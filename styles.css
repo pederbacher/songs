@@ -62,27 +62,33 @@ pre {
     top: 10px;
     right: 10px;
     background: rgba(255, 255, 255, 0.95);
-    padding: 12px;
-    border-radius: 10px;
+    padding: 16px;
+    border-radius: 14px;
     box-shadow: 0 0 10px rgba(0,0,0,0.25);
     font-family: Arial, sans-serif;
     z-index: 99999;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: opacity 0.25s ease;
     max-height: 500px;
 }
 
-#controls.collapsed {
-    max-height: 39px; /* height of just the toggle button */
+
+#controls button {
+    font-size: 15px;      /* bigger text */
+    padding: 8px 14px;    /* thicker & wider buttons */
+    margin: 2px;
+    border-radius: 8px;
 }
 
-/* Scroll controls */
-#controls button {
-    margin: 4px;
-    padding: 6px 12px;
-    font-size: 14px;
+#controls.collapsed {
+    max-height: 38px;
+}
+
+#controls.fullyHidden {
+    opacity: 0;
+    pointer-events: none;
 }

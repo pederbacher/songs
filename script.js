@@ -176,3 +176,62 @@ document.getElementById("menuToggle").addEventListener("click", function () {
     }
 });
 ////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////
+// Auto‑hide top controls: fully disappear, reappear on scroll up
+let autoHideTimeout = null;
+let lastScrollY = window.scrollY;
+let userForcedOpen = false;   // Track if user manually opened menu
+let mouseInRightSide = false;
+
+const controls = document.getElementById("controls");
+const toggleBtn = document.getElementById("menuToggle");
+
+// Fully hide menu
+function autoHideMenu() {
+    if (!userForcedOpen) {
+        controls.classList.add("fullyHidden");
+    }
+}
+
+// Reset timer when user interacts
+function resetAutoHideTimer() {
+    clearTimeout(autoHideTimeout);
+    controls.classList.remove("fullyHidden");
+    autoHideTimeout = setTimeout(autoHideMenu, 1000);
+}
+
+// Detect if mouse is in the right 25% of the screen
+window.addEventListener("mousemove", (e) => {
+    const threshold = window.innerWidth * 0.85;
+    mouseInRightSide = (e.clientX >= threshold);
+    // If mouse enters right side → show menu
+    if (mouseInRightSide) {
+        controls.classList.remove("fullyHidden");
+        resetAutoHideTimer();
+    }
+});
+
+// Detect manual toggle (user override)
+toggleBtn.addEventListener("click", () => {
+    userForcedOpen = !controls.classList.contains("collapsed");
+    resetAutoHideTimer();
+});
+
+// Show when scrolling up
+window.addEventListener("scroll", () => {
+    const currentY = window.scrollY;
+    const scrollingUp = currentY < lastScrollY - 5;
+    if (scrollingUp && mouseInRightSide) {
+        // Show only if conditions are met
+        controls.classList.remove("fullyHidden");
+        resetAutoHideTimer();
+    }
+    lastScrollY = currentY;
+});
+
+// Initial start
+resetAutoHideTimer();
+////////////////////////////////////////////////////////////////
