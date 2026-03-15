@@ -270,10 +270,12 @@ function down() {
 }
 function hideshowchords() {
   const btn = document.getElementById("toggleChords");
-  if (btn.textContent === "Hide") {
-    showGroup(-1);
+    if (btn.textContent === "ChordsHide") {
+	btn.textContent = "ChordsShow"
+	showGroup(-1);
   } else {
-    showGroup(currentIndex);
+      btn.textContent = "ChordsHide"
+      showGroup(currentIndex);
   }
 }
 window.up = up;
@@ -310,7 +312,7 @@ function ensureSplitContainer() {
 
       <button data-action="up">Up</button>
       <button data-action="down">Down</button>
-      <button data-action="toggleChords">Hide</button>
+      <button data-action="toggleChords">Chords</button>
 
       <button data-action="toc">TOC</button>
       <button data-action="single">Single</button>
@@ -329,7 +331,7 @@ function ensureSplitContainer() {
 
       <button data-action="up">Up</button>
       <button data-action="down">Down</button>
-      <button data-action="toggleChords">Hide</button>
+      <button data-action="toggleChords">Chords</button>
 
       <button data-action="toc">TOC</button>
       <button data-action="single">Single</button>
