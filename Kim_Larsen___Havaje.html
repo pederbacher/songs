@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Havaje</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Use defer so the script loads in parallel and runs after HTML is parsed -->
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
 
-    <h1>Kim Larsen: Havaje</h1>
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Kim Larsen: Havaje</h1>
 
-    <pre>
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
 Kim Larsen - Haveje
 
 <span class='chordline no0'>            C          F</span><span class='chordline no1'>            C#         F#</span><span class='chordline no2'>            D          G</span><span class='chordline no3'>            D#         G#</span><span class='chordline no4'>            E          A</span><span class='chordline no5'>            F          A#</span><span class='chordline no6'>            F#         B</span><span class='chordline no7'>            G          C</span><span class='chordline no8'>            G#         C#</span><span class='chordline no9'>            A          D</span><span class='chordline no10'>            A#         D#</span><span class='chordline no11'>            B          E</span>
@@ -79,17 +88,33 @@ Ja, vi beder bare guderne om godt vejr
 Ah, åh, ye-he
 <span class='chordline no0'>F    G     C</span><span class='chordline no1'>F#   G#    C#</span><span class='chordline no2'>G    A     D</span><span class='chordline no3'>G#   A#    D#</span><span class='chordline no4'>A    B     E</span><span class='chordline no5'>A#   C     F</span><span class='chordline no6'>B    C#    F#</span><span class='chordline no7'>C    D     G</span><span class='chordline no8'>C#   D#    G#</span><span class='chordline no9'>D    E     A</span><span class='chordline no10'>D#   F     A#</span><span class='chordline no11'>E    F#    B</span>
 Ah, åh, ye-he
-    </pre>
-    
-    <div id="controls">
-      <button id="menuToggle">▲</button>
-      <button id="startstop" onclick="startstop()">Start</button>
-      <button id="slower">-</button>
-      <button id="faster">+</button>
-      <button id="upbutton" onclick="up()">Up</button>
-      <button id="downbutton" onclick="down()">Down</button>
-      <button id="toggleChords" onclick="hideshowchords()">Hide</button>
-      <button onclick="window.location.href='index.html'">TOC</button>
+      </pre>
     </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="slower" type="button">-</button>
+      <button id="faster" type="button">+</button>
+
+      <!-- Transpose + chords (only in single mode) -->
+      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
+      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">Chords</button>
+
+      <!-- TOC: show in both modes (change to only-single if you prefer) -->
+      <button type="button" onclick="window.location.href='index.html'">TOC</button>
+
+      <!-- Split toggle: show in both modes -->
+      <button id="splitToggle" type="button">Split</button>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
   </body>
 </html>

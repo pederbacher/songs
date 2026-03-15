@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Let it be</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Use defer so the script loads in parallel and runs after HTML is parsed -->
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
 
-    <h1>Beatles: Let it be</h1>
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Beatles: Let it be</h1>
 
-    <pre>
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
 <span class='chordline no0'>(start på D)</span><span class='chordline no1'>(start på D#)</span><span class='chordline no2'>(start på E)</span><span class='chordline no3'>(start på F)</span><span class='chordline no4'>(start på F#)</span><span class='chordline no5'>(start på G)</span><span class='chordline no6'>(start på G#)</span><span class='chordline no7'>(start på A)</span><span class='chordline no8'>(start på A#)</span><span class='chordline no9'>(start på B)</span><span class='chordline no10'>(start på C)</span><span class='chordline no11'>(start på C#)</span>
 <span class='chordline no0'>       G              D</span><span class='chordline no1'>       G#             D#</span><span class='chordline no2'>       A              E</span><span class='chordline no3'>       A#             F</span><span class='chordline no4'>       B              F#</span><span class='chordline no5'>       C              G</span><span class='chordline no6'>       C#             G#</span><span class='chordline no7'>       D              A</span><span class='chordline no8'>       D#             A#</span><span class='chordline no9'>       E              B</span><span class='chordline no10'>       F              C</span><span class='chordline no11'>       F#             C#</span>
 When I find myself in times of trouble,
@@ -64,17 +73,33 @@ Speaking words of wisdom, let it betogvftjdb   x  g6pp9pmlllxxcxxxc  6978
 Let it be, let it be, let it be, yeah, let it be
 <span class='chordline no0'>G                D              C G/b Am G</span><span class='chordline no1'>G#               D#             C# G#/b A#m G#</span><span class='chordline no2'>A                E              D A/b Bm A</span><span class='chordline no3'>A#               F              D# A#/b Cm A#</span><span class='chordline no4'>B                F#             E B/b C#m B</span><span class='chordline no5'>C                G              F C/b Dm C</span><span class='chordline no6'>C#               G#             F# C#/b D#m C#</span><span class='chordline no7'>D                A              G D/b Em D</span><span class='chordline no8'>D#               A#             G# D#/b Fm D#</span><span class='chordline no9'>E                B              A E/b F#m E</span><span class='chordline no10'>F                C              A# F/b Gm F</span><span class='chordline no11'>F#               C#             B F#/b G#m F#</span>
 Whisper words of wisdom, let it be
-    </pre>
-    
-    <div id="controls">
-      <button id="menuToggle">▲</button>
-      <button id="startstop" onclick="startstop()">Start</button>
-      <button id="slower">-</button>
-      <button id="faster">+</button>
-      <button id="upbutton" onclick="up()">Up</button>
-      <button id="downbutton" onclick="down()">Down</button>
-      <button id="toggleChords" onclick="hideshowchords()">Hide</button>
-      <button onclick="window.location.href='index.html'">TOC</button>
+      </pre>
     </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="slower" type="button">-</button>
+      <button id="faster" type="button">+</button>
+
+      <!-- Transpose + chords (only in single mode) -->
+      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
+      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">Chords</button>
+
+      <!-- TOC: show in both modes (change to only-single if you prefer) -->
+      <button type="button" onclick="window.location.href='index.html'">TOC</button>
+
+      <!-- Split toggle: show in both modes -->
+      <button id="splitToggle" type="button">Split</button>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
   </body>
 </html>

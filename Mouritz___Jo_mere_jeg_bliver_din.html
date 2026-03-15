@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Jo mere jeg bliver din</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Use defer so the script loads in parallel and runs after HTML is parsed -->
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
 
-    <h1>Mouritz: Jo mere jeg bliver din</h1>
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Mouritz: Jo mere jeg bliver din</h1>
 
-    <pre>
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
 Mouritz/Hørslev Projektet
 Jo mere jeg bliver din
 
@@ -114,17 +123,33 @@ jo mer' blir' jeg mig selv
 Verden er i skred
 <span class='chordline no0'>            C        Dm7       Cmaj7      Dm7      C</span><span class='chordline no1'>            C#       D#m7      C#maj7     D#m7     C#</span><span class='chordline no2'>            D        Em7       Dmaj7      Em7      D</span><span class='chordline no3'>            D#       Fm7       D#maj7     Fm7      D#</span><span class='chordline no4'>            E        F#m7      Emaj7      F#m7     E</span><span class='chordline no5'>            F        Gm7       Fmaj7      Gm7      F</span><span class='chordline no6'>            F#       G#m7      F#maj7     G#m7     F#</span><span class='chordline no7'>            G        Am7       Gmaj7      Am7      G</span><span class='chordline no8'>            G#       A#m7      G#maj7     A#m7     G#</span><span class='chordline no9'>            A        Bm7       Amaj7      Bm7      A</span><span class='chordline no10'>            A#       Cm7       A#maj7     Cm7      A#</span><span class='chordline no11'>            B        C#m7      Bmaj7      C#m7     B</span>
 Kom tag mig med
-    </pre>
-    
-    <div id="controls">
-      <button id="menuToggle">▲</button>
-      <button id="startstop" onclick="startstop()">Start</button>
-      <button id="slower">-</button>
-      <button id="faster">+</button>
-      <button id="upbutton" onclick="up()">Up</button>
-      <button id="downbutton" onclick="down()">Down</button>
-      <button id="toggleChords" onclick="hideshowchords()">Hide</button>
-      <button onclick="window.location.href='index.html'">TOC</button>
+      </pre>
     </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="slower" type="button">-</button>
+      <button id="faster" type="button">+</button>
+
+      <!-- Transpose + chords (only in single mode) -->
+      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
+      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">Chords</button>
+
+      <!-- TOC: show in both modes (change to only-single if you prefer) -->
+      <button type="button" onclick="window.location.href='index.html'">TOC</button>
+
+      <!-- Split toggle: show in both modes -->
+      <button id="splitToggle" type="button">Split</button>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
   </body>
 </html>

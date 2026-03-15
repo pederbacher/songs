@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="da">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Hurricane</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Use defer so the script loads in parallel and runs after HTML is parsed -->
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
   </head>
   <body>
 
-    <h1>Bob Dylan: Hurricane</h1>
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Bob Dylan: Hurricane</h1>
 
-    <pre>
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
 
 
 <span class='chordline no0'>| Am | F |  x4</span><span class='chordline no1'>| A#m | F# | x4</span><span class='chordline no2'>| Bm | G |  x4</span><span class='chordline no3'>| Cm | G# | x4</span><span class='chordline no4'>| C#m | A | x4</span><span class='chordline no5'>| Dm | A# | x4</span><span class='chordline no6'>| D#m | B | x4</span><span class='chordline no7'>| Em | C |  x4</span><span class='chordline no8'>| Fm | C# | x4</span><span class='chordline no9'>| F#m | D | x4</span><span class='chordline no10'>| Gm | D# | x4</span><span class='chordline no11'>| G#m | E | x4</span>
@@ -276,17 +285,33 @@ The champion of the world
 <span class='chordline no0'>| Dm | C | Dm | C Em | Am F | C | G |</span><span class='chordline no1'>| D#m | C# | D#m | C# Fm | A#m F# | C# | G# |</span><span class='chordline no2'>| Em | D | Em | D F#m | Bm G | D | A |</span><span class='chordline no3'>| Fm | D# | Fm | D# Gm | Cm G# | D# | A# |</span><span class='chordline no4'>| F#m | E | F#m | E G#m | C#m A | E | B |</span><span class='chordline no5'>| Gm | F | Gm | F Am | Dm A# | F | C |</span><span class='chordline no6'>| G#m | F# | G#m | F# A#m | D#m B | F# | C# |</span><span class='chordline no7'>| Am | G | Am | G Bm | Em C | G | D |</span><span class='chordline no8'>| A#m | G# | A#m | G# Cm | Fm C# | G# | D# |</span><span class='chordline no9'>| Bm | A | Bm | A C#m | F#m D | A | E |</span><span class='chordline no10'>| Cm | A# | Cm | A# Dm | Gm D# | A# | F |</span><span class='chordline no11'>| C#m | B | C#m | B D#m | G#m E | B | F# |</span>
 <span class='chordline no0'>| Am | F | Am | F |</span><span class='chordline no1'>| A#m | F# | A#m | F# |</span><span class='chordline no2'>| Bm | G | Bm | G |</span><span class='chordline no3'>| Cm | G# | Cm | G# |</span><span class='chordline no4'>| C#m | A | C#m | A |</span><span class='chordline no5'>| Dm | A# | Dm | A# |</span><span class='chordline no6'>| D#m | B | D#m | B |</span><span class='chordline no7'>| Em | C | Em | C |</span><span class='chordline no8'>| Fm | C# | Fm | C# |</span><span class='chordline no9'>| F#m | D | F#m | D |</span><span class='chordline no10'>| Gm | D# | Gm | D# |</span><span class='chordline no11'>| G#m | E | G#m | E |</span>
 <span class='chordline no0'>| Am | F | Am | F | C</span><span class='chordline no1'>| A#m | F# | A#m | F# | C#</span><span class='chordline no2'>| Bm | G | Bm | G | D</span><span class='chordline no3'>| Cm | G# | Cm | G# | D#</span><span class='chordline no4'>| C#m | A | C#m | A | E</span><span class='chordline no5'>| Dm | A# | Dm | A# | F</span><span class='chordline no6'>| D#m | B | D#m | B | F#</span><span class='chordline no7'>| Em | C | Em | C | G</span><span class='chordline no8'>| Fm | C# | Fm | C# | G#</span><span class='chordline no9'>| F#m | D | F#m | D | A</span><span class='chordline no10'>| Gm | D# | Gm | D# | A#</span><span class='chordline no11'>| G#m | E | G#m | E | B</span>
-    </pre>
-    
-    <div id="controls">
-      <button id="menuToggle">▲</button>
-      <button id="startstop" onclick="startstop()">Start</button>
-      <button id="slower">-</button>
-      <button id="faster">+</button>
-      <button id="upbutton" onclick="up()">Up</button>
-      <button id="downbutton" onclick="down()">Down</button>
-      <button id="toggleChords" onclick="hideshowchords()">Hide</button>
-      <button onclick="window.location.href='index.html'">TOC</button>
+      </pre>
     </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="slower" type="button">-</button>
+      <button id="faster" type="button">+</button>
+
+      <!-- Transpose + chords (only in single mode) -->
+      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
+      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">Chords</button>
+
+      <!-- TOC: show in both modes (change to only-single if you prefer) -->
+      <button type="button" onclick="window.location.href='index.html'">TOC</button>
+
+      <!-- Split toggle: show in both modes -->
+      <button id="splitToggle" type="button">Split</button>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
   </body>
 </html>

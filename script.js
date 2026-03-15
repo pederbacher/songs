@@ -1,237 +1,588 @@
-const isFirefox = navigator.userAgent.toLowerCase().includes('firefox');
+// --- Environment detection
+const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
 
-////////////////////////////////////////////////////////////////
-// Auto-scroll
-if (isFirefox) {
-    let speed = 5;              // pixels per second (can be very small)
-    let scrolling = false;
-    let lastTimestamp = 0;
-    let fractionalAccumulator = 0;
-
-    function getScrollElement() {
-	return document.scrollingElement || document.documentElement;
-    }
-
-    function scrollStep(timestamp) {
-	if (!scrolling) return;
-
-	if (!lastTimestamp) lastTimestamp = timestamp;
-
-	const delta = timestamp - lastTimestamp;
-	lastTimestamp = timestamp;
-
-	const scrollElement = getScrollElement();
-
-	// calculate precise movement
-	const exactPixels = (speed * delta) / 1000;
-
-	// accumulate fractions
-	fractionalAccumulator += exactPixels;
-
-	// extract whole pixels only
-	const wholePixels = Math.floor(fractionalAccumulator);
-
-	if (wholePixels > 0) {
-            scrollElement.scrollTop += wholePixels;
-            fractionalAccumulator -= wholePixels;
-	}
-
-	// stop at bottom
-	if (scrollElement.scrollTop + window.innerHeight >= scrollElement.scrollHeight) {
-            scrolling = false;
-            document.getElementById("startstop").textContent = "Start";
-            return;
-	}
-
-	requestAnimationFrame(scrollStep);
-    }
-
-    function startstop() {
-	const btn = document.getElementById("startstop");
-
-	if (!scrolling) {
-            scrolling = true;
-            lastTimestamp = 0;
-            requestAnimationFrame(scrollStep);
-            btn.textContent = "Stop";
-	} else {
-            scrolling = false;
-            btn.textContent = "Start";
-	}
-    }
-
-    document.getElementById("faster").onclick = () => {
-	speed += 2;
-    };
-
-    document.getElementById("slower").onclick = () => {
-	speed = Math.max(0.5, speed - 2);
-    };
-
-} else {
-    // Chrome
-    let speed = 10;        // Default speed
-    let intervalId = null;
-
-    function updateSpeed() {
-	clearInterval(intervalId);
-	intervalId = setInterval(() => {
-            window.scrollBy(0, 0.7/getZoomViaDPR()); // Must be 0.2 or above otherwise no scroll
-	}, 1000/speed); // Interval time in ms
-    }
-    
-    function getZoomViaDPR() {
-	return window.devicePixelRatio || 1; // 1.00 = 100%
-    }
-
-    function startstop() {
-	let btn = document.getElementById("startstop");
-	if (btn.textContent === "Start") {
-	    updateSpeed();
-	    btn.textContent = "Stop"
-	}else{
-	    clearInterval(intervalId);
-	    btn.textContent = "Start"
-	}
-    }
-
-    document.getElementById("faster").onclick = () => {
-	speed += 5;
-	updateSpeed();
-    };
-
-    document.getElementById("slower").onclick = () => {
-	speed = Math.max(1, speed - 5);
-	updateSpeed();
-    };
-}
-////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////////
-// Transpose
-const groups = ["no0","no1","no2","no3",
-		"no4","no5","no6","no7",
-		"no8","no9","no10","no11"];
-let currentIndex = 0;
-
-function showGroup(index) {
-    document.querySelectorAll(".chordline").forEach(el => {
-	el.style.display = "none";
-    });
-    if(index >= 0) {
-	document.querySelectorAll("." + groups[index]).forEach(el => {
-	    el.style.display = "inline-block";
-	});
-	currentIndex = index;
-	// Update buttons
-	let btn = document.getElementById("upbutton");
-	btn.textContent = "Up " + index;
-    }
-}
-
-function up() {
-    let newIndex = (currentIndex + 1) % groups.length;
-    showGroup(newIndex);
-}
-
-function down() {
-    let newIndex = (currentIndex - 1 + groups.length) % groups.length;
-    showGroup(newIndex);
-}
-////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////////
-// Chords
-function hideshowchords() {
-    let btn = document.getElementById("toggleChords");
-
-    if (btn.textContent === "Hide") {
-	btn.textContent = "Show";
-	showGroup(-1);
-    } else {
-	btn.textContent = "Hide";
-	showGroup(currentIndex);
-    }
-}
-
-// show first group on load
-showGroup(0);
-////////////////////////////////////////////////////////////////
-
-
-////////////////////////////////////////////////////////////////
-// Menu folding
-document.getElementById("menuToggle").addEventListener("click", function () {
-    let controls = document.getElementById("controls");
-    let toggle = document.getElementById("menuToggle");
-
-    controls.classList.toggle("collapsed");
-
-    if (controls.classList.contains("collapsed")) {
-        toggle.textContent = "▼";
-    } else {
-        toggle.textContent = "▲";
-    }
-});
-////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////
-// Auto‑hide top controls: fully disappear, reappear on scroll up
+// --- Globals
 let autoHideTimeout = null;
-let lastScrollY = window.scrollY;
-let userForcedOpen = false;   // Track if user manually opened menu
-let mouseInRightSide = false;
+let lastScrollY = 0;          // kept for completeness
+let splitMode = false;        // split view state
+let isSyncingScroll = false;  // prevent recursive scroll syncing
+
+// Master menu visibility via mouse right edge (10%)
+let mouseInRightEdge = false; // rightmost 10% of window triggers menu show
+
+// Split TOTAL width control (both panes grow/shrink together)
+let splitScale = 0.9;         // fraction of viewport width (0..1)
+const SCALE_STEP = 0.05;
+const SCALE_MIN = 0.50;
+const SCALE_MAX = 1.00;
+
+// Per-pane toolbar auto-hide state
+const paneHide = {
+  left: { timer: null, installed: false },
+  right: { timer: null, installed: false },
+};
+const TOP_ZONE_PX = 110;  // mouse must be within this top area to show toolbars
+const HIDE_DELAY_MS = 1500;
 
 const controls = document.getElementById("controls");
-const toggleBtn = document.getElementById("menuToggle");
 
-// Fully hide menu
+// --- Utility: current vertical scroll position (for some logic if needed)
+function getCurrentScrollY() {
+  if (splitMode) {
+    const left = document.getElementById("paneLeft");
+    return left ? left.scrollTop : 0;
+  }
+  return window.scrollY;
+}
+
+// --- Utility: scroll targets (document or both panes)
+function getDocScrollElement() {
+  return document.scrollingElement || document.documentElement;
+}
+function getScrollTargets() {
+  if (splitMode) {
+    const l = document.getElementById("paneLeft");
+    const r = document.getElementById("paneRight");
+    return [l, r].filter(Boolean);
+  }
+  return [getDocScrollElement()];
+}
+function allTargetsAtBottom(targets) {
+  return targets.every(
+    (el) => el.scrollTop + el.clientHeight >= el.scrollHeight - 1
+  );
+}
+
+/* ============================================================
+   MASTER MENU: Appear when mouse enters rightmost 10% (both modes)
+   Auto-hide after 3s of inactivity.
+   ============================================================ */
 function autoHideMenu() {
-    if (!userForcedOpen) {
-        controls.classList.add("fullyHidden");
-    }
+  controls.classList.add("fullyHidden");
 }
-
-// Reset timer when user interacts
 function resetAutoHideTimer() {
-    clearTimeout(autoHideTimeout);
-    controls.classList.remove("fullyHidden");
-    autoHideTimeout = setTimeout(autoHideMenu, 1000);
+  clearTimeout(autoHideTimeout);
+  autoHideTimeout = setTimeout(autoHideMenu, 2000);
+}
+function showControls() {
+  controls.classList.remove("fullyHidden");
+  resetAutoHideTimer();
 }
 
-// Detect if mouse is in the right 25% of the screen
+// Track mouse — show master menu when cursor is in the rightmost 10% of the viewport
 window.addEventListener("mousemove", (e) => {
-    const threshold = window.innerWidth * 0.85;
-    mouseInRightSide = (e.clientX >= threshold);
-    // If mouse enters right side → show menu
-    if (mouseInRightSide) {
-        controls.classList.remove("fullyHidden");
-        resetAutoHideTimer();
-    }
-});
+  const threshold = window.innerWidth * 0.90; // 90% of width
+  const inRight10 = e.clientX >= threshold;
 
-// Detect manual toggle (user override)
-toggleBtn.addEventListener("click", () => {
-    userForcedOpen = !controls.classList.contains("collapsed");
-    resetAutoHideTimer();
-});
+  // Only react when entering the trigger zone
+  if (inRight10 && !mouseInRightEdge) {
+    showControls();
+  }
+  mouseInRightEdge = inRight10;
+}, { passive: true });
 
-// Show when scrolling up
+// Keep lastScrollY updated (not used for menu visibility anymore, but harmless)
 window.addEventListener("scroll", () => {
-    const currentY = window.scrollY;
-    const scrollingUp = currentY < lastScrollY - 5;
-    if (scrollingUp && mouseInRightSide) {
-        // Show only if conditions are met
-        controls.classList.remove("fullyHidden");
-        resetAutoHideTimer();
+  lastScrollY = getCurrentScrollY();
+}, { passive: true });
+
+/* ============================================================
+   AUTO-SCROLL (Firefox vs. Chrome) with split-view support
+   Global API used by master and per-pane toolbars
+   ============================================================ */
+let api = {
+  startstop: null,
+  speedUp: null,
+  speedDown: null,
+};
+
+if (isFirefox) {
+  // ---------- FIREFOX: precise rAF scrolling
+  let speed = 5; // pixels per second (can be fractional via accumulator)
+  let scrolling = false;
+  let lastTimestamp = 0;
+  let fractionalAccumulator = 0;
+
+  function scrollStep(timestamp) {
+    if (!scrolling) return;
+
+    if (!lastTimestamp) lastTimestamp = timestamp;
+    const delta = timestamp - lastTimestamp;
+    lastTimestamp = timestamp;
+
+    // precise movement
+    const exactPixels = (speed * delta) / 1000;
+    fractionalAccumulator += exactPixels;
+
+    // apply whole pixels to all targets
+    const wholePixels = Math.floor(fractionalAccumulator);
+    if (wholePixels > 0) {
+      const targets = getScrollTargets();
+      targets.forEach((el) => (el.scrollTop += wholePixels));
+      fractionalAccumulator -= wholePixels;
     }
-    lastScrollY = currentY;
+
+    // stop at bottom (all targets)
+    const targetsNow = getScrollTargets();
+    if (allTargetsAtBottom(targetsNow)) {
+      scrolling = false;
+      const btn = document.getElementById("startstop");
+      if (btn) btn.textContent = "Start";
+      return;
+    }
+
+    requestAnimationFrame(scrollStep);
+  }
+
+  function startstop() {
+    const btn = document.getElementById("startstop");
+    if (!scrolling) {
+      scrolling = true;
+      lastTimestamp = 0;
+      requestAnimationFrame(scrollStep);
+      if (btn) btn.textContent = "Stop";
+    } else {
+      scrolling = false;
+      if (btn) btn.textContent = "Start";
+    }
+  }
+  function speedUp() { speed += 2; }
+  function speedDown() { speed = Math.max(0.5, speed - 2); }
+
+  // Hook global (master) buttons
+  document.getElementById("faster").onclick = speedUp;
+  document.getElementById("slower").onclick = speedDown;
+
+  // expose
+  api.startstop = startstop;
+  api.speedUp = speedUp;
+  api.speedDown = speedDown;
+  window.startstop = startstop;
+} else {
+  // ---------- CHROME/OTHERS: small-step setInterval scrolling
+  let speed = 10; // default "units per second"
+  let intervalId = null;
+
+  function getZoomViaDPR() {
+    return window.devicePixelRatio || 1;
+  }
+
+  function tick() {
+    const step = 0.7 / getZoomViaDPR(); // must be >= ~0.2 to move
+    const targets = getScrollTargets();
+
+    // If in single mode targeting the document, use window.scrollBy for consistency
+    if (!splitMode && targets[0] === getDocScrollElement()) {
+      const atBottom =
+        window.scrollY + window.innerHeight >= document.body.scrollHeight - 1;
+      if (atBottom) {
+        clearInterval(intervalId);
+        intervalId = null;
+        const btn = document.getElementById("startstop");
+        if (btn) btn.textContent = "Start";
+        return;
+      }
+      window.scrollBy(0, step);
+    } else {
+      // split mode: scroll both panes & stop at bottom when both reached
+      if (allTargetsAtBottom(targets)) {
+        clearInterval(intervalId);
+        intervalId = null;
+        const btn = document.getElementById("startstop");
+        if (btn) btn.textContent = "Start";
+        return;
+      }
+      targets.forEach((el) => (el.scrollTop += step));
+    }
+  }
+
+  function updateSpeed() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(tick, 1000 / speed);
+  }
+
+  function startstop() {
+    const btn = document.getElementById("startstop");
+    if (!intervalId) {
+      updateSpeed();
+      if (btn) btn.textContent = "Stop";
+    } else {
+      clearInterval(intervalId);
+      intervalId = null;
+      if (btn) btn.textContent = "Start";
+    }
+  }
+  function speedUp() {
+    speed += 5;
+    if (document.getElementById("startstop")?.textContent === "Stop") {
+      updateSpeed();
+    }
+  }
+  function speedDown() {
+    speed = Math.max(1, speed - 5);
+    if (document.getElementById("startstop")?.textContent === "Stop") {
+      updateSpeed();
+    }
+  }
+
+  // Hook global (master) buttons
+  document.getElementById("faster").onclick = speedUp;
+  document.getElementById("slower").onclick = speedDown;
+
+  // expose
+  api.startstop = startstop;
+  api.speedUp = speedUp;
+  api.speedDown = speedDown;
+  window.startstop = startstop;
+}
+
+/* ============================================================
+   TRANSPOSE (single + per-pane)
+   ============================================================ */
+const groups = [
+  "no0","no1","no2","no3",
+  "no4","no5","no6","no7",
+  "no8","no9","no10","no11"
+];
+let currentIndex = 0; // single mode
+
+function showGroup(index) {
+  // single mode: affect global content
+  document.querySelectorAll("#pageContent .chordline").forEach((el) => {
+    el.style.display = "none";
+  });
+  if (index >= 0) {
+    document
+      .querySelectorAll("#pageContent ." + groups[index])
+      .forEach((el) => (el.style.display = "inline-block"));
+    currentIndex = index;
+    const btn = document.getElementById("upbutton");
+    if (btn) btn.textContent = "Up " + index;
+  }
+}
+function up() {
+  const newIndex = (currentIndex + 1) % groups.length;
+  showGroup(newIndex);
+}
+function down() {
+  const newIndex = (currentIndex - 1 + groups.length) % groups.length;
+  showGroup(newIndex);
+}
+function hideshowchords() {
+  const btn = document.getElementById("toggleChords");
+  if (btn.textContent === "Hide") {
+    showGroup(-1);
+  } else {
+    showGroup(currentIndex);
+  }
+}
+window.up = up;
+window.down = down;
+window.hideshowchords = hideshowchords;
+
+// Initialize first chord group (single mode)
+showGroup(0);
+
+/* ============================================================
+   SPLIT VIEW: Two synced panes with per-pane toolbars
+   - TOTAL width control via master +width/-width buttons
+   - Per-pane toolbars auto-hide and appear when mouse in top of pane
+   ============================================================ */
+const paneState = {
+  left: { index: 0, chordsVisible: true },
+  right: { index: 0, chordsVisible: true },
+};
+
+function ensureSplitContainer() {
+  if (document.getElementById("splitContainer")) return;
+
+  const split = document.createElement("div");
+  split.id = "splitContainer";
+
+  const left = document.createElement("div");
+  left.className = "split-pane";
+  left.id = "paneLeft";
+  left.innerHTML = `
+    <div class="paneControls hidden" data-pane="left">
+      <button data-action="startstop">Start</button>
+      <button data-action="slower">-</button>
+      <button data-action="faster">+</button>
+
+      <button data-action="up">Up</button>
+      <button data-action="down">Down</button>
+      <button data-action="toggleChords">Hide</button>
+
+      <button data-action="toc">TOC</button>
+      <button data-action="single">Single</button>
+    </div>
+    <div class="paneContent"></div>
+  `;
+
+  const right = document.createElement("div");
+  right.className = "split-pane";
+  right.id = "paneRight";
+  right.innerHTML = `
+    <div class="paneControls hidden" data-pane="right">
+      <button data-action="startstop">Start</button>
+      <button data-action="slower">-</button>
+      <button data-action="faster">+</button>
+
+      <button data-action="up">Up</button>
+      <button data-action="down">Down</button>
+      <button data-action="toggleChords">Hide</button>
+
+      <button data-action="toc">TOC</button>
+      <button data-action="single">Single</button>
+    </div>
+    <div class="paneContent"></div>
+  `;
+
+  split.appendChild(left);
+  split.appendChild(right);
+
+  const pageContent = document.getElementById("pageContent");
+  pageContent.insertAdjacentElement("afterend", split);
+}
+
+function paneShowGroup(paneContentEl, index) {
+  const chordlines = paneContentEl.querySelectorAll(".chordline");
+  chordlines.forEach((el) => (el.style.display = "none"));
+  if (index >= 0) {
+    paneContentEl
+      .querySelectorAll("." + groups[index])
+      .forEach((el) => (el.style.display = "inline-block"));
+  }
+}
+
+function attachPaneScrollSync() {
+  const left = document.getElementById("paneLeft");
+  const right = document.getElementById("paneRight");
+  if (!left || !right) return;
+
+  function sync(source, target) {
+    if (isSyncingScroll) return;
+    isSyncingScroll = true;
+
+    const sMax = source.scrollHeight - source.clientHeight;
+    const tMax = target.scrollHeight - target.clientHeight;
+    const perc = sMax > 0 ? source.scrollTop / sMax : 0;
+
+    target.scrollTop = perc * tMax;
+    isSyncingScroll = false;
+  }
+
+  left.addEventListener("scroll", () => sync(left, right), { passive: true });
+  right.addEventListener("scroll", () => sync(right, left), { passive: true });
+}
+
+function wirePaneToolbar(toolbarEl) {
+  // Remove old listeners if re-enabling split
+  const fresh = toolbarEl.cloneNode(true);
+  toolbarEl.parentNode.replaceChild(fresh, toolbarEl);
+
+  const paneKey = fresh.getAttribute("data-pane"); // 'left' or 'right'
+  const paneRoot =
+    paneKey === "left" ? document.getElementById("paneLeft") : document.getElementById("paneRight");
+  const contentEl = paneRoot.querySelector(".paneContent");
+
+  fresh.addEventListener("click", (e) => {
+    const btn = e.target.closest("button[data-action]");
+    if (!btn) return;
+    const action = btn.getAttribute("data-action");
+
+    switch (action) {
+      case "startstop":
+        api.startstop();
+        break;
+      case "faster":
+        api.speedUp();
+        break;
+      case "slower":
+        api.speedDown();
+        break;
+      case "up": {
+        paneState[paneKey].index = (paneState[paneKey].index + 1) % groups.length;
+        paneShowGroup(contentEl, paneState[paneKey].index);
+        break;
+      }
+      case "down": {
+        paneState[paneKey].index =
+          (paneState[paneKey].index - 1 + groups.length) % groups.length;
+        paneShowGroup(contentEl, paneState[paneKey].index);
+        break;
+      }
+      case "toggleChords": {
+        const st = paneState[paneKey];
+        st.chordsVisible = !st.chordsVisible;
+        if (st.chordsVisible) {
+          paneShowGroup(contentEl, st.index);
+        } else {
+          contentEl.querySelectorAll(".chordline").forEach((el) => (el.style.display = "none"));
+        }
+        break;
+      }
+      case "toc":
+        window.location.href = "index.html";
+        break;
+      case "single":
+        disableSplitView();
+        break;
+    }
+  });
+
+  return fresh;
+}
+
+/* ---------- Per-pane toolbar auto-hide ---------- */
+function showPaneControls(paneKey) {
+  const toolbar = document.querySelector(`#pane${capitalize(paneKey)} .paneControls`);
+  if (!toolbar) return;
+  toolbar.classList.remove("hidden");
+
+  // Clear any pending hide timer
+  if (paneHide[paneKey].timer) {
+    clearTimeout(paneHide[paneKey].timer);
+    paneHide[paneKey].timer = null;
+  }
+}
+function hidePaneControlsLater(paneKey) {
+  if (paneHide[paneKey].timer) clearTimeout(paneHide[paneKey].timer);
+  paneHide[paneKey].timer = setTimeout(() => {
+    const toolbar = document.querySelector(`#pane${capitalize(paneKey)} .paneControls`);
+    toolbar?.classList.add("hidden");
+  }, HIDE_DELAY_MS);
+}
+function installPaneAutoHide(paneKey) {
+  if (paneHide[paneKey].installed) return; // install only once
+  paneHide[paneKey].installed = true;
+
+  const pane = document.getElementById(`pane${capitalize(paneKey)}`);
+  const toolbar = pane.querySelector(".paneControls");
+
+  // Show when mouse is inside the top zone of the pane
+  pane.addEventListener("mousemove", (e) => {
+    const bounds = pane.getBoundingClientRect();
+    const y = e.clientY - bounds.top;
+    if (y <= TOP_ZONE_PX) {
+      showPaneControls(paneKey);
+    } else {
+      // start hide timer when moving away from top
+      hidePaneControlsLater(paneKey);
+    }
+  });
+
+  // Keep visible while hovering the toolbar itself
+  toolbar.addEventListener("mouseenter", () => showPaneControls(paneKey));
+  toolbar.addEventListener("mouseleave", () => hidePaneControlsLater(paneKey));
+
+  // Start hidden shortly after enabling split
+  setTimeout(() => hidePaneControlsLater(paneKey), 1200);
+}
+
+function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+/* ---------- TOTAL split width control ---------- */
+function applySplitTotalWidth() {
+  const split = document.getElementById("splitContainer");
+  if (!split) return;
+  // Use viewport width minus the body horizontal padding (~40px)
+  const vw = Math.round(splitScale * 100);
+  split.style.setProperty("--split-width", `calc(${vw}vw - 40px)`);
+}
+
+function enableSplitView() {
+  ensureSplitContainer();
+
+  const split = document.getElementById("splitContainer");
+  const leftPane = document.getElementById("paneLeft");
+  const rightPane = document.getElementById("paneRight");
+  const leftContent = leftPane.querySelector(".paneContent");
+  const rightContent = rightPane.querySelector(".paneContent");
+  const pageContent = document.getElementById("pageContent");
+
+  // Clone inner HTML (avoid duplicate IDs)
+  leftContent.innerHTML = pageContent.innerHTML;
+  rightContent.innerHTML = pageContent.innerHTML;
+
+  // Initialize per-pane chord state
+  paneState.left.index = 0;
+  paneState.left.chordsVisible = true;
+  paneShowGroup(leftContent, paneState.left.index);
+
+  paneState.right.index = 0;
+  paneState.right.chordsVisible = true;
+  paneShowGroup(rightContent, paneState.right.index);
+
+  // Wire pane toolbars (replace nodes to avoid duplicate listeners)
+  wirePaneToolbar(leftPane.querySelector(".paneControls"));
+  wirePaneToolbar(rightPane.querySelector(".paneControls"));
+
+  // Show split; hide original content
+  pageContent.style.display = "none";
+  split.classList.add("active");
+  splitMode = true;
+
+  // Body becomes full width in split mode
+  document.body.classList.add("split-mode");
+
+  // Prevent body scroll (we now scroll panes)
+  document.body.style.overflow = "hidden";
+
+  attachPaneScrollSync();
+
+  // Install per-pane auto-hide behavior (only once per side)
+  installPaneAutoHide("left");
+  installPaneAutoHide("right");
+
+  // Rebase lastScrollY for completeness
+  lastScrollY = getCurrentScrollY();
+
+  // Apply initial TOTAL width
+  applySplitTotalWidth();
+}
+
+function disableSplitView() {
+  const split = document.getElementById("splitContainer");
+  const pageContent = document.getElementById("pageContent");
+
+  if (split) split.classList.remove("active");
+  if (pageContent) pageContent.style.display = "";
+
+  document.body.style.overflow = "";
+  splitMode = false;
+
+  // Return body to constrained width
+  document.body.classList.remove("split-mode");
+
+  // Rebase lastScrollY back to window
+  lastScrollY = getCurrentScrollY();
+
+  // Restart the auto-hide behavior (will show when mouse hits right edge)
+  // No change needed here; timer starts on first reveal
+}
+
+// Split toggle button (in master menu)
+document.getElementById("splitToggle")?.addEventListener("click", () => {
+  if (!splitMode) enableSplitView();
+  else disableSplitView();
 });
 
-// Initial start
-resetAutoHideTimer();
-////////////////////////////////////////////////////////////////
+// Width controls (master menu) — TOTAL width of the split area
+document.getElementById("wider")?.addEventListener("click", () => {
+  if (!splitMode) return;
+  splitScale = Math.min(SCALE_MAX, splitScale + SCALE_STEP);
+  applySplitTotalWidth();
+});
+document.getElementById("narrower")?.addEventListener("click", () => {
+  if (!splitMode) return;
+  splitScale = Math.max(SCALE_MIN, splitScale - SCALE_STEP);
+  applySplitTotalWidth();
+});
+
+/* ============================================================
+   Hook master buttons for speed in both engines (already done above)
+   ============================================================ */
+// Firefox handlers registered in that branch; same for Chrome.
+
+// --- Initialize menu hidden; it will appear on first move to right edge
+lastScrollY = getCurrentScrollY();

@@ -1,94 +1,160 @@
 :root {
-    --mono-font: "Courier New", monospace;
-    --chord-color: #1a4da3;
+  --mono-font: "Courier New", monospace;
+  --chord-color: #1a4da3;
 }
 
+/* Base */
 body {
-    font-family: Arial, sans-serif;
-    background: #fafafa;
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-    //    margin: 2rem;
-    line-height: 1.2;
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+  padding: 20px;
+  max-width: 1000px;   /* constrained in single mode */
+  margin: auto;
+  line-height: 1.2;
 }
 
-table {
-    border-collapse: collapse;
-    width: 100%;
-    max-width: 800px;
-}
-th, td {
-    border: 1px solid #ccc;
-    padding: 4px 12px;
-    text-align: left;
-}
-th {
-    background-color: #f4f4f4;
-}
-a {
-    color: #0366d6;
-    text-decoration: none;
-}
-a:hover {
-    text-decoration: underline;
+/* In split mode we remove the max-width constraint to allow full-width split */
+body.split-mode {
+  max-width: none;
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 pre {
-    white-space: pre-wrap;
-    font-family: var(--mono-font);
+  white-space: pre-wrap;
+  font-family: var(--mono-font);
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 4px 12px;
+  text-align: left;
+}
+th { background-color: #f4f4f4; }
+
+a { color: #0366d6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* Chord lines */
 .chordline {
   font-family: var(--mono-font);
   color: var(--chord-color);
   font-weight: bold;
-  display: none;          /* is set to "inline-block" with java script, enable vertical padding */
-  padding: 0 0 0 0px;         /* more space above (2px), less below (0) */
-  line-height: 1;                 /* keeps the box compact */
-  vertical-align: -0.25em;        /* nudge the box up a bit */
-  /* optional cosmetics
-  background: #eef;
-  border-radius: 4px;
-  */
+  display: none;           /* JS sets to inline-block for the active group */
+  padding: 0 0 0 0px;
+  line-height: 1;
+  vertical-align: -0.25em;
 }
 
+/* Floating Controls (master menu) — no fold button any more */
 #controls {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 16px;
-    border-radius: 14px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.25);
-    font-family: Arial, sans-serif;
-    z-index: 99999;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 18px;
+  border-radius: 14px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-    overflow: hidden;
-    transition: opacity 0.25s ease;
-    max-height: 500px;
+  /* Fit viewport height and scroll internally if needed */
+  max-height: calc(100vh - 20px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  transition: opacity 0.25s ease;
 }
-
-
 #controls button {
-    font-size: 15px;      /* bigger text */
-    padding: 8px 14px;    /* thicker & wider buttons */
-    margin: 2px;
-    border-radius: 8px;
+  margin: 4px;
+  padding: 8px 14px;
+  font-size: 15px;
+  border-radius: 8px;
 }
 
-#controls.collapsed {
-    max-height: 38px;
-}
+/* Hide / show master-menu buttons based on mode */
+body.split-mode #controls .only-single { display: none !important; }
+body:not(.split-mode) #controls .only-split { display: none !important; }
 
+/* Full auto-hide */
 #controls.fullyHidden {
-    opacity: 0;
-    pointer-events: none;
+  opacity: 0;
+  pointer-events: none;
 }
+
+/* Split view layout */
+#splitContainer {
+  display: none;                     /* hidden until enabled */
+  grid-template-columns: 1fr 1fr;    /* keep 50/50; total width is controlled by --split-width */
+  gap: 12px;
+  width: var(--split-width, calc(100vw - 40px)); /* dynamic total width */
+  max-width: none;                   /* allow to grow beyond body max-width in split mode */
+  margin: 0 auto;                    /* center the split area */
+  padding-right: 0;
+}
+#splitContainer.active {
+  display: grid;
+}
+
+.split-pane {
+  height: 100vh;                  /* full viewport height for independent scrolling */
+  overflow: auto;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 8px 10px 10px 10px;
+  position: relative;
+
+  /* Allow the grid column to shrink */
+  min-width: 0;
+}
+.split-pane .paneContent {
+  /* Let content expand/contract with the pane */
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}
+
+/* Per-pane toolbar (auto-hide in split mode) */
+.paneControls {
+  position: sticky;
+  top: 6px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: opacity 0.2s ease;
+}
+.paneControls button {
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 7px;
+}
+
+/* Hidden state for per-pane toolbar */
+.paneControls.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Optional: on very small screens, stack panes */
+@media (max-width: 900px) {
+  #splitContainer {
+    grid-template-columns: 1fr;
+  }
+}
+``
