@@ -62,7 +62,7 @@ function autoHideMenu() {
 }
 function resetAutoHideTimer() {
   clearTimeout(autoHideTimeout);
-  autoHideTimeout = setTimeout(autoHideMenu, 2000);
+  autoHideTimeout = setTimeout(autoHideMenu, 3000);
 }
 function showControls() {
   controls.classList.remove("fullyHidden");
@@ -98,7 +98,7 @@ let api = {
 
 if (isFirefox) {
   // ---------- FIREFOX: precise rAF scrolling
-  let speed = 5; // pixels per second (can be fractional via accumulator)
+  let speed = 8; // pixels per second (can be fractional via accumulator)
   let scrolling = false;
   let lastTimestamp = 0;
   let fractionalAccumulator = 0;
