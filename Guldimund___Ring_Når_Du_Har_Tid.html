@@ -11,6 +11,29 @@
   </head>
   <body>
 
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="slower" type="button">-</button>
+      <button id="faster" type="button">+</button>
+
+      <!-- Transpose + chords (only in single mode) -->
+      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
+      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+
+      <!-- TOC: show in both modes (change to only-single if you prefer) -->
+      <button type="button" onclick="window.location.href='index.html'">TOC</button>
+
+      <!-- Split toggle: show in both modes -->
+      <button id="splitToggle" type="button">Split</button>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
     <!-- Main page content (this will be cloned into split panes) -->
     <div id="pageContent">
       <h1>Guldimund: Ring Når Du Har Tid</h1>
@@ -22,7 +45,8 @@
         <div class="chordline no0">Am     Dm     G     C</div>
       -->
       <pre>
-<span class='chordline no0'>Tuning: E A D G B EKey: AmCapo: No capo</span><span class='chordline no1'>Buning: F A# D# G# C FDey: A#mC#apo: Fo capo</span><span class='chordline no2'>Buning: F# B E A C# F#Dey: BmDapo: Fo capo</span><span class='chordline no3'>Buning: G C F A# D GDey: CmD#apo: Fo capo</span><span class='chordline no4'>Buning: G# C# F# B D# G#Dey: C#mEapo: Fo capo</span><span class='chordline no5'>Buning: A D G C E ADey: DmFapo: Fo capo</span><span class='chordline no6'>Buning: A# D# G# C# F A#Dey: D#mF#apo: Fo capo</span><span class='chordline no7'>Buning: B E A D F# BDey: EmGapo: Fo capo</span><span class='chordline no8'>Buning: C F A# D# G CDey: FmG#apo: Fo capo</span><span class='chordline no9'>Buning: C# F# B E G# C#Dey: F#mAapo: Fo capo</span><span class='chordline no10'>Buning: D G C F A DDey: GmA#apo: Fo capo</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Dey: G#mBapo: Fo capo</span>
+<span class='chordline no0'>Key: Am</span><span class='chordline no1'>Dey: A#m</span><span class='chordline no2'>Dey: Bm</span><span class='chordline no3'>Dey: Cm</span><span class='chordline no4'>Dey: C#m</span><span class='chordline no5'>Dey: Dm</span><span class='chordline no6'>Dey: D#m</span><span class='chordline no7'>Dey: Em</span><span class='chordline no8'>Dey: Fm</span><span class='chordline no9'>Dey: F#m</span><span class='chordline no10'>Dey: Gm</span><span class='chordline no11'>Dey: G#m</span>
+<span class='chordline no0'>Start: A</span><span class='chordline no1'>Start: A#</span><span class='chordline no2'>Start: B</span><span class='chordline no3'>Start: C</span><span class='chordline no4'>Start: C#</span><span class='chordline no5'>Start: D</span><span class='chordline no6'>Start: D#</span><span class='chordline no7'>Start: E</span><span class='chordline no8'>Start: F</span><span class='chordline no9'>Start: F#</span><span class='chordline no10'>Start: G</span><span class='chordline no11'>Start: G#</span>
 
 
 <span class='chordline no0'>Dm          C/E           F               Bb           Dm</span><span class='chordline no1'>D#m         C#/F          F#              B           D#m</span><span class='chordline no2'>Em          D/F#          G               C           Em</span><span class='chordline no3'>Fm          D#/G          G#              Db           Fm</span><span class='chordline no4'>F#m         E/G#          A               D           F#m</span><span class='chordline no5'>Gm          F/A           A#              Eb           Gm</span><span class='chordline no6'>G#m         F#/A#          B               E           G#m</span><span class='chordline no7'>Am          G/B           C               F           Am</span><span class='chordline no8'>A#m         G#/C          C#              Gb           A#m</span><span class='chordline no9'>Bm          A/C#          D               G           Bm</span><span class='chordline no10'>Cm          A#/D          D#              Ab           Cm</span><span class='chordline no11'>C#m         B/D#          E               A           C#m</span>
@@ -202,29 +226,6 @@ Bare tag din tid og indtil da så venter jeg
     </div>
 
     <!-- Split container is created dynamically after #pageContent -->
-
-    <!-- Floating master controls (no fold button anymore) -->
-    <div id="controls" class="fullyHidden">
-      <!-- Scroll controls (control both panes in split mode) -->
-      <button id="startstop" type="button" onclick="startstop()">Start</button>
-      <button id="slower" type="button">-</button>
-      <button id="faster" type="button">+</button>
-
-      <!-- Transpose + chords (only in single mode) -->
-      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
-      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
-      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
-
-      <!-- TOC: show in both modes (change to only-single if you prefer) -->
-      <button type="button" onclick="window.location.href='index.html'">TOC</button>
-
-      <!-- Split toggle: show in both modes -->
-      <button id="splitToggle" type="button">Split</button>
-
-      <!-- Visible only in split mode: TOTAL width controls for the split area -->
-      <button id="narrower" class="only-split" type="button">-width</button>
-      <button id="wider"   class="only-split" type="button">+width</button>
-    </div>
 
   </body>
 </html>

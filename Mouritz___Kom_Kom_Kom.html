@@ -11,6 +11,29 @@
   </head>
   <body>
 
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="slower" type="button">-</button>
+      <button id="faster" type="button">+</button>
+
+      <!-- Transpose + chords (only in single mode) -->
+      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
+      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+
+      <!-- TOC: show in both modes (change to only-single if you prefer) -->
+      <button type="button" onclick="window.location.href='index.html'">TOC</button>
+
+      <!-- Split toggle: show in both modes -->
+      <button id="splitToggle" type="button">Split</button>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
     <!-- Main page content (this will be cloned into split panes) -->
     <div id="pageContent">
       <h1>Mouritz: Kom Kom Kom</h1>
@@ -101,29 +124,6 @@ Og ud af mit liv
     </div>
 
     <!-- Split container is created dynamically after #pageContent -->
-
-    <!-- Floating master controls (no fold button anymore) -->
-    <div id="controls" class="fullyHidden">
-      <!-- Scroll controls (control both panes in split mode) -->
-      <button id="startstop" type="button" onclick="startstop()">Start</button>
-      <button id="slower" type="button">-</button>
-      <button id="faster" type="button">+</button>
-
-      <!-- Transpose + chords (only in single mode) -->
-      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
-      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
-      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
-
-      <!-- TOC: show in both modes (change to only-single if you prefer) -->
-      <button type="button" onclick="window.location.href='index.html'">TOC</button>
-
-      <!-- Split toggle: show in both modes -->
-      <button id="splitToggle" type="button">Split</button>
-
-      <!-- Visible only in split mode: TOTAL width controls for the split area -->
-      <button id="narrower" class="only-split" type="button">-width</button>
-      <button id="wider"   class="only-split" type="button">+width</button>
-    </div>
 
   </body>
 </html>

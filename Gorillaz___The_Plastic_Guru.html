@@ -11,6 +11,29 @@
   </head>
   <body>
 
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="slower" type="button">-</button>
+      <button id="faster" type="button">+</button>
+
+      <!-- Transpose + chords (only in single mode) -->
+      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
+      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+
+      <!-- TOC: show in both modes (change to only-single if you prefer) -->
+      <button type="button" onclick="window.location.href='index.html'">TOC</button>
+
+      <!-- Split toggle: show in both modes -->
+      <button id="splitToggle" type="button">Split</button>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
     <!-- Main page content (this will be cloned into split panes) -->
     <div id="pageContent">
       <h1>Gorillaz: The Plastic Guru</h1>
@@ -23,6 +46,7 @@
       -->
       <pre>
 (Tempo 126)
+<span class='chordline no0'>(start E-F-G)</span><span class='chordline no1'>(start F-F#-G#)</span><span class='chordline no2'>(start F#-G-A)</span><span class='chordline no3'>(start G-G#-A#)</span><span class='chordline no4'>(start G#-A-B)</span><span class='chordline no5'>(start A-A#-C)</span><span class='chordline no6'>(start A#-B-C#)</span><span class='chordline no7'>(start B-C-D)</span><span class='chordline no8'>(start C-C#-D#)</span><span class='chordline no9'>(start C#-D-E)</span><span class='chordline no10'>(start D-D#-F)</span><span class='chordline no11'>(start D#-E-F#)</span>
 
 Note: C/B er 2 fingre
 F kan være Fmaj7, check det
@@ -31,11 +55,11 @@ F kan være Fmaj7, check det
 <span class='chordline no0'>C  C/B  F</span><span class='chordline no1'>C# C#/C F#</span><span class='chordline no2'>D  D/C# G</span><span class='chordline no3'>D# D#/D G#</span><span class='chordline no4'>E  E/D# A</span><span class='chordline no5'>F  F/E  A#</span><span class='chordline no6'>F# F#/F B</span><span class='chordline no7'>G  G/F# C</span><span class='chordline no8'>G# G#/G C#</span><span class='chordline no9'>A  A/G# D</span><span class='chordline no10'>A# A#/A D#</span><span class='chordline no11'>B  B/A# E</span>
 <span class='chordline no0'>Em        G  (2x)</span><span class='chordline no1'>Fm        G# (2x)</span><span class='chordline no2'>F#m       A  (2x)</span><span class='chordline no3'>Gm        A# (2x)</span><span class='chordline no4'>G#m       B  (2x)</span><span class='chordline no5'>Am        C  (2x)</span><span class='chordline no6'>A#m       C# (2x)</span><span class='chordline no7'>Bm        D  (2x)</span><span class='chordline no8'>Cm        D# (2x)</span><span class='chordline no9'>C#m       E  (2x)</span><span class='chordline no10'>Dm        F  (2x)</span><span class='chordline no11'>D#m       F# (2x)</span>
 
-<span class='chordline no0'>  C         C/B  F</span><span class='chordline no1'>  C#        C#/C F#</span><span class='chordline no2'>  D         D/C# G</span><span class='chordline no3'>  D#        D#/D G#</span><span class='chordline no4'>  E         E/D# A</span><span class='chordline no5'>  F         F/E  A#</span><span class='chordline no6'>  F#        F#/F B</span><span class='chordline no7'>  G         G/F# C</span><span class='chordline no8'>  G#        G#/G C#</span><span class='chordline no9'>  A         A/G# D</span><span class='chordline no10'>  A#        A#/A D#</span><span class='chordline no11'>  B         B/A# E</span>
+<span class='chordline no0'>  C         C/B  F (short)</span><span class='chordline no1'>  C#        C#/C F# (short)</span><span class='chordline no2'>  D         D/C# G (short)</span><span class='chordline no3'>  D#        D#/D G# (short)</span><span class='chordline no4'>  E         E/D# A (short)</span><span class='chordline no5'>  F         F/E  A# (short)</span><span class='chordline no6'>  F#        F#/F B (short)</span><span class='chordline no7'>  G         G/F# C (short)</span><span class='chordline no8'>  G#        G#/G C# (short)</span><span class='chordline no9'>  A         A/G# D (short)</span><span class='chordline no10'>  A#        A#/A D# (short)</span><span class='chordline no11'>  B         B/A# E (short)</span>
 I thought I was alone
 <span class='chordline no0'>    Em                                             G</span><span class='chordline no1'>    Fm                                             G#</span><span class='chordline no2'>    F#m                                            A</span><span class='chordline no3'>    Gm                                             A#</span><span class='chordline no4'>    G#m                                            B</span><span class='chordline no5'>    Am                                             C</span><span class='chordline no6'>    A#m                                            C#</span><span class='chordline no7'>    Bm                                             D</span><span class='chordline no8'>    Cm                                             D#</span><span class='chordline no9'>    C#m                                            E</span><span class='chordline no10'>    Dm                                             F</span><span class='chordline no11'>    D#m                                            F#</span>
 But you know what I'm thinking, you've been here before
-<span class='chordline no0'>         C    C/B    F</span><span class='chordline no1'>         C#   C#/C   F#</span><span class='chordline no2'>         D    D/C#   G</span><span class='chordline no3'>         D#   D#/D   G#</span><span class='chordline no4'>         E    E/D#   A</span><span class='chordline no5'>         F    F/E    A#</span><span class='chordline no6'>         F#   F#/F   B</span><span class='chordline no7'>         G    G/F#   C</span><span class='chordline no8'>         G#   G#/G   C#</span><span class='chordline no9'>         A    A/G#   D</span><span class='chordline no10'>         A#   A#/A   D#</span><span class='chordline no11'>         B    B/A#   E</span>
+<span class='chordline no0'>         C    C/B    F (short)</span><span class='chordline no1'>         C#   C#/C   F# (short)</span><span class='chordline no2'>         D    D/C#   G (short)</span><span class='chordline no3'>         D#   D#/D   G# (short)</span><span class='chordline no4'>         E    E/D#   A (short)</span><span class='chordline no5'>         F    F/E    A# (short)</span><span class='chordline no6'>         F#   F#/F   B (short)</span><span class='chordline no7'>         G    G/F#   C (short)</span><span class='chordline no8'>         G#   G#/G   C# (short)</span><span class='chordline no9'>         A    A/G#   D (short)</span><span class='chordline no10'>         A#   A#/A   D# (short)</span><span class='chordline no11'>         B    B/A#   E (short)</span>
 You were tied to the demon
 <span class='chordline no0'>Em                                         G</span><span class='chordline no1'>Fm                                         G#</span><span class='chordline no2'>F#m                                        A</span><span class='chordline no3'>Gm                                         A#</span><span class='chordline no4'>G#m                                        B</span><span class='chordline no5'>Am                                         C</span><span class='chordline no6'>A#m                                        C#</span><span class='chordline no7'>Bm                                         D</span><span class='chordline no8'>Cm                                         D#</span><span class='chordline no9'>C#m                                        E</span><span class='chordline no10'>Dm                                         F</span><span class='chordline no11'>D#m                                        F#</span>
 Starring in your own show and selling your snake oil
@@ -45,11 +69,11 @@ We believe what we choose
 <span class='chordline no0'>G               C</span><span class='chordline no1'>G#              C#</span><span class='chordline no2'>A               D</span><span class='chordline no3'>A#              D#</span><span class='chordline no4'>B               E</span><span class='chordline no5'>C               F</span><span class='chordline no6'>C#              F#</span><span class='chordline no7'>D               G</span><span class='chordline no8'>D#              G#</span><span class='chordline no9'>E               A</span><span class='chordline no10'>F               A#</span><span class='chordline no11'>F#              B</span>
 Is that not the truth?
 
-<span class='chordline no0'>  C        C/B    F</span><span class='chordline no1'>  C#       C#/C   F#</span><span class='chordline no2'>  D        D/C#   G</span><span class='chordline no3'>  D#       D#/D   G#</span><span class='chordline no4'>  E        E/D#   A</span><span class='chordline no5'>  F        F/E    A#</span><span class='chordline no6'>  F#       F#/F   B</span><span class='chordline no7'>  G        G/F#   C</span><span class='chordline no8'>  G#       G#/G   C#</span><span class='chordline no9'>  A        A/G#   D</span><span class='chordline no10'>  A#       A#/A   D#</span><span class='chordline no11'>  B        B/A#   E</span>
+<span class='chordline no0'>  C        C/B    F (short)</span><span class='chordline no1'>  C#       C#/C   F# (short)</span><span class='chordline no2'>  D        D/C#   G (short)</span><span class='chordline no3'>  D#       D#/D   G# (short)</span><span class='chordline no4'>  E        E/D#   A (short)</span><span class='chordline no5'>  F        F/E    A# (short)</span><span class='chordline no6'>  F#       F#/F   B (short)</span><span class='chordline no7'>  G        G/F#   C (short)</span><span class='chordline no8'>  G#       G#/G   C# (short)</span><span class='chordline no9'>  A        A/G#   D (short)</span><span class='chordline no10'>  A#       A#/A   D# (short)</span><span class='chordline no11'>  B        B/A#   E (short)</span>
 I looked into the eyes
 <span class='chordline no0'>       Em                             G</span><span class='chordline no1'>       Fm                             G#</span><span class='chordline no2'>       F#m                            A</span><span class='chordline no3'>       Gm                             A#</span><span class='chordline no4'>       G#m                            B</span><span class='chordline no5'>       Am                             C</span><span class='chordline no6'>       A#m                            C#</span><span class='chordline no7'>       Bm                             D</span><span class='chordline no8'>       Cm                             D#</span><span class='chordline no9'>       C#m                            E</span><span class='chordline no10'>       Dm                             F</span><span class='chordline no11'>       D#m                            F#</span>
 of the plastic guru, who lived on the mountain
-<span class='chordline no0'>       C    C/B    F</span><span class='chordline no1'>       C#   C#/C   F#</span><span class='chordline no2'>       D    D/C#   G</span><span class='chordline no3'>       D#   D#/D   G#</span><span class='chordline no4'>       E    E/D#   A</span><span class='chordline no5'>       F    F/E    A#</span><span class='chordline no6'>       F#   F#/F   B</span><span class='chordline no7'>       G    G/F#   C</span><span class='chordline no8'>       G#   G#/G   C#</span><span class='chordline no9'>       A    A/G#   D</span><span class='chordline no10'>       A#   A#/A   D#</span><span class='chordline no11'>       B    B/A#   E</span>
+<span class='chordline no0'>       C    C/B    F (short)</span><span class='chordline no1'>       C#   C#/C   F# (short)</span><span class='chordline no2'>       D    D/C#   G (short)</span><span class='chordline no3'>       D#   D#/D   G# (short)</span><span class='chordline no4'>       E    E/D#   A (short)</span><span class='chordline no5'>       F    F/E    A# (short)</span><span class='chordline no6'>       F#   F#/F   B (short)</span><span class='chordline no7'>       G    G/F#   C (short)</span><span class='chordline no8'>       G#   G#/G   C# (short)</span><span class='chordline no9'>       A    A/G#   D (short)</span><span class='chordline no10'>       A#   A#/A   D# (short)</span><span class='chordline no11'>       B    B/A#   E (short)</span>
 He was tied to the demon,
 <span class='chordline no0'>Em                                  G</span><span class='chordline no1'>Fm                                  G#</span><span class='chordline no2'>F#m                                 A</span><span class='chordline no3'>Gm                                  A#</span><span class='chordline no4'>G#m                                 B</span><span class='chordline no5'>Am                                  C</span><span class='chordline no6'>A#m                                 C#</span><span class='chordline no7'>Bm                                  D</span><span class='chordline no8'>Cm                                  D#</span><span class='chordline no9'>C#m                                 E</span><span class='chordline no10'>Dm                                  F</span><span class='chordline no11'>D#m                                 F#</span>
 burning in the silence before the applause
@@ -76,29 +100,6 @@ Is that not the truth?
     </div>
 
     <!-- Split container is created dynamically after #pageContent -->
-
-    <!-- Floating master controls (no fold button anymore) -->
-    <div id="controls" class="fullyHidden">
-      <!-- Scroll controls (control both panes in split mode) -->
-      <button id="startstop" type="button" onclick="startstop()">Start</button>
-      <button id="slower" type="button">-</button>
-      <button id="faster" type="button">+</button>
-
-      <!-- Transpose + chords (only in single mode) -->
-      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
-      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
-      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
-
-      <!-- TOC: show in both modes (change to only-single if you prefer) -->
-      <button type="button" onclick="window.location.href='index.html'">TOC</button>
-
-      <!-- Split toggle: show in both modes -->
-      <button id="splitToggle" type="button">Split</button>
-
-      <!-- Visible only in split mode: TOTAL width controls for the split area -->
-      <button id="narrower" class="only-split" type="button">-width</button>
-      <button id="wider"   class="only-split" type="button">+width</button>
-    </div>
 
   </body>
 </html>

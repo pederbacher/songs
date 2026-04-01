@@ -22,7 +22,7 @@ const paneHide = {
   right: { timer: null, installed: false },
 };
 const TOP_ZONE_PX = 110;  // mouse must be within this top area to show toolbars
-const HIDE_DELAY_MS = 1500;
+const HIDE_DELAY_MS = 500;
 
 const controls = document.getElementById("controls");
 
@@ -57,28 +57,31 @@ function allTargetsAtBottom(targets) {
    MASTER MENU: Appear when mouse enters rightmost 10% (both modes)
    Auto-hide after 3s of inactivity.
    ============================================================ */
+let mouseOverControls = false;
+
 function autoHideMenu() {
   controls.classList.add("fullyHidden");
 }
 function resetAutoHideTimer() {
   clearTimeout(autoHideTimeout);
-  autoHideTimeout = setTimeout(autoHideMenu, 3000);
+  if (!mouseOverControls) {
+    autoHideTimeout = setTimeout(autoHideMenu, 500);
+  }
 }
 function showControls() {
   controls.classList.remove("fullyHidden");
   resetAutoHideTimer();
 }
 
-// Track mouse — show master menu when cursor is in the rightmost 10% of the viewport
-window.addEventListener("mousemove", (e) => {
-  const threshold = window.innerWidth * 0.90; // 90% of width
-  const inRight10 = e.clientX >= threshold;
+// Keep controls visible while the mouse is over them
+controls.addEventListener("mouseenter", () => { mouseOverControls = true;  clearTimeout(autoHideTimeout); });
+controls.addEventListener("mouseleave", () => { mouseOverControls = false; resetAutoHideTimer(); });
 
-  // Only react when entering the trigger zone
-  if (inRight10 && !mouseInRightEdge) {
+// Track mouse — in single mode show controls when in top zone; hidden in split mode
+window.addEventListener("mousemove", (e) => {
+  if (!splitMode && e.clientY <= TOP_ZONE_PX) {
     showControls();
   }
-  mouseInRightEdge = inRight10;
 }, { passive: true });
 
 // Keep lastScrollY updated (not used for menu visibility anymore, but harmless)
@@ -270,20 +273,61 @@ function down() {
 }
 function hideshowchords() {
   const btn = document.getElementById("toggleChords");
-    if (btn.textContent === "ChordsHide") {
-	btn.textContent = "ChordsShow"
-	showGroup(-1);
+  const rows = document.querySelectorAll("#pageContent .chordrow");
+  if (btn.textContent === "ChordsHide") {
+    btn.textContent = "ChordsShow";
+    rows.forEach(r => r.style.display = "none");
+    document.getElementById("pageContent").classList.add("chords-hidden");
+    showGroup(-1);
   } else {
-      btn.textContent = "ChordsHide"
-      showGroup(currentIndex);
+    btn.textContent = "ChordsHide";
+    rows.forEach(r => r.style.display = "");
+    document.getElementById("pageContent").classList.remove("chords-hidden");
+    showGroup(currentIndex);
   }
 }
 window.up = up;
 window.down = down;
 window.hideshowchords = hideshowchords;
 
+// Wrap each chord row (12 transposition spans + trailing \n) in a .chordrow
+// so the entire line can be hidden without leaving a blank gap.
+function wrapChordRows(container) {
+  const pre = container.querySelector('pre');
+  if (!pre) return;
+  const children = Array.from(pre.childNodes);
+  let i = 0;
+  while (i < children.length) {
+    const node = children[i];
+    if (node.nodeType === Node.ELEMENT_NODE && node.classList.contains('chordline')) {
+      const wrapper = document.createElement('span');
+      wrapper.className = 'chordrow';
+      pre.insertBefore(wrapper, node);
+      // Collect all consecutive chordline spans
+      while (i < children.length &&
+             children[i] &&
+             children[i].nodeType === Node.ELEMENT_NODE &&
+             children[i].classList.contains('chordline')) {
+        wrapper.appendChild(children[i]);
+        i++;
+      }
+      // Include the trailing newline so hiding the wrapper removes the blank line
+      if (i < children.length &&
+          children[i] &&
+          children[i].nodeType === Node.TEXT_NODE &&
+          children[i].textContent === '\n') {
+        wrapper.appendChild(children[i]);
+        i++;
+      }
+    } else {
+      i++;
+    }
+  }
+}
+
 // Initialize first chord group (single mode)
 showGroup(0);
+wrapChordRows(document.getElementById('pageContent'));
 
 /* ============================================================
    SPLIT VIEW: Two synced panes with per-pane toolbars
@@ -405,21 +449,26 @@ function wirePaneToolbar(toolbarEl) {
       case "up": {
         paneState[paneKey].index = (paneState[paneKey].index + 1) % groups.length;
         paneShowGroup(contentEl, paneState[paneKey].index);
+        btn.textContent = "Up " + paneState[paneKey].index;
         break;
       }
       case "down": {
         paneState[paneKey].index =
           (paneState[paneKey].index - 1 + groups.length) % groups.length;
         paneShowGroup(contentEl, paneState[paneKey].index);
+        fresh.querySelector("[data-action='up']").textContent = "Up " + paneState[paneKey].index;
         break;
       }
       case "toggleChords": {
         const st = paneState[paneKey];
         st.chordsVisible = !st.chordsVisible;
         if (st.chordsVisible) {
+          contentEl.querySelectorAll(".chordrow").forEach(r => r.style.display = "");
+          contentEl.classList.remove("chords-hidden");
           paneShowGroup(contentEl, st.index);
         } else {
-          contentEl.querySelectorAll(".chordline").forEach((el) => (el.style.display = "none"));
+          contentEl.querySelectorAll(".chordrow").forEach(r => r.style.display = "none");
+          contentEl.classList.add("chords-hidden");
         }
         break;
       }
@@ -516,8 +565,12 @@ function enableSplitView() {
   paneShowGroup(rightContent, paneState.right.index);
 
   // Wire pane toolbars (replace nodes to avoid duplicate listeners)
-  wirePaneToolbar(leftPane.querySelector(".paneControls"));
-  wirePaneToolbar(rightPane.querySelector(".paneControls"));
+  const leftToolbar  = wirePaneToolbar(leftPane.querySelector(".paneControls"));
+  const rightToolbar = wirePaneToolbar(rightPane.querySelector(".paneControls"));
+
+  // Set initial Up button text to show starting transpose index
+  leftToolbar.querySelector("[data-action='up']").textContent  = "Up " + paneState.left.index;
+  rightToolbar.querySelector("[data-action='up']").textContent = "Up " + paneState.right.index;
 
   // Show split; hide original content
   pageContent.style.display = "none";
