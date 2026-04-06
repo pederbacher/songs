@@ -15,19 +15,29 @@
     <div id="controls" class="fullyHidden">
       <!-- Scroll controls (control both panes in split mode) -->
       <button id="startstop" type="button" onclick="startstop()">Start</button>
-      <button id="slower" type="button">-</button>
-      <button id="faster" type="button">+</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
 
-      <!-- Transpose + chords (only in single mode) -->
-      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
-      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <!-- Chords, TOC, Split in first row -->
       <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
-
-      <!-- TOC: show in both modes (change to only-single if you prefer) -->
-      <button type="button" onclick="window.location.href='index.html'">TOC</button>
-
-      <!-- Split toggle: show in both modes -->
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
       <button id="splitToggle" type="button">Split</button>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
 
       <!-- Visible only in split mode: TOTAL width controls for the split area -->
       <button id="narrower" class="only-split" type="button">-width</button>

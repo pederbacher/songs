@@ -15,19 +15,29 @@
     <div id="controls" class="fullyHidden">
       <!-- Scroll controls (control both panes in split mode) -->
       <button id="startstop" type="button" onclick="startstop()">Start</button>
-      <button id="slower" type="button">-</button>
-      <button id="faster" type="button">+</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
 
-      <!-- Transpose + chords (only in single mode) -->
-      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
-      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <!-- Chords, TOC, Split in first row -->
       <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
-
-      <!-- TOC: show in both modes (change to only-single if you prefer) -->
-      <button type="button" onclick="window.location.href='index.html'">TOC</button>
-
-      <!-- Split toggle: show in both modes -->
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
       <button id="splitToggle" type="button">Split</button>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
 
       <!-- Visible only in split mode: TOTAL width controls for the split area -->
       <button id="narrower" class="only-split" type="button">-width</button>
@@ -45,9 +55,7 @@
         <div class="chordline no0">Am     Dm     G     C</div>
       -->
       <pre>
-<span class='chordline no0'>Tuning: E A D G B EKey: ACapo: No capo</span><span class='chordline no1'>Buning: F A# D# G# C FDey: A#C#apo: Fo capo</span><span class='chordline no2'>Buning: F# B E A C# F#Dey: BDapo: Fo capo</span><span class='chordline no3'>Buning: G C F A# D GDey: CD#apo: Fo capo</span><span class='chordline no4'>Buning: G# C# F# B D# G#Dey: C#Eapo: Fo capo</span><span class='chordline no5'>Buning: A D G C E ADey: DFapo: Fo capo</span><span class='chordline no6'>Buning: A# D# G# C# F A#Dey: D#F#apo: Fo capo</span><span class='chordline no7'>Buning: B E A D F# BDey: EGapo: Fo capo</span><span class='chordline no8'>Buning: C F A# D# G CDey: FG#apo: Fo capo</span><span class='chordline no9'>Buning: C# F# B E G# C#Dey: F#Aapo: Fo capo</span><span class='chordline no10'>Buning: D G C F A DDey: GA#apo: Fo capo</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Dey: G#Bapo: Fo capo</span>
-
-BOYS DON’T CRY – The Cure
+<span class='chordline no0'>Key: A</span><span class='chordline no1'>Dey: A#</span><span class='chordline no2'>Dey: B</span><span class='chordline no3'>Dey: C</span><span class='chordline no4'>Dey: C#</span><span class='chordline no5'>Dey: D</span><span class='chordline no6'>Dey: D#</span><span class='chordline no7'>Dey: E</span><span class='chordline no8'>Dey: F</span><span class='chordline no9'>Dey: F#</span><span class='chordline no10'>Dey: G</span><span class='chordline no11'>Dey: G#</span>
 
 
 <span class='chordline no0'>A    Bm    C#m    D    D C#m Bm (x4)</span><span class='chordline no1'>A#   Cm    Dm    D#   D# Dm Cm (x4)</span><span class='chordline no2'>B    C#m   D#m    E    E D#m C#m (x4)</span><span class='chordline no3'>C    Dm    Em    F    F Em Dm (x4)</span><span class='chordline no4'>C#   D#m   Fm    F#   F# Fm D#m (x4)</span><span class='chordline no5'>D    Em    F#m    G    G F#m Em (x4)</span><span class='chordline no6'>D#   Fm    Gm    G#   G# Gm Fm (x4)</span><span class='chordline no7'>E    F#m   G#m    A    A G#m F#m (x4)</span><span class='chordline no8'>F    Gm    Am    A#   A# Am Gm (x4)</span><span class='chordline no9'>F#   G#m   A#m    B    B A#m G#m (x4)</span><span class='chordline no10'>G    Am    Bm    C    C Bm Am (x4)</span><span class='chordline no11'>G#   A#m   Cm    C#   C# Cm A#m (x4)</span>

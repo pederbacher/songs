@@ -15,19 +15,29 @@
     <div id="controls" class="fullyHidden">
       <!-- Scroll controls (control both panes in split mode) -->
       <button id="startstop" type="button" onclick="startstop()">Start</button>
-      <button id="slower" type="button">-</button>
-      <button id="faster" type="button">+</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
 
-      <!-- Transpose + chords (only in single mode) -->
-      <button id="upbutton" class="only-single" type="button" onclick="up()">Up</button>
-      <button id="downbutton" class="only-single" type="button" onclick="down()">Down</button>
+      <!-- Chords, TOC, Split in first row -->
       <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
-
-      <!-- TOC: show in both modes (change to only-single if you prefer) -->
-      <button type="button" onclick="window.location.href='index.html'">TOC</button>
-
-      <!-- Split toggle: show in both modes -->
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
       <button id="splitToggle" type="button">Split</button>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
 
       <!-- Visible only in split mode: TOTAL width controls for the split area -->
       <button id="narrower" class="only-split" type="button">-width</button>
@@ -45,9 +55,7 @@
         <div class="chordline no0">Am     Dm     G     C</div>
       -->
       <pre>
-<span class='chordline no0'>Tuning: E A D G B ECapo: No capo</span><span class='chordline no1'>Buning: F A# D# G# C FC#apo: Fo capo</span><span class='chordline no2'>Buning: F# B E A C# F#Dapo: Fo capo</span><span class='chordline no3'>Buning: G C F A# D GD#apo: Fo capo</span><span class='chordline no4'>Buning: G# C# F# B D# G#Eapo: Fo capo</span><span class='chordline no5'>Buning: A D G C E AFapo: Fo capo</span><span class='chordline no6'>Buning: A# D# G# C# F A#F#apo: Fo capo</span><span class='chordline no7'>Buning: B E A D F# BGapo: Fo capo</span><span class='chordline no8'>Buning: C F A# D# G CG#apo: Fo capo</span><span class='chordline no9'>Buning: C# F# B E G# C#Aapo: Fo capo</span><span class='chordline no10'>Buning: D G C F A DA#apo: Fo capo</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Bapo: Fo capo</span>
-
-Start D?
+<span class='chordline no0'>Start D</span><span class='chordline no1'>Start D#</span><span class='chordline no2'>Start E</span><span class='chordline no3'>Start F</span><span class='chordline no4'>Start F#</span><span class='chordline no5'>Start G</span><span class='chordline no6'>Start G#</span><span class='chordline no7'>Start A</span><span class='chordline no8'>Start A#</span><span class='chordline no9'>Start B</span><span class='chordline no10'>Start C</span><span class='chordline no11'>Start C#</span>
 
 
 <span class='chordline no0'>Dm</span><span class='chordline no1'>D#m</span><span class='chordline no2'>Em</span><span class='chordline no3'>Fm</span><span class='chordline no4'>F#m</span><span class='chordline no5'>Gm</span><span class='chordline no6'>G#m</span><span class='chordline no7'>Am</span><span class='chordline no8'>A#m</span><span class='chordline no9'>Bm</span><span class='chordline no10'>Cm</span><span class='chordline no11'>C#m</span>

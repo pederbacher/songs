@@ -11,7 +11,7 @@ let isSyncingScroll = false;  // prevent recursive scroll syncing
 let mouseInRightEdge = false; // rightmost 10% of window triggers menu show
 
 // Split TOTAL width control (both panes grow/shrink together)
-let splitScale = 0.9;         // fraction of viewport width (0..1)
+let splitScale = 1.0;         // fraction of viewport width (0..1)
 const SCALE_STEP = 0.05;
 const SCALE_MIN = 0.50;
 const SCALE_MAX = 1.00;
@@ -259,8 +259,10 @@ function showGroup(index) {
       .querySelectorAll("#pageContent ." + groups[index])
       .forEach((el) => (el.style.display = "inline-block"));
     currentIndex = index;
-    const btn = document.getElementById("upbutton");
-    if (btn) btn.textContent = "Up " + index;
+    // Highlight active transpose button
+    document.querySelectorAll("#transposeButtons button").forEach((btn, i) => {
+      btn.classList.toggle("active", i === index);
+    });
   }
 }
 function up() {
@@ -345,43 +347,32 @@ function ensureSplitContainer() {
   const split = document.createElement("div");
   split.id = "splitContainer";
 
-  const left = document.createElement("div");
-  left.className = "split-pane";
-  left.id = "paneLeft";
-  left.innerHTML = `
-    <div class="paneControls hidden" data-pane="left">
+  function paneToolbarHTML(side) {
+    return `
+    <div class="paneControls hidden" data-pane="${side}">
       <button data-action="startstop">Start</button>
-      <button data-action="slower">-</button>
-      <button data-action="faster">+</button>
-
-      <button data-action="up">Up</button>
-      <button data-action="down">Down</button>
-      <button data-action="toggleChords">Chords</button>
-
-      <button data-action="toc">TOC</button>
+      <button data-action="faster" class="speed-btn">+</button>
+      <button data-action="slower" class="speed-btn">-</button>
+      <button data-action="toggleChords">ChordsHide</button>
+      <button data-action="toc" class="speed-btn">TOC</button>
       <button data-action="single">Single</button>
+      <div class="paneTransposeButtons">
+        ${Array.from({length: 12}, (_, i) => `<button data-action="transpose" data-index="${i}">${i}</button>`).join('')}
+      </div>
     </div>
     <div class="paneContent"></div>
   `;
+  }
+
+  const left = document.createElement("div");
+  left.className = "split-pane";
+  left.id = "paneLeft";
+  left.innerHTML = paneToolbarHTML("left");
 
   const right = document.createElement("div");
   right.className = "split-pane";
   right.id = "paneRight";
-  right.innerHTML = `
-    <div class="paneControls hidden" data-pane="right">
-      <button data-action="startstop">Start</button>
-      <button data-action="slower">-</button>
-      <button data-action="faster">+</button>
-
-      <button data-action="up">Up</button>
-      <button data-action="down">Down</button>
-      <button data-action="toggleChords">Chords</button>
-
-      <button data-action="toc">TOC</button>
-      <button data-action="single">Single</button>
-    </div>
-    <div class="paneContent"></div>
-  `;
+  right.innerHTML = paneToolbarHTML("right");
 
   split.appendChild(left);
   split.appendChild(right);
@@ -446,22 +437,19 @@ function wirePaneToolbar(toolbarEl) {
       case "slower":
         api.speedDown();
         break;
-      case "up": {
-        paneState[paneKey].index = (paneState[paneKey].index + 1) % groups.length;
-        paneShowGroup(contentEl, paneState[paneKey].index);
-        btn.textContent = "Up " + paneState[paneKey].index;
-        break;
-      }
-      case "down": {
-        paneState[paneKey].index =
-          (paneState[paneKey].index - 1 + groups.length) % groups.length;
-        paneShowGroup(contentEl, paneState[paneKey].index);
-        fresh.querySelector("[data-action='up']").textContent = "Up " + paneState[paneKey].index;
+      case "transpose": {
+        const idx = parseInt(btn.getAttribute("data-index"));
+        paneState[paneKey].index = idx;
+        paneShowGroup(contentEl, idx);
+        fresh.querySelectorAll("[data-action='transpose']").forEach((b, i) => {
+          b.classList.toggle("active", i === idx);
+        });
         break;
       }
       case "toggleChords": {
         const st = paneState[paneKey];
         st.chordsVisible = !st.chordsVisible;
+        btn.textContent = st.chordsVisible ? "ChordsHide" : "ChordsShow";
         if (st.chordsVisible) {
           contentEl.querySelectorAll(".chordrow").forEach(r => r.style.display = "");
           contentEl.classList.remove("chords-hidden");
@@ -536,9 +524,8 @@ function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
 function applySplitTotalWidth() {
   const split = document.getElementById("splitContainer");
   if (!split) return;
-  // Use viewport width minus the body horizontal padding (~40px)
   const vw = Math.round(splitScale * 100);
-  split.style.setProperty("--split-width", `calc(${vw}vw - 40px)`);
+  split.style.setProperty("--split-width", `${vw}vw`);
 }
 
 function enableSplitView() {
@@ -568,9 +555,9 @@ function enableSplitView() {
   const leftToolbar  = wirePaneToolbar(leftPane.querySelector(".paneControls"));
   const rightToolbar = wirePaneToolbar(rightPane.querySelector(".paneControls"));
 
-  // Set initial Up button text to show starting transpose index
-  leftToolbar.querySelector("[data-action='up']").textContent  = "Up " + paneState.left.index;
-  rightToolbar.querySelector("[data-action='up']").textContent = "Up " + paneState.right.index;
+  // Highlight initial transpose button (index 0) in each pane
+  leftToolbar.querySelectorAll("[data-action='transpose']")[0]?.classList.add("active");
+  rightToolbar.querySelectorAll("[data-action='transpose']")[0]?.classList.add("active");
 
   // Show split; hide original content
   pageContent.style.display = "none";

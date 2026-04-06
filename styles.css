@@ -19,9 +19,12 @@ body {
   line-height: 1.2;
 }
 
-/* In split mode we remove the max-width constraint to allow full-width split */
+/* In split mode: full viewport, no padding/margin gutters */
 body.split-mode {
   max-width: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
 }
 
 h1 {
@@ -92,6 +95,27 @@ body.split-mode #controls {
 body.split-mode #controls .only-single { display: none !important; }
 body:not(.split-mode) #controls .only-split { display: none !important; }
 
+/* Transpose buttons row — force onto its own line, buttons fill available width */
+#transposeButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 100%;
+}
+#transposeButtons button {
+  flex: 1;
+}
+.speed-btn {
+  width: 3em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#transposeButtons button.active {
+  background-color: #1a4da3;
+  color: white;
+}
+
 /* Full auto-hide */
 #controls.fullyHidden {
   opacity: 0;
@@ -103,7 +127,7 @@ body:not(.split-mode) #controls .only-split { display: none !important; }
   display: none;                     /* hidden until enabled */
   grid-template-columns: 1fr 1fr;    /* keep 50/50; total width is controlled by --split-width */
   gap: 12px;
-  width: var(--split-width, calc(100vw - 40px)); /* dynamic total width */
+  width: var(--split-width, 100vw); /* dynamic total width */
   max-width: none;                   /* allow to grow beyond body max-width in split mode */
   margin: 0 auto;                    /* center the split area */
   padding-right: 0;
@@ -150,6 +174,21 @@ body:not(.split-mode) #controls .only-split { display: none !important; }
   padding: 6px 10px;
   font-size: 14px;
   border-radius: 7px;
+}
+
+/* Transpose buttons row inside pane toolbar */
+.paneTransposeButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  width: 100%;
+}
+.paneTransposeButtons button {
+  flex: 1;
+}
+.paneTransposeButtons button.active {
+  background-color: #1a4da3;
+  color: white;
 }
 
 /* Hidden state for per-pane toolbar */
