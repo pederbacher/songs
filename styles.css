@@ -8,6 +8,11 @@
   line-height: var(--chords-hidden-line-height);
 }
 
+/* Always reserve scrollbar space to prevent layout shift on scroll start/stop */
+html {
+  overflow-y: scroll;
+}
+
 /* Base */
 body {
   font-family: Arial, sans-serif;
@@ -84,6 +89,9 @@ a:hover { text-decoration: underline; }
   padding: 6px 10px;
   font-size: 14px;
   border-radius: 7px;
+}
+#startstop {
+  min-width: 4em;
 }
 
 /* Split-mode: hide master controls entirely (each pane has its own toolbar) */

@@ -12,6 +12,7 @@ let mouseInRightEdge = false; // rightmost 10% of window triggers menu show
 
 // Split TOTAL width control (both panes grow/shrink together)
 let splitScale = 1.0;         // fraction of viewport width (0..1)
+let hoveredPane = null;       // 'left', 'right', or null
 const SCALE_STEP = 0.05;
 const SCALE_MIN = 0.50;
 const SCALE_MAX = 1.00;
@@ -101,7 +102,7 @@ let api = {
 
 if (isFirefox) {
   // ---------- FIREFOX: precise rAF scrolling
-  let speed = 8; // pixels per second (can be fractional via accumulator)
+  let speed = 16; // pixels per second (can be fractional via accumulator)
   let scrolling = false;
   let lastTimestamp = 0;
   let fractionalAccumulator = 0;
@@ -163,7 +164,7 @@ if (isFirefox) {
   window.startstop = startstop;
 } else {
   // ---------- CHROME/OTHERS: small-step setInterval scrolling
-  let speed = 10; // default "units per second"
+  let speed = 20; // default "units per second"
   let intervalId = null;
 
   function getZoomViaDPR() {
@@ -391,6 +392,26 @@ function paneShowGroup(paneContentEl, index) {
   }
 }
 
+function paneSetGroup(paneKey, index) {
+  const paneRoot = document.getElementById(`pane${capitalize(paneKey)}`);
+  if (!paneRoot) return;
+  const contentEl = paneRoot.querySelector(".paneContent");
+  const toolbar   = paneRoot.querySelector(".paneControls");
+  paneState[paneKey].index = index;
+  paneShowGroup(contentEl, index);
+  if (toolbar) {
+    toolbar.querySelectorAll("[data-action='transpose']").forEach((b, i) => {
+      b.classList.toggle("active", i === index);
+    });
+  }
+}
+function paneUp(paneKey) {
+  paneSetGroup(paneKey, (paneState[paneKey].index + 1) % groups.length);
+}
+function paneDown(paneKey) {
+  paneSetGroup(paneKey, (paneState[paneKey].index - 1 + groups.length) % groups.length);
+}
+
 function attachPaneScrollSync() {
   const left = document.getElementById("paneLeft");
   const right = document.getElementById("paneRight");
@@ -570,6 +591,12 @@ function enableSplitView() {
   // Prevent body scroll (we now scroll panes)
   document.body.style.overflow = "hidden";
 
+  // Track which pane the mouse is over (for keyboard transpose routing)
+  leftPane.addEventListener("mouseenter",  () => { hoveredPane = "left";  }, { passive: true });
+  rightPane.addEventListener("mouseenter", () => { hoveredPane = "right"; }, { passive: true });
+  leftPane.addEventListener("mouseleave",  () => { if (hoveredPane === "left")  hoveredPane = null; }, { passive: true });
+  rightPane.addEventListener("mouseleave", () => { if (hoveredPane === "right") hoveredPane = null; }, { passive: true });
+
   attachPaneScrollSync();
 
   // Install per-pane auto-hide behavior (only once per side)
@@ -625,6 +652,32 @@ document.getElementById("narrower")?.addEventListener("click", () => {
    Hook master buttons for speed in both engines (already done above)
    ============================================================ */
 // Firefox handlers registered in that branch; same for Chrome.
+
+// --- Spacebar toggles auto-scroll
+document.addEventListener("keydown", (e) => {
+  if (e.target.matches("input, textarea, button, select")) return;
+  if (e.code === "Space") {
+    e.preventDefault();
+    api.startstop();
+  } else if (e.key === "+" || e.key === "=") {
+    api.speedUp();
+  } else if (e.key === "-") {
+    api.speedDown();
+  } else if (e.key >= "0" && e.key <= "9") {
+    if (splitMode && hoveredPane) paneSetGroup(hoveredPane, parseInt(e.key));
+    else showGroup(parseInt(e.key));
+  } else if (e.key === "u") {
+    if (splitMode && hoveredPane) paneUp(hoveredPane);
+    else up();
+  } else if (e.key === "d") {
+    if (splitMode && hoveredPane) paneDown(hoveredPane);
+    else down();
+  }
+});
+
+// --- Ensure page has keyboard focus on load (no click required)
+document.body.tabIndex = -1;
+document.body.focus();
 
 // --- Initialize menu hidden; it will appear on first move to right edge
 lastScrollY = getCurrentScrollY();
