@@ -102,7 +102,7 @@ let api = {
 
 if (isFirefox) {
   // ---------- FIREFOX: precise rAF scrolling
-  let speed = 16; // pixels per second (can be fractional via accumulator)
+  let speed = 4; // pixels per second (can be fractional via accumulator)
   let scrolling = false;
   let lastTimestamp = 0;
   let fractionalAccumulator = 0;
@@ -124,15 +124,6 @@ if (isFirefox) {
       const targets = getScrollTargets();
       targets.forEach((el) => (el.scrollTop += wholePixels));
       fractionalAccumulator -= wholePixels;
-    }
-
-    // stop at bottom (all targets)
-    const targetsNow = getScrollTargets();
-    if (allTargetsAtBottom(targetsNow)) {
-      scrolling = false;
-      const btn = document.getElementById("startstop");
-      if (btn) btn.textContent = "Start";
-      return;
     }
 
     requestAnimationFrame(scrollStep);
@@ -161,10 +152,11 @@ if (isFirefox) {
   api.startstop = startstop;
   api.speedUp = speedUp;
   api.speedDown = speedDown;
+  api.getSpeed = () => speed;
   window.startstop = startstop;
 } else {
   // ---------- CHROME/OTHERS: small-step setInterval scrolling
-  let speed = 20; // default "units per second"
+  let speed = 5; // default "units per second"
   let intervalId = null;
 
   function getZoomViaDPR() {
@@ -177,25 +169,8 @@ if (isFirefox) {
 
     // If in single mode targeting the document, use window.scrollBy for consistency
     if (!splitMode && targets[0] === getDocScrollElement()) {
-      const atBottom =
-        window.scrollY + window.innerHeight >= document.body.scrollHeight - 1;
-      if (atBottom) {
-        clearInterval(intervalId);
-        intervalId = null;
-        const btn = document.getElementById("startstop");
-        if (btn) btn.textContent = "Start";
-        return;
-      }
       window.scrollBy(0, step);
     } else {
-      // split mode: scroll both panes & stop at bottom when both reached
-      if (allTargetsAtBottom(targets)) {
-        clearInterval(intervalId);
-        intervalId = null;
-        const btn = document.getElementById("startstop");
-        if (btn) btn.textContent = "Start";
-        return;
-      }
       targets.forEach((el) => (el.scrollTop += step));
     }
   }
@@ -237,8 +212,23 @@ if (isFirefox) {
   api.startstop = startstop;
   api.speedUp = speedUp;
   api.speedDown = speedDown;
+  api.getSpeed = () => speed;
   window.startstop = startstop;
 }
+
+/* ============================================================
+   SPEED INDICATOR: brief toast showing current speed
+   ============================================================ */
+let toastTimer = null;
+function showToast(text) {
+  const el = document.getElementById("speedIndicator");
+  if (!el) return;
+  el.textContent = text;
+  el.classList.add("visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("visible"), 1000);
+}
+function showSpeedIndicator() { showToast(Math.round(api.getSpeed())); }
 
 /* ============================================================
    TRANSPOSE (single + per-pane)
@@ -661,17 +651,39 @@ document.addEventListener("keydown", (e) => {
     api.startstop();
   } else if (e.key === "+" || e.key === "=") {
     api.speedUp();
+    showSpeedIndicator();
   } else if (e.key === "-") {
     api.speedDown();
+    showSpeedIndicator();
   } else if (e.key >= "0" && e.key <= "9") {
     if (splitMode && hoveredPane) paneSetGroup(hoveredPane, parseInt(e.key));
     else showGroup(parseInt(e.key));
+    showToast(splitMode && hoveredPane ? paneState[hoveredPane].index : currentIndex);
   } else if (e.key === "u") {
     if (splitMode && hoveredPane) paneUp(hoveredPane);
     else up();
+    showToast(splitMode && hoveredPane ? paneState[hoveredPane].index : currentIndex);
   } else if (e.key === "d") {
     if (splitMode && hoveredPane) paneDown(hoveredPane);
     else down();
+    showToast(splitMode && hoveredPane ? paneState[hoveredPane].index : currentIndex);
+  } else if (splitMode) {
+    // In split mode, route scroll keys to the hovered pane
+    const paneRoot = hoveredPane ? document.getElementById(`pane${capitalize(hoveredPane)}`) : null;
+    if (!paneRoot) return;
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      paneRoot.scrollTop += 60;
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      paneRoot.scrollTop -= 60;
+    } else if (e.key === "PageDown") {
+      e.preventDefault();
+      paneRoot.scrollTop += paneRoot.clientHeight * 0.9;
+    } else if (e.key === "PageUp") {
+      e.preventDefault();
+      paneRoot.scrollTop -= paneRoot.clientHeight * 0.9;
+    }
   }
 });
 
