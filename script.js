@@ -102,7 +102,7 @@ let api = {
 
 if (isFirefox) {
   // ---------- FIREFOX: precise rAF scrolling
-  let speed = 4; // pixels per second (can be fractional via accumulator)
+  let speed = 10; // pixels per second (can be fractional via accumulator)
   let scrolling = false;
   let lastTimestamp = 0;
   let fractionalAccumulator = 0;
@@ -156,7 +156,7 @@ if (isFirefox) {
   window.startstop = startstop;
 } else {
   // ---------- CHROME/OTHERS: small-step setInterval scrolling
-  let speed = 5; // default "units per second"
+  let speed = 10; // default "units per second"
   let intervalId = null;
 
   function getZoomViaDPR() {
