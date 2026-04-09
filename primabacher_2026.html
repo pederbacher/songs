@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <title>Songs</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  thead th { cursor: pointer; user-select: none; }
+  thead th:hover { text-decoration: underline; }
+  thead th.sort-asc::after  { content: " ▲"; font-size: 0.75em; }
+  thead th.sort-desc::after { content: " ▼"; font-size: 0.75em; }
+</style>
 </head>
 <body>
 
@@ -93,3 +99,52 @@
       <td></td>
     </tr>
   </tbody>
+</table>
+</pre>
+
+<script>
+(function () {
+  var lastTh = null, asc = true;
+  document.querySelectorAll("thead th").forEach(function (th, col) {
+    th.addEventListener("click", function () {
+      var tbody = document.querySelector("tbody");
+      var rows  = Array.from(tbody.querySelectorAll("tr"));
+      if (lastTh === th) { asc = !asc; } else { asc = true; }
+      if (lastTh) { lastTh.classList.remove("sort-asc", "sort-desc"); }
+      th.classList.toggle("sort-asc",  asc);
+      th.classList.toggle("sort-desc", !asc);
+      lastTh = th;
+
+      // Build order map from data-order="val1;val2;..." if present
+      var orderMap = null;
+      var orderAttr = th.getAttribute("data-order");
+      if (orderAttr) {
+        orderMap = {};
+        orderAttr.split(";").forEach(function (v, i) {
+          orderMap[v.trim().toLowerCase()] = i;
+        });
+      }
+
+      rows.sort(function (a, b) {
+        var ta = (a.cells[col] ? a.cells[col].textContent : "").trim();
+        var tb = (b.cells[col] ? b.cells[col].textContent : "").trim();
+        if (orderMap) {
+          var ia = orderMap.hasOwnProperty(ta.toLowerCase()) ? orderMap[ta.toLowerCase()] : Infinity;
+          var ib = orderMap.hasOwnProperty(tb.toLowerCase()) ? orderMap[tb.toLowerCase()] : Infinity;
+          // Non-matching (Infinity) always stay below matching
+          if (ia === Infinity && ib === Infinity) return ta.localeCompare(tb);
+          if (ia !== ib) return asc ? ia - ib : ib - ia;
+          return ta.localeCompare(tb);
+        }
+        return asc
+          ? ta.toLowerCase().localeCompare(tb.toLowerCase())
+          : tb.toLowerCase().localeCompare(ta.toLowerCase());
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

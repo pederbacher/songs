@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <title>Songs</title>
 <link rel="stylesheet" href="styles.css">
+<style>
+  thead th { cursor: pointer; user-select: none; }
+  thead th:hover { text-decoration: underline; }
+  thead th.sort-asc::after  { content: " ▲"; font-size: 0.75em; }
+  thead th.sort-desc::after { content: " ▼"; font-size: 0.75em; }
+</style>
 </head>
 <body>
 
@@ -14,6 +20,8 @@
       <th>Artist</th>
       <th>Song</th>
       <th>Versions</th>
+      <th data-order="Onsdag;Torsdag;Fredag;Lørdag">Day</th>
+      <th>Stage</th>
     </tr>
   </thead>
   <tbody>
@@ -21,70 +29,147 @@
       <td>Aphaca</td>
       <td><a href="Aphaca___En_drøm_om_et_menneske.html">En drøm om et menneske</a></td>
       <td></td>
+      <td>Fredag</td>
+      <td>Orange</td>
     </tr>
     <tr>
       <td>Cure</td>
       <td><a href="Cure___Boys_dont_cry.html">Boys dont cry</a></td>
+      <td></td>
+      <td>Torsdag</td>
       <td></td>
     </tr>
     <tr>
       <td>Cure</td>
       <td><a href="Cure___Lullaby.html">Lullaby</a></td>
       <td></td>
+      <td>Fredag</td>
+      <td></td>
     </tr>
     <tr>
       <td>Gorillaz</td>
       <td><a href="Gorillaz___Clint_Eastwood.html">Clint Eastwood</a></td>
+      <td></td>
+      <td></td>
       <td></td>
     </tr>
     <tr>
       <td>Gorillaz</td>
       <td><a href="Gorillaz___Feel_good_inc.html">Feel good inc</a></td>
       <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Gorillaz</td>
       <td><a href="Gorillaz___On_Melancholy_Hill.html">On Melancholy Hill</a></td>
+      <td></td>
+      <td>lørdag</td>
       <td></td>
     </tr>
     <tr>
       <td>Gorillaz</td>
       <td><a href="Gorillaz___The_happy_dictator.html">The happy dictator</a></td>
       <td><a href="Gorillaz___The_happy_dictator.advanced.html">advanced</a>, <a href="Gorillaz___The_happy_dictator.simple.html">simple</a></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Gorillaz</td>
       <td><a href="Gorillaz___The_Plastic_Guru.html">The Plastic Guru</a></td>
+      <td></td>
+      <td>lørdag</td>
       <td></td>
     </tr>
     <tr>
       <td>Guldimund</td>
       <td><a href="Guldimund___Hvordan_ser_gud_ud.html">Hvordan ser gud ud</a></td>
       <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Guldimund</td>
       <td><a href="Guldimund___Ring_Når_Du_Har_Tid.html">Ring Når Du Har Tid</a></td>
+      <td></td>
+      <td></td>
       <td></td>
     </tr>
     <tr>
       <td>Kneecap</td>
       <td><a href="Kneecap___Better_way_to_live.html">Better way to live</a></td>
       <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Sophs</td>
       <td><a href="Sophs___Sweat.html">Sweat</a></td>
+      <td></td>
+      <td></td>
       <td></td>
     </tr>
     <tr>
       <td>Tobias Rahim</td>
       <td><a href="Tobias_Rahim___Når_mænd_de_græder.html">Når mænd de græder</a></td>
       <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>Tobias Rahim</td>
       <td><a href="Tobias_Rahim___Stor_mand.html">Stor mand</a></td>
       <td></td>
+      <td></td>
+      <td></td>
     </tr>
   </tbody>
+</table>
+</pre>
+
+<script>
+(function () {
+  var lastTh = null, asc = true;
+  document.querySelectorAll("thead th").forEach(function (th, col) {
+    th.addEventListener("click", function () {
+      var tbody = document.querySelector("tbody");
+      var rows  = Array.from(tbody.querySelectorAll("tr"));
+      if (lastTh === th) { asc = !asc; } else { asc = true; }
+      if (lastTh) { lastTh.classList.remove("sort-asc", "sort-desc"); }
+      th.classList.toggle("sort-asc",  asc);
+      th.classList.toggle("sort-desc", !asc);
+      lastTh = th;
+
+      // Build order map from data-order="val1;val2;..." if present
+      var orderMap = null;
+      var orderAttr = th.getAttribute("data-order");
+      if (orderAttr) {
+        orderMap = {};
+        orderAttr.split(";").forEach(function (v, i) {
+          orderMap[v.trim().toLowerCase()] = i;
+        });
+      }
+
+      rows.sort(function (a, b) {
+        var ta = (a.cells[col] ? a.cells[col].textContent : "").trim();
+        var tb = (b.cells[col] ? b.cells[col].textContent : "").trim();
+        if (orderMap) {
+          var ia = orderMap.hasOwnProperty(ta.toLowerCase()) ? orderMap[ta.toLowerCase()] : Infinity;
+          var ib = orderMap.hasOwnProperty(tb.toLowerCase()) ? orderMap[tb.toLowerCase()] : Infinity;
+          // Non-matching (Infinity) always stay below matching
+          if (ia === Infinity && ib === Infinity) return ta.localeCompare(tb);
+          if (ia !== ib) return asc ? ia - ib : ib - ia;
+          return ta.localeCompare(tb);
+        }
+        return asc
+          ? ta.toLowerCase().localeCompare(tb.toLowerCase())
+          : tb.toLowerCase().localeCompare(ta.toLowerCase());
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
