@@ -5,6 +5,12 @@ const isFirefox = navigator.userAgent.toLowerCase().includes("firefox");
 let autoHideTimeout = null;
 let lastScrollY = 0;          // kept for completeness
 let splitMode = false;        // split view state
+let chordsVisible = true;     // single mode chords visibility
+let _initComplete = false;    // guards saveState during page initialization
+const paneState = {
+  left:  { index: 0, chordsVisible: true },
+  right: { index: 0, chordsVisible: true },
+};
 let isSyncingScroll = false;  // prevent recursive scroll syncing
 
 // Master menu visibility via mouse right edge (10%)
@@ -254,6 +260,7 @@ function showGroup(index) {
     document.querySelectorAll("#transposeButtons button").forEach((btn, i) => {
       btn.classList.toggle("active", i === index);
     });
+    saveState();
   }
 }
 function up() {
@@ -271,12 +278,15 @@ function hideshowchords() {
     btn.textContent = "ChordsShow";
     rows.forEach(r => r.style.display = "none");
     document.getElementById("pageContent").classList.add("chords-hidden");
+    chordsVisible = false;
+    saveState();
     showGroup(-1);
   } else {
     btn.textContent = "ChordsHide";
     rows.forEach(r => r.style.display = "");
     document.getElementById("pageContent").classList.remove("chords-hidden");
-    showGroup(currentIndex);
+    chordsVisible = true;
+    showGroup(currentIndex); // saveState called inside showGroup
   }
 }
 window.up = up;
@@ -318,19 +328,61 @@ function wrapChordRows(container) {
   }
 }
 
-// Initialize first chord group (single mode)
-showGroup(0);
+/* ============================================================
+   STATE PERSISTENCE via localStorage
+   Saved on every change; read once on page load as initial state.
+   Already-open tabs are not affected (no storage event listener).
+   ============================================================ */
+function saveState() {
+  if (!_initComplete) return;
+  try {
+    localStorage.setItem('songViewState', JSON.stringify({
+      chordsVisible,
+      splitMode,
+      transpose: currentIndex,
+      left:  { index: paneState.left.index,  chordsVisible: paneState.left.chordsVisible  },
+      right: { index: paneState.right.index, chordsVisible: paneState.right.chordsVisible },
+    }));
+  } catch(e) {}
+}
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('songViewState');
+    return s ? JSON.parse(s) : null;
+  } catch(e) { return null; }
+}
+
+// Initialize state from localStorage (applied as initial state for this page load)
+const _savedState = loadState();
+if (_savedState) {
+  currentIndex      = _savedState.transpose ?? 0;
+  chordsVisible     = _savedState.chordsVisible ?? true;
+  if (_savedState.left)  Object.assign(paneState.left,  _savedState.left);
+  if (_savedState.right) Object.assign(paneState.right, _savedState.right);
+}
+const _splitOnLoad = _savedState?.splitMode ?? false;
+
+showGroup(currentIndex);
 wrapChordRows(document.getElementById('pageContent'));
+
+// Apply single-mode chords-hidden state after rows are wrapped
+if (!chordsVisible) {
+  const _btn = document.getElementById('toggleChords');
+  if (_btn) _btn.textContent = 'ChordsShow';
+  document.querySelectorAll('#pageContent .chordrow').forEach(r => r.style.display = 'none');
+  document.getElementById('pageContent').classList.add('chords-hidden');
+}
+
+// Restore split mode if it was active
+try { if (_splitOnLoad) enableSplitView(); } catch(e) { console.error('split restore failed:', e); }
+_initComplete = true;
 
 /* ============================================================
    SPLIT VIEW: Two synced panes with per-pane toolbars
    - TOTAL width control via master +width/-width buttons
    - Per-pane toolbars auto-hide and appear when mouse in top of pane
    ============================================================ */
-const paneState = {
-  left: { index: 0, chordsVisible: true },
-  right: { index: 0, chordsVisible: true },
-};
 
 function ensureSplitContainer() {
   if (document.getElementById("splitContainer")) return;
@@ -394,6 +446,7 @@ function paneSetGroup(paneKey, index) {
       b.classList.toggle("active", i === index);
     });
   }
+  saveState();
 }
 function paneUp(paneKey) {
   paneSetGroup(paneKey, (paneState[paneKey].index + 1) % groups.length);
@@ -455,6 +508,7 @@ function wirePaneToolbar(toolbarEl) {
         fresh.querySelectorAll("[data-action='transpose']").forEach((b, i) => {
           b.classList.toggle("active", i === idx);
         });
+        saveState();
         break;
       }
       case "toggleChords": {
@@ -469,6 +523,7 @@ function wirePaneToolbar(toolbarEl) {
           contentEl.querySelectorAll(".chordrow").forEach(r => r.style.display = "none");
           contentEl.classList.add("chords-hidden");
         }
+        saveState();
         break;
       }
       case "toc":
@@ -553,22 +608,31 @@ function enableSplitView() {
   leftContent.innerHTML = pageContent.innerHTML;
   rightContent.innerHTML = pageContent.innerHTML;
 
-  // Initialize per-pane chord state
-  paneState.left.index = 0;
-  paneState.left.chordsVisible = true;
+  // Apply per-pane chord state (preserved from localStorage on load)
   paneShowGroup(leftContent, paneState.left.index);
+  if (!paneState.left.chordsVisible) {
+    leftContent.querySelectorAll(".chordrow").forEach(r => r.style.display = "none");
+    leftContent.classList.add("chords-hidden");
+  }
 
-  paneState.right.index = 0;
-  paneState.right.chordsVisible = true;
   paneShowGroup(rightContent, paneState.right.index);
+  if (!paneState.right.chordsVisible) {
+    rightContent.querySelectorAll(".chordrow").forEach(r => r.style.display = "none");
+    rightContent.classList.add("chords-hidden");
+  }
 
   // Wire pane toolbars (replace nodes to avoid duplicate listeners)
   const leftToolbar  = wirePaneToolbar(leftPane.querySelector(".paneControls"));
   const rightToolbar = wirePaneToolbar(rightPane.querySelector(".paneControls"));
 
-  // Highlight initial transpose button (index 0) in each pane
-  leftToolbar.querySelectorAll("[data-action='transpose']")[0]?.classList.add("active");
-  rightToolbar.querySelectorAll("[data-action='transpose']")[0]?.classList.add("active");
+  // Highlight initial transpose button in each pane
+  leftToolbar.querySelectorAll("[data-action='transpose']")[paneState.left.index]?.classList.add("active");
+  rightToolbar.querySelectorAll("[data-action='transpose']")[paneState.right.index]?.classList.add("active");
+  // Set chord button text to match restored state
+  const ltc = leftToolbar.querySelector("[data-action='toggleChords']");
+  const rtc = rightToolbar.querySelector("[data-action='toggleChords']");
+  if (ltc) ltc.textContent = paneState.left.chordsVisible ? "ChordsHide" : "ChordsShow";
+  if (rtc) rtc.textContent = paneState.right.chordsVisible ? "ChordsHide" : "ChordsShow";
 
   // Show split; hide original content
   pageContent.style.display = "none";
@@ -598,6 +662,7 @@ function enableSplitView() {
 
   // Apply initial TOTAL width
   applySplitTotalWidth();
+  saveState();
 }
 
 function disableSplitView() {
@@ -615,6 +680,7 @@ function disableSplitView() {
 
   // Rebase lastScrollY back to window
   lastScrollY = getCurrentScrollY();
+  saveState();
 
   // Restart the auto-hide behavior (will show when mouse hits right edge)
   // No change needed here; timer starts on first reveal
