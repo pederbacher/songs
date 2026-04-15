@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Blowin' in the wind</title>
 
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
     <!-- Link your CSS and JS files -->
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
@@ -22,6 +25,11 @@
       <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
       <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
       <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
 
       <!-- Transpose buttons (only in single mode) — second row -->
       <div id="transposeButtons" class="only-single">
@@ -58,7 +66,7 @@
 <span class='chordline no0'>(Start på A)</span><span class='chordline no1'>(Start på A#)</span><span class='chordline no2'>(Start på B)</span><span class='chordline no3'>(Start på C)</span><span class='chordline no4'>(Start på C#)</span><span class='chordline no5'>(Start på D)</span><span class='chordline no6'>(Start på D#)</span><span class='chordline no7'>(Start på E)</span><span class='chordline no8'>(Start på F)</span><span class='chordline no9'>(Start på F#)</span><span class='chordline no10'>(Start på G)</span><span class='chordline no11'>(Start på G#)</span>
 
 
-<span class='chordline no0'>D        G            A        D</span><span class='chordline no1'>D#       G#           A#       D#</span><span class='chordline no2'>E        A            B        E</span><span class='chordline no3'>F        A#           C        F</span><span class='chordline no4'>F#       B            C#       F#</span><span class='chordline no5'>G        C            D        G</span><span class='chordline no6'>G#       C#           D#       G#</span><span class='chordline no7'>A        D            E        A</span><span class='chordline no8'>A#       D#           F        A#</span><span class='chordline no9'>B        E            F#       B</span><span class='chordline no10'>C        F            G        C</span><span class='chordline no11'>C#       F#           G#       C#</span>
+<span class='chordline no0'>D        G            A        Dsus</span><span class='chordline no1'>D#       G#           A#       D#sus</span><span class='chordline no2'>E        A            B        Esus</span><span class='chordline no3'>F        A#           C        Fsus</span><span class='chordline no4'>F#       B            C#       F#sus</span><span class='chordline no5'>G        C            D        Gsus</span><span class='chordline no6'>G#       C#           D#       G#sus</span><span class='chordline no7'>A        D            E        Asus</span><span class='chordline no8'>A#       D#           F        A#sus</span><span class='chordline no9'>B        E            F#       Bsus</span><span class='chordline no10'>C        F            G        Csus</span><span class='chordline no11'>C#       F#           G#       C#sus</span>
 How many roads must a man walk down
 <span class='chordline no0'>  D        G          D</span><span class='chordline no1'>  D#       G#         D#</span><span class='chordline no2'>  E        A          E</span><span class='chordline no3'>  F        A#         F</span><span class='chordline no4'>  F#       B          F#</span><span class='chordline no5'>  G        C          G</span><span class='chordline no6'>  G#       C#         G#</span><span class='chordline no7'>  A        D          A</span><span class='chordline no8'>  A#       D#         A#</span><span class='chordline no9'>  B        E          B</span><span class='chordline no10'>  C        F          C</span><span class='chordline no11'>  C#       F#         C#</span>
 Before you call him a man?
@@ -121,6 +129,19 @@ The answer is blowin in the wind.
 
     <!-- Speed indicator toast -->
     <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Split container is created dynamically after #pageContent -->
 

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>The Times They Are A-Changin</title>
 
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
     <!-- Link your CSS and JS files -->
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
@@ -22,6 +25,11 @@
       <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
       <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
       <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
 
       <!-- Transpose buttons (only in single mode) — second row -->
       <div id="transposeButtons" class="only-single">
@@ -154,6 +162,19 @@ For the times they are a-changin'
 
     <!-- Speed indicator toast -->
     <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Split container is created dynamically after #pageContent -->
 

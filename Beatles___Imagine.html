@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Imagine</title>
 
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {"speed":15};</script>
+
     <!-- Link your CSS and JS files -->
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
@@ -22,6 +25,11 @@
       <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
       <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
       <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
 
       <!-- Transpose buttons (only in single mode) — second row -->
       <div id="transposeButtons" class="only-single">
@@ -55,6 +63,8 @@
         <div class="chordline no0">Am     Dm     G     C</div>
       -->
       <pre>
+
+
 <span class='chordline no0'>(start på D)</span><span class='chordline no1'>(start på D#)</span><span class='chordline no2'>(start på E)</span><span class='chordline no3'>(start på F)</span><span class='chordline no4'>(start på F#)</span><span class='chordline no5'>(start på G)</span><span class='chordline no6'>(start på G#)</span><span class='chordline no7'>(start på A)</span><span class='chordline no8'>(start på A#)</span><span class='chordline no9'>(start på B)</span><span class='chordline no10'>(start på C)</span><span class='chordline no11'>(start på C#)</span>
 
 
@@ -119,6 +129,19 @@ And the world will be as one
 
     <!-- Speed indicator toast -->
     <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Split container is created dynamically after #pageContent -->
 

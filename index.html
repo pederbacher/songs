@@ -2,7 +2,7 @@
 <html lang="da">
 <head>
 <meta charset="UTF-8">
-<title>Songs</title>
+<title>All songs</title>
 <link rel="stylesheet" href="styles.css">
 <style>
   thead th { cursor: pointer; user-select: none; }
@@ -10,8 +10,35 @@
   thead th.sort-asc::after  { content: " ▲"; font-size: 0.75em; }
   thead th.sort-desc::after { content: " ▼"; font-size: 0.75em; }
 </style>
+<script>window.TOC_META = {"collectionFile":null};</script>
+<script src="toc-script.js" defer></script>
 </head>
 <body>
+
+<div id="toc-controls" class="fullyHidden">
+  <div id="toc-nav-links">
+    <a href="index.html">All songs</a>
+    <a href="primabacher_2026.html">Primabacher 2026</a>
+    <a href="roskilde_2026.html">Roskilde 2026</a>
+  </div>
+  <div id="toc-edit-buttons">
+    <button id="toc-editBtn" type="button" onclick="tocOpenEditor()">Edit</button>
+    <button type="button" onclick="tocNewCollection()">New</button>
+    <button id="toc-rebuildBtn" type="button" onclick="tocRebuildHtml()">Rebuild</button>
+  </div>
+</div>
+
+<div id="editorOverlay">
+  <div id="editorBox">
+    <h2 id="editorTitle">Edit collection</h2>
+    <textarea id="editorTextarea" spellcheck="false"></textarea>
+    <div id="editorStatus"></div>
+    <div id="editorButtons">
+      <button type="button" onclick="saveEditor(true)">Save and close</button>
+      <button type="button" onclick="closeEditor()">Cancel</button>
+    </div>
+  </div>
+</div>
 
 <pre>
 <table>
@@ -141,6 +168,11 @@
     <tr>
       <td>Fontaines DC</td>
       <td><a href="Fontaines_DC___Jackie_down_the_line.html">Jackie down the line</a></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>Fragglerne</td>
+      <td><a href="Fragglerne___Fraggel_rock.html">Fraggel rock</a></td>
       <td></td>
     </tr>
     <tr>

@@ -106,9 +106,11 @@ let api = {
   speedDown: null,
 };
 
+const _metaSpeed = (window.SONG_META && window.SONG_META.speed) ? Number(window.SONG_META.speed) : 10;
+
 if (isFirefox) {
   // ---------- FIREFOX: precise rAF scrolling
-  let speed = 10; // pixels per second (can be fractional via accumulator)
+  let speed = _metaSpeed; // pixels per second (can be fractional via accumulator)
   let scrolling = false;
   let lastTimestamp = 0;
   let fractionalAccumulator = 0;
@@ -162,7 +164,7 @@ if (isFirefox) {
   window.startstop = startstop;
 } else {
   // ---------- CHROME/OTHERS: small-step setInterval scrolling
-  let speed = 10; // default "units per second"
+  let speed = _metaSpeed; // default "units per second"
   let intervalId = null;
 
   function getZoomViaDPR() {
@@ -759,3 +761,132 @@ document.body.focus();
 
 // --- Initialize menu hidden; it will appear on first move to right edge
 lastScrollY = getCurrentScrollY();
+
+/* ============================================================
+   SONG EDITOR
+   Opens the raw .txt source in a textarea, saves via POST /save-song.
+   The server.py backend handles the read/write; the plain Python
+   http.server does not support this, so server.py must be running.
+   ============================================================ */
+let _editorFile = null; // which .txt file is currently open in the editor
+
+function songTxtFilename() {
+  // Derive "Artist___Title.txt" from the current page URL
+  return window.location.pathname.split("/").pop().replace(/\.html$/, ".txt");
+}
+
+async function _openEditorForFile(file) {
+  const overlay = document.getElementById("editorOverlay");
+  const textarea = document.getElementById("editorTextarea");
+  const status = document.getElementById("editorStatus");
+  const title = document.getElementById("editorTitle");
+
+  _editorFile = file;
+  title.textContent = "Edit: " + file;
+  status.textContent = "Loading…";
+  textarea.value = "";
+  overlay.classList.add("active");
+
+  try {
+    const res = await fetch("/song-source?file=" + encodeURIComponent(file));
+    if (!res.ok) throw new Error("Server returned " + res.status);
+    const data = await res.json();
+    textarea.value = data.content;
+    status.textContent = "";
+    textarea.setSelectionRange(0, 0);
+    textarea.scrollTop = 0;
+    textarea.focus();
+  } catch (err) {
+    status.textContent = "Could not load source: " + err.message;
+  }
+}
+
+function openEditor() {
+  _openEditorForFile(songTxtFilename());
+}
+
+async function newSong() {
+  const input = window.prompt("New song filename (format: Artist___Title):");
+  if (!input) return;
+
+  // Normalise: strip .txt if user typed it, then re-add
+  let name = input.trim().replace(/\.txt$/i, "");
+  if (!name) return;
+  const file = name + ".txt";
+
+  const status = document.getElementById("editorStatus");
+
+  try {
+    const res = await fetch("/new-song", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ file }),
+    });
+    if (res.status === 409) {
+      if (!window.confirm(file + " already exists. Open it for editing?")) return;
+    } else if (!res.ok) {
+      throw new Error("Server returned " + res.status);
+    }
+    _openEditorForFile(file);
+  } catch (err) {
+    alert("Could not create song: " + err.message);
+  }
+}
+
+function closeEditor() {
+  document.getElementById("editorOverlay").classList.remove("active");
+  document.getElementById("editorStatus").textContent = "";
+  _editorFile = null;
+  // Return keyboard focus to page so spacebar scroll etc. still work
+  document.body.focus();
+}
+
+async function saveEditor(andClose = false) {
+  const file = _editorFile || songTxtFilename();
+  const content = document.getElementById("editorTextarea").value;
+  const status = document.getElementById("editorStatus");
+
+  status.textContent = "Saving…";
+  try {
+    const res = await fetch("/save-song", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ file, content }),
+    });
+    if (!res.ok) throw new Error("Server returned " + res.status);
+    if (andClose) {
+      closeEditor();
+    } else {
+      status.textContent = "Saved. Run make-html.R to regenerate HTML.";
+    }
+  } catch (err) {
+    status.textContent = "Save failed: " + err.message;
+  }
+}
+
+/* ============================================================
+   REBUILD
+   Triggers make-html.R on the server, then reloads the page.
+   ============================================================ */
+async function rebuildHtml() {
+  const btn = document.getElementById("rebuildBtn");
+  const original = btn.textContent;
+  btn.textContent = "Rebuilding…";
+  btn.disabled = true;
+  try {
+    const res = await fetch("/rebuild", { method: "POST" });
+    if (!res.ok) throw new Error("Server returned " + res.status);
+    window.location.reload();
+  } catch (err) {
+    alert("Rebuild failed: " + err.message);
+    btn.textContent = original;
+    btn.disabled = false;
+  }
+}
+
+// Close editor on Escape key
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && document.getElementById("editorOverlay").classList.contains("active")) {
+    closeEditor();
+  }
+});

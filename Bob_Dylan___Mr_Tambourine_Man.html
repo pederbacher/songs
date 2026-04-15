@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Mr Tambourine Man</title>
 
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {"speed":12};</script>
+
     <!-- Link your CSS and JS files -->
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
@@ -22,6 +25,11 @@
       <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
       <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
       <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
 
       <!-- Transpose buttons (only in single mode) — second row -->
       <div id="transposeButtons" class="only-single">
@@ -55,16 +63,18 @@
         <div class="chordline no0">Am     Dm     G     C</div>
       -->
       <pre>
-<span class='chordline no0'>(start C->D)</span><span class='chordline no1'>(start C#-GD#)</span><span class='chordline no2'>(start D-GE)</span><span class='chordline no3'>(start D#-GF)</span><span class='chordline no4'>(start E-GF#)</span><span class='chordline no5'>(start F-GG)</span><span class='chordline no6'>(start F#-GG#)</span><span class='chordline no7'>(start G-GA)</span><span class='chordline no8'>(start G#-GA#)</span><span class='chordline no9'>(start A-GB)</span><span class='chordline no10'>(start A#-GC)</span><span class='chordline no11'>(start B-GC#)</span>
+
+
+<span class='chordline no0'>(start C->D)</span><span class='chordline no1'>(start C#->D#)</span><span class='chordline no2'>(start D->E)</span><span class='chordline no3'>(start D#->F)</span><span class='chordline no4'>(start E->F#)</span><span class='chordline no5'>(start F->G)</span><span class='chordline no6'>(start F#->G#)</span><span class='chordline no7'>(start G->A)</span><span class='chordline no8'>(start G#->A#)</span><span class='chordline no9'>(start A->B)</span><span class='chordline no10'>(start A#->C)</span><span class='chordline no11'>(start B->C#)</span>
 
 
 <span class='chordline no0'>D      000232</span><span class='chordline no1'>D#     000232</span><span class='chordline no2'>E      000232</span><span class='chordline no3'>F      000232</span><span class='chordline no4'>F#     000232</span><span class='chordline no5'>G      000232</span><span class='chordline no6'>G#     000232</span><span class='chordline no7'>A      000232</span><span class='chordline no8'>A#     000232</span><span class='chordline no9'>B      000232</span><span class='chordline no10'>C      000232</span><span class='chordline no11'>C#     000232</span>
 <span class='chordline no0'>Dsus4  000233</span><span class='chordline no1'>D#sus4 000233</span><span class='chordline no2'>Esus4  000233</span><span class='chordline no3'>Fsus4  000233</span><span class='chordline no4'>F#sus4 000233</span><span class='chordline no5'>Gsus4  000233</span><span class='chordline no6'>G#sus4 000233</span><span class='chordline no7'>Asus4  000233</span><span class='chordline no8'>A#sus4 000233</span><span class='chordline no9'>Bsus4  000233</span><span class='chordline no10'>Csus4  000233</span><span class='chordline no11'>C#sus4 000233</span>
-Dsus2  000230
+<span class='chordline no0'>Dsus2  000230</span><span class='chordline no1'>D#sus2 000230</span><span class='chordline no2'>Esus2  000230</span><span class='chordline no3'>Fsus2  000230</span><span class='chordline no4'>F#sus2 000230</span><span class='chordline no5'>Gsus2  000230</span><span class='chordline no6'>G#sus2 000230</span><span class='chordline no7'>Asus2  000230</span><span class='chordline no8'>A#sus2 000230</span><span class='chordline no9'>Bsus2  000230</span><span class='chordline no10'>Csus2  000230</span><span class='chordline no11'>C#sus2 000230</span>
 <span class='chordline no0'>G      020033</span><span class='chordline no1'>G#     020033</span><span class='chordline no2'>A      020033</span><span class='chordline no3'>A#     020033</span><span class='chordline no4'>B      020033</span><span class='chordline no5'>C      020033</span><span class='chordline no6'>C#     020033</span><span class='chordline no7'>D      020033</span><span class='chordline no8'>D#     020033</span><span class='chordline no9'>E      020033</span><span class='chordline no10'>F      020033</span><span class='chordline no11'>F#     020033</span>
 <span class='chordline no0'>A      x02220 or 202220</span><span class='chordline no1'>A#     x02220 or 202220</span><span class='chordline no2'>B      x02220 or 202220</span><span class='chordline no3'>C      x02220 or 202220</span><span class='chordline no4'>C#     x02220 or 202220</span><span class='chordline no5'>D      x02220 or 202220</span><span class='chordline no6'>D#     x02220 or 202220</span><span class='chordline no7'>E      x02220 or 202220</span><span class='chordline no8'>F      x02220 or 202220</span><span class='chordline no9'>F#     x02220 or 202220</span><span class='chordline no10'>G      x02220 or 202220</span><span class='chordline no11'>G#     x02220 or 202220</span>
-Asus4  x02230 or 202230
-Asus2  x02200 or 202200
+<span class='chordline no0'>Asus4  x02230 or 202230</span><span class='chordline no1'>A#sus4 x02230 or 202230</span><span class='chordline no2'>Bsus4  x02230 or 202230</span><span class='chordline no3'>Csus4  x02230 or 202230</span><span class='chordline no4'>C#sus4 x02230 or 202230</span><span class='chordline no5'>Dsus4  x02230 or 202230</span><span class='chordline no6'>D#sus4 x02230 or 202230</span><span class='chordline no7'>Esus4  x02230 or 202230</span><span class='chordline no8'>Fsus4  x02230 or 202230</span><span class='chordline no9'>F#sus4 x02230 or 202230</span><span class='chordline no10'>Gsus4  x02230 or 202230</span><span class='chordline no11'>G#sus4 x02230 or 202230</span>
+<span class='chordline no0'>Asus2  x02200 or 202200</span><span class='chordline no1'>A#sus2 x02200 or 202200</span><span class='chordline no2'>Bsus2  x02200 or 202200</span><span class='chordline no3'>Csus2  x02200 or 202200</span><span class='chordline no4'>C#sus2 x02200 or 202200</span><span class='chordline no5'>Dsus2  x02200 or 202200</span><span class='chordline no6'>D#sus2 x02200 or 202200</span><span class='chordline no7'>Esus2  x02200 or 202200</span><span class='chordline no8'>Fsus2  x02200 or 202200</span><span class='chordline no9'>F#sus2 x02200 or 202200</span><span class='chordline no10'>Gsus2  x02200 or 202200</span><span class='chordline no11'>G#sus2 x02200 or 202200</span>
 
 
 <span class='chordline no0'>D D  Dsus2 Dsus2 D</span><span class='chordline no1'>D# D# D#sus2 D#sus2 D#</span><span class='chordline no2'>E E  Esus2 Esus2 E</span><span class='chordline no3'>F F  Fsus2 Fsus2 F</span><span class='chordline no4'>F# F# F#sus2 F#sus2 F#</span><span class='chordline no5'>G G  Gsus2 Gsus2 G</span><span class='chordline no6'>G# G# G#sus2 G#sus2 G#</span><span class='chordline no7'>A A  Asus2 Asus2 A</span><span class='chordline no8'>A# A# A#sus2 A#sus2 A#</span><span class='chordline no9'>B B  Bsus2 Bsus2 B</span><span class='chordline no10'>C C  Csus2 Csus2 C</span><span class='chordline no11'>C# C# C#sus2 C#sus2 C#</span>
@@ -189,6 +199,19 @@ In the jingle jangle morning I'll come following you
 
     <!-- Speed indicator toast -->
     <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
 
     <!-- Split container is created dynamically after #pageContent -->
 
