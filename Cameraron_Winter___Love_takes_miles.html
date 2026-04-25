@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Love takes miles</title>
+
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
+
+      <!-- Chords, TOC, Split in first row -->
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
+      <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Cameraron Winter: Love takes miles</h1>
+
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
+<span class='chordline no0'>Tuning: E A D G B EKey: AbCapo: No capo</span><span class='chordline no1'>Buning: F A# D# G# C FDey: AC#apo: Fo capo</span><span class='chordline no2'>Buning: F# B E A C# F#Dey: BbDapo: Fo capo</span><span class='chordline no3'>Buning: G C F A# D GDey: BD#apo: Fo capo</span><span class='chordline no4'>Buning: G# C# F# B D# G#Dey: CEapo: Fo capo</span><span class='chordline no5'>Buning: A D G C E ADey: DbFapo: Fo capo</span><span class='chordline no6'>Buning: A# D# G# C# F A#Dey: DF#apo: Fo capo</span><span class='chordline no7'>Buning: B E A D F# BDey: EbGapo: Fo capo</span><span class='chordline no8'>Buning: C F A# D# G CDey: EG#apo: Fo capo</span><span class='chordline no9'>Buning: C# F# B E G# C#Dey: FAapo: Fo capo</span><span class='chordline no10'>Buning: D G C F A DDey: GbA#apo: Fo capo</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Dey: GBapo: Fo capo</span>
+
+
+<span class='chordline no0'>Ab</span><span class='chordline no1'>A</span><span class='chordline no2'>Bb</span><span class='chordline no3'>B</span><span class='chordline no4'>C</span><span class='chordline no5'>Db</span><span class='chordline no6'>D</span><span class='chordline no7'>Eb</span><span class='chordline no8'>E</span><span class='chordline no9'>F</span><span class='chordline no10'>Gb</span><span class='chordline no11'>G</span>
+<span class='chordline no0'>              Ab</span><span class='chordline no1'>              A</span><span class='chordline no2'>              Bb</span><span class='chordline no3'>              B</span><span class='chordline no4'>              C</span><span class='chordline no5'>              Db</span><span class='chordline no6'>              D</span><span class='chordline no7'>              Eb</span><span class='chordline no8'>              E</span><span class='chordline no9'>              F</span><span class='chordline no10'>              Gb</span><span class='chordline no11'>              G</span>
+Love will call
+
+
+
+<span class='chordline no0'>                 Cm                   Fm</span><span class='chordline no1'>                 C#m                  F#m</span><span class='chordline no2'>                 Dm                   Gm</span><span class='chordline no3'>                 D#m                  G#m</span><span class='chordline no4'>                 Em                   Am</span><span class='chordline no5'>                 Fm                   A#m</span><span class='chordline no6'>                 F#m                  Bm</span><span class='chordline no7'>                 Gm                   Cm</span><span class='chordline no8'>                 G#m                  C#m</span><span class='chordline no9'>                 Am                   Dm</span><span class='chordline no10'>                 A#m                  D#m</span><span class='chordline no11'>                 Bm                   Em</span>
+When you've got enough under your arms
+<span class='chordline no0'>      Db</span><span class='chordline no1'>      D</span><span class='chordline no2'>      Eb</span><span class='chordline no3'>      E</span><span class='chordline no4'>      F</span><span class='chordline no5'>      Gb</span><span class='chordline no6'>      G</span><span class='chordline no7'>      Ab</span><span class='chordline no8'>      A</span><span class='chordline no9'>      Bb</span><span class='chordline no10'>      B</span><span class='chordline no11'>      C</span>
+Oh oh,  mama
+<span class='chordline no0'>Ab</span><span class='chordline no1'>A</span><span class='chordline no2'>Bb</span><span class='chordline no3'>B</span><span class='chordline no4'>C</span><span class='chordline no5'>Db</span><span class='chordline no6'>D</span><span class='chordline no7'>Eb</span><span class='chordline no8'>E</span><span class='chordline no9'>F</span><span class='chordline no10'>Gb</span><span class='chordline no11'>G</span>
+  Love will call
+<span class='chordline no0'>                   Cm                   Fm</span><span class='chordline no1'>                   C#m                  F#m</span><span class='chordline no2'>                   Dm                   Gm</span><span class='chordline no3'>                   D#m                  G#m</span><span class='chordline no4'>                   Em                   Am</span><span class='chordline no5'>                   Fm                   A#m</span><span class='chordline no6'>                   F#m                  Bm</span><span class='chordline no7'>                   Gm                   Cm</span><span class='chordline no8'>                   G#m                  C#m</span><span class='chordline no9'>                   Am                   Dm</span><span class='chordline no10'>                   A#m                  D#m</span><span class='chordline no11'>                   Bm                   Em</span>
+Love will make you fit it all in the car
+<span class='chordline no0'>      Db</span><span class='chordline no1'>      D</span><span class='chordline no2'>      Eb</span><span class='chordline no3'>      E</span><span class='chordline no4'>      F</span><span class='chordline no5'>      Gb</span><span class='chordline no6'>      G</span><span class='chordline no7'>      Ab</span><span class='chordline no8'>      A</span><span class='chordline no9'>      Bb</span><span class='chordline no10'>      B</span><span class='chordline no11'>      C</span>
+Oh oh,  mama
+<span class='chordline no0'>Ab</span><span class='chordline no1'>A</span><span class='chordline no2'>Bb</span><span class='chordline no3'>B</span><span class='chordline no4'>C</span><span class='chordline no5'>Db</span><span class='chordline no6'>D</span><span class='chordline no7'>Eb</span><span class='chordline no8'>E</span><span class='chordline no9'>F</span><span class='chordline no10'>Gb</span><span class='chordline no11'>G</span>
+  Something will take you
+By your pants, and
+<span class='chordline no0'>          Cm                     Fm</span><span class='chordline no1'>          C#m                    F#m</span><span class='chordline no2'>          Dm                     Gm</span><span class='chordline no3'>          D#m                    G#m</span><span class='chordline no4'>          Em                     Am</span><span class='chordline no5'>          Fm                     A#m</span><span class='chordline no6'>          F#m                    Bm</span><span class='chordline no7'>          Gm                     Cm</span><span class='chordline no8'>          G#m                    C#m</span><span class='chordline no9'>          Am                     Dm</span><span class='chordline no10'>          A#m                    D#m</span><span class='chordline no11'>          Bm                     Em</span>
+Swing you over his head and kick you back and forth
+
+
+
+<span class='chordline no0'>Ab                  Fm</span><span class='chordline no1'>A                  F#m</span><span class='chordline no2'>Bb                  Gm</span><span class='chordline no3'>B                  G#m</span><span class='chordline no4'>C                  Am</span><span class='chordline no5'>Db                  A#m</span><span class='chordline no6'>D                  Bm</span><span class='chordline no7'>Eb                  Cm</span><span class='chordline no8'>E                  C#m</span><span class='chordline no9'>F                  Dm</span><span class='chordline no10'>Gb                  D#m</span><span class='chordline no11'>G                  Em</span>
+Watching the bells, watching the lights
+<span class='chordline no0'>Db                     Ab</span><span class='chordline no1'>D                     A</span><span class='chordline no2'>Eb                     Bb</span><span class='chordline no3'>E                     B</span><span class='chordline no4'>F                     C</span><span class='chordline no5'>Gb                     Db</span><span class='chordline no6'>G                     D</span><span class='chordline no7'>Ab                     Eb</span><span class='chordline no8'>A                     E</span><span class='chordline no9'>Bb                     F</span><span class='chordline no10'>B                     Gb</span><span class='chordline no11'>C                     G</span>
+What I want is far away
+<span class='chordline no0'>                  Fm</span><span class='chordline no1'>                  F#m</span><span class='chordline no2'>                  Gm</span><span class='chordline no3'>                  G#m</span><span class='chordline no4'>                  Am</span><span class='chordline no5'>                  A#m</span><span class='chordline no6'>                  Bm</span><span class='chordline no7'>                  Cm</span><span class='chordline no8'>                  C#m</span><span class='chordline no9'>                  Dm</span><span class='chordline no10'>                  D#m</span><span class='chordline no11'>                  Em</span>
+Talk to the moon, flatten her down
+<span class='chordline no0'>Bbm                                Db          Ab</span><span class='chordline no1'>Bm                                D          A</span><span class='chordline no2'>Cm                                Eb          Bb</span><span class='chordline no3'>Dbm                                E          B</span><span class='chordline no4'>Dm                                F          C</span><span class='chordline no5'>Ebm                                Gb          Db</span><span class='chordline no6'>Em                                G          D</span><span class='chordline no7'>Fm                                Ab          Eb</span><span class='chordline no8'>Gbm                                A          E</span><span class='chordline no9'>Gm                                Bb          F</span><span class='chordline no10'>Abm                                B          Gb</span><span class='chordline no11'>Am                                C          G</span>
+Make her watch the wind all night, she can wait
+<span class='chordline no0'>                Fm</span><span class='chordline no1'>                F#m</span><span class='chordline no2'>                Gm</span><span class='chordline no3'>                G#m</span><span class='chordline no4'>                Am</span><span class='chordline no5'>                A#m</span><span class='chordline no6'>                Bm</span><span class='chordline no7'>                Cm</span><span class='chordline no8'>                C#m</span><span class='chordline no9'>                Dm</span><span class='chordline no10'>                D#m</span><span class='chordline no11'>                Em</span>
+Lonely as hell, walking around
+<span class='chordline no0'>Db                          Ab</span><span class='chordline no1'>D                          A</span><span class='chordline no2'>Eb                          Bb</span><span class='chordline no3'>E                          B</span><span class='chordline no4'>F                          C</span><span class='chordline no5'>Gb                          Db</span><span class='chordline no6'>G                          D</span><span class='chordline no7'>Ab                          Eb</span><span class='chordline no8'>A                          E</span><span class='chordline no9'>Bb                          F</span><span class='chordline no10'>B                          Gb</span><span class='chordline no11'>C                          G</span>
+Without moving, I'm not here
+<span class='chordline no0'>                   Fm</span><span class='chordline no1'>                   F#m</span><span class='chordline no2'>                   Gm</span><span class='chordline no3'>                   G#m</span><span class='chordline no4'>                   Am</span><span class='chordline no5'>                   A#m</span><span class='chordline no6'>                   Bm</span><span class='chordline no7'>                   Cm</span><span class='chordline no8'>                   C#m</span><span class='chordline no9'>                   Dm</span><span class='chordline no10'>                   D#m</span><span class='chordline no11'>                   Em</span>
+Watching the moon, writing it down
+<span class='chordline no0'>Bbm</span><span class='chordline no1'>Bm</span><span class='chordline no2'>Cm</span><span class='chordline no3'>Dbm</span><span class='chordline no4'>Dm</span><span class='chordline no5'>Ebm</span><span class='chordline no6'>Em</span><span class='chordline no7'>Fm</span><span class='chordline no8'>Gbm</span><span class='chordline no9'>Gm</span><span class='chordline no10'>Abm</span><span class='chordline no11'>Am</span>
+Love takes miles
+<span class='chordline no0'>                      Db           Ab</span><span class='chordline no1'>                      D           A</span><span class='chordline no2'>                      Eb           Bb</span><span class='chordline no3'>                      E           B</span><span class='chordline no4'>                      F           C</span><span class='chordline no5'>                      Gb           Db</span><span class='chordline no6'>                      G           D</span><span class='chordline no7'>                      Ab           Eb</span><span class='chordline no8'>                      A           E</span><span class='chordline no9'>                      Bb           F</span><span class='chordline no10'>                      B           Gb</span><span class='chordline no11'>                      C           G</span>
+Love takes miles, love  takes years
+
+
+
+<span class='chordline no0'>Ab</span><span class='chordline no1'>A</span><span class='chordline no2'>Bb</span><span class='chordline no3'>B</span><span class='chordline no4'>C</span><span class='chordline no5'>Db</span><span class='chordline no6'>D</span><span class='chordline no7'>Eb</span><span class='chordline no8'>E</span><span class='chordline no9'>F</span><span class='chordline no10'>Gb</span><span class='chordline no11'>G</span>
+  Mhm
+<span class='chordline no0'>            Cm                  Fm</span><span class='chordline no1'>            C#m                 F#m</span><span class='chordline no2'>            Dm                  Gm</span><span class='chordline no3'>            D#m                 G#m</span><span class='chordline no4'>            Em                  Am</span><span class='chordline no5'>            Fm                  A#m</span><span class='chordline no6'>            F#m                 Bm</span><span class='chordline no7'>            Gm                  Cm</span><span class='chordline no8'>            G#m                 C#m</span><span class='chordline no9'>            Am                  Dm</span><span class='chordline no10'>            A#m                 D#m</span><span class='chordline no11'>            Bm                  Em</span>
+You left me promising your shoes
+<span class='chordline no0'>         Db</span><span class='chordline no1'>         D</span><span class='chordline no2'>         Eb</span><span class='chordline no3'>         E</span><span class='chordline no4'>         F</span><span class='chordline no5'>         Gb</span><span class='chordline no6'>         G</span><span class='chordline no7'>         Ab</span><span class='chordline no8'>         A</span><span class='chordline no9'>         Bb</span><span class='chordline no10'>         B</span><span class='chordline no11'>         C</span>
+Mhm, mama
+<span class='chordline no0'>Ab</span><span class='chordline no1'>A</span><span class='chordline no2'>Bb</span><span class='chordline no3'>B</span><span class='chordline no4'>C</span><span class='chordline no5'>Db</span><span class='chordline no6'>D</span><span class='chordline no7'>Eb</span><span class='chordline no8'>E</span><span class='chordline no9'>F</span><span class='chordline no10'>Gb</span><span class='chordline no11'>G</span>
+  I need
+<span class='chordline no0'>            Cm                   Fm</span><span class='chordline no1'>            C#m                  F#m</span><span class='chordline no2'>            Dm                   Gm</span><span class='chordline no3'>            D#m                  G#m</span><span class='chordline no4'>            Em                   Am</span><span class='chordline no5'>            Fm                   A#m</span><span class='chordline no6'>            F#m                  Bm</span><span class='chordline no7'>            Gm                   Cm</span><span class='chordline no8'>            G#m                  C#m</span><span class='chordline no9'>            Am                   Dm</span><span class='chordline no10'>            A#m                  D#m</span><span class='chordline no11'>            Bm                   Em</span>
+I need your feet more than you do
+<span class='chordline no0'>    Db       Ab</span><span class='chordline no1'>    D       A</span><span class='chordline no2'>    Eb       Bb</span><span class='chordline no3'>    E       B</span><span class='chordline no4'>    F       C</span><span class='chordline no5'>    Gb       Db</span><span class='chordline no6'>    G       D</span><span class='chordline no7'>    Ab       Eb</span><span class='chordline no8'>    A       E</span><span class='chordline no9'>    Bb       F</span><span class='chordline no10'>    B       Gb</span><span class='chordline no11'>    C       G</span>
+Mhm mhm, mama
+<span class='chordline no0'>                          Cm</span><span class='chordline no1'>                          C#m</span><span class='chordline no2'>                          Dm</span><span class='chordline no3'>                          D#m</span><span class='chordline no4'>                          Em</span><span class='chordline no5'>                          Fm</span><span class='chordline no6'>                          F#m</span><span class='chordline no7'>                          Gm</span><span class='chordline no8'>                          G#m</span><span class='chordline no9'>                          Am</span><span class='chordline no10'>                          A#m</span><span class='chordline no11'>                          Bm</span>
+I need somebody sent down from the sun
+<span class='chordline no0'>           Db</span><span class='chordline no1'>           D</span><span class='chordline no2'>           Eb</span><span class='chordline no3'>           E</span><span class='chordline no4'>           F</span><span class='chordline no5'>           Gb</span><span class='chordline no6'>           G</span><span class='chordline no7'>           Ab</span><span class='chordline no8'>           A</span><span class='chordline no9'>           Bb</span><span class='chordline no10'>           B</span><span class='chordline no11'>           C</span>
+That talks to me how you used to
+
+
+
+<span class='chordline no0'>Ab                  Fm</span><span class='chordline no1'>A                  F#m</span><span class='chordline no2'>Bb                  Gm</span><span class='chordline no3'>B                  G#m</span><span class='chordline no4'>C                  Am</span><span class='chordline no5'>Db                  A#m</span><span class='chordline no6'>D                  Bm</span><span class='chordline no7'>Eb                  Cm</span><span class='chordline no8'>E                  C#m</span><span class='chordline no9'>F                  Dm</span><span class='chordline no10'>Gb                  D#m</span><span class='chordline no11'>G                  Em</span>
+Watching the bells, watching the lights
+<span class='chordline no0'>Db                     Ab</span><span class='chordline no1'>D                     A</span><span class='chordline no2'>Eb                     Bb</span><span class='chordline no3'>E                     B</span><span class='chordline no4'>F                     C</span><span class='chordline no5'>Gb                     Db</span><span class='chordline no6'>G                     D</span><span class='chordline no7'>Ab                     Eb</span><span class='chordline no8'>A                     E</span><span class='chordline no9'>Bb                     F</span><span class='chordline no10'>B                     Gb</span><span class='chordline no11'>C                     G</span>
+What I want is far away
+<span class='chordline no0'>                  Fm</span><span class='chordline no1'>                  F#m</span><span class='chordline no2'>                  Gm</span><span class='chordline no3'>                  G#m</span><span class='chordline no4'>                  Am</span><span class='chordline no5'>                  A#m</span><span class='chordline no6'>                  Bm</span><span class='chordline no7'>                  Cm</span><span class='chordline no8'>                  C#m</span><span class='chordline no9'>                  Dm</span><span class='chordline no10'>                  D#m</span><span class='chordline no11'>                  Em</span>
+Talk to the moon, flatten her down
+<span class='chordline no0'>Bbm                                Db          Ab</span><span class='chordline no1'>Bm                                D          A</span><span class='chordline no2'>Cm                                Eb          Bb</span><span class='chordline no3'>Dbm                                E          B</span><span class='chordline no4'>Dm                                F          C</span><span class='chordline no5'>Ebm                                Gb          Db</span><span class='chordline no6'>Em                                G          D</span><span class='chordline no7'>Fm                                Ab          Eb</span><span class='chordline no8'>Gbm                                A          E</span><span class='chordline no9'>Gm                                Bb          F</span><span class='chordline no10'>Abm                                B          Gb</span><span class='chordline no11'>Am                                C          G</span>
+Make her watch the wind all night, she can wait
+<span class='chordline no0'>                Fm</span><span class='chordline no1'>                F#m</span><span class='chordline no2'>                Gm</span><span class='chordline no3'>                G#m</span><span class='chordline no4'>                Am</span><span class='chordline no5'>                A#m</span><span class='chordline no6'>                Bm</span><span class='chordline no7'>                Cm</span><span class='chordline no8'>                C#m</span><span class='chordline no9'>                Dm</span><span class='chordline no10'>                D#m</span><span class='chordline no11'>                Em</span>
+Lonely as hell, walking around
+<span class='chordline no0'>Db                          Ab</span><span class='chordline no1'>D                          A</span><span class='chordline no2'>Eb                          Bb</span><span class='chordline no3'>E                          B</span><span class='chordline no4'>F                          C</span><span class='chordline no5'>Gb                          Db</span><span class='chordline no6'>G                          D</span><span class='chordline no7'>Ab                          Eb</span><span class='chordline no8'>A                          E</span><span class='chordline no9'>Bb                          F</span><span class='chordline no10'>B                          Gb</span><span class='chordline no11'>C                          G</span>
+Without moving, I'm not here
+<span class='chordline no0'>                   Fm</span><span class='chordline no1'>                   F#m</span><span class='chordline no2'>                   Gm</span><span class='chordline no3'>                   G#m</span><span class='chordline no4'>                   Am</span><span class='chordline no5'>                   A#m</span><span class='chordline no6'>                   Bm</span><span class='chordline no7'>                   Cm</span><span class='chordline no8'>                   C#m</span><span class='chordline no9'>                   Dm</span><span class='chordline no10'>                   D#m</span><span class='chordline no11'>                   Em</span>
+Watching the moon, writing it down
+<span class='chordline no0'>Bbm</span><span class='chordline no1'>Bm</span><span class='chordline no2'>Cm</span><span class='chordline no3'>Dbm</span><span class='chordline no4'>Dm</span><span class='chordline no5'>Ebm</span><span class='chordline no6'>Em</span><span class='chordline no7'>Fm</span><span class='chordline no8'>Gbm</span><span class='chordline no9'>Gm</span><span class='chordline no10'>Abm</span><span class='chordline no11'>Am</span>
+Love takes miles
+<span class='chordline no0'>                      Db           Ab</span><span class='chordline no1'>                      D           A</span><span class='chordline no2'>                      Eb           Bb</span><span class='chordline no3'>                      E           B</span><span class='chordline no4'>                      F           C</span><span class='chordline no5'>                      Gb           Db</span><span class='chordline no6'>                      G           D</span><span class='chordline no7'>                      Ab           Eb</span><span class='chordline no8'>                      A           E</span><span class='chordline no9'>                      Bb           F</span><span class='chordline no10'>                      B           Gb</span><span class='chordline no11'>                      C           G</span>
+Love takes miles, love  takes years
+
+
+
+<span class='chordline no0'>Eb Fm Db Ab</span><span class='chordline no1'>E F#m D A</span><span class='chordline no2'>F Gm Eb Bb</span><span class='chordline no3'>Gb G#m E B</span><span class='chordline no4'>G Am F C</span><span class='chordline no5'>Ab A#m Gb Db</span><span class='chordline no6'>A Bm G D</span><span class='chordline no7'>Bb Cm Ab Eb</span><span class='chordline no8'>B C#m A E</span><span class='chordline no9'>C Dm Bb F</span><span class='chordline no10'>Db D#m B Gb</span><span class='chordline no11'>D Em C G</span>
+
+
+
+<span class='chordline no0'>Eb                  Fm</span><span class='chordline no1'>E                  F#m</span><span class='chordline no2'>F                  Gm</span><span class='chordline no3'>Gb                  G#m</span><span class='chordline no4'>G                  Am</span><span class='chordline no5'>Ab                  A#m</span><span class='chordline no6'>A                  Bm</span><span class='chordline no7'>Bb                  Cm</span><span class='chordline no8'>B                  C#m</span><span class='chordline no9'>C                  Dm</span><span class='chordline no10'>Db                  D#m</span><span class='chordline no11'>D                  Em</span>
+  You better start awalking babe
+<span class='chordline no0'>Db              Ab</span><span class='chordline no1'>D              A</span><span class='chordline no2'>Eb              Bb</span><span class='chordline no3'>E              B</span><span class='chordline no4'>F              C</span><span class='chordline no5'>Gb              Db</span><span class='chordline no6'>G              D</span><span class='chordline no7'>Ab              Eb</span><span class='chordline no8'>A              E</span><span class='chordline no9'>Bb              F</span><span class='chordline no10'>B              Gb</span><span class='chordline no11'>C              G</span>
+Love takes miles
+<span class='chordline no0'>Eb                  Fm</span><span class='chordline no1'>E                  F#m</span><span class='chordline no2'>F                  Gm</span><span class='chordline no3'>Gb                  G#m</span><span class='chordline no4'>G                  Am</span><span class='chordline no5'>Ab                  A#m</span><span class='chordline no6'>A                  Bm</span><span class='chordline no7'>Bb                  Cm</span><span class='chordline no8'>B                  C#m</span><span class='chordline no9'>C                  Dm</span><span class='chordline no10'>Db                  D#m</span><span class='chordline no11'>D                  Em</span>
+  You better start awalking babe
+<span class='chordline no0'>Db              Ab</span><span class='chordline no1'>D              A</span><span class='chordline no2'>Eb              Bb</span><span class='chordline no3'>E              B</span><span class='chordline no4'>F              C</span><span class='chordline no5'>Gb              Db</span><span class='chordline no6'>G              D</span><span class='chordline no7'>Ab              Eb</span><span class='chordline no8'>A              E</span><span class='chordline no9'>Bb              F</span><span class='chordline no10'>B              Gb</span><span class='chordline no11'>C              G</span>
+Love takes miles
+
+
+
+<span class='chordline no0'>Eb      Fm Db        Ab</span><span class='chordline no1'>E      F#m D       A</span><span class='chordline no2'>F      Gm Eb        Bb</span><span class='chordline no3'>Gb      G#m E       B</span><span class='chordline no4'>G      Am F        C</span><span class='chordline no5'>Ab      A#m Gb       Db</span><span class='chordline no6'>A      Bm G        D</span><span class='chordline no7'>Bb      Cm Ab        Eb</span><span class='chordline no8'>B      C#m A       E</span><span class='chordline no9'>C      Dm Bb        F</span><span class='chordline no10'>Db      D#m B       Gb</span><span class='chordline no11'>D      Em C        G</span>
+  Ooooo,   oooooooooo
+<span class='chordline no0'>Eb          Fm Db  Ab</span><span class='chordline no1'>E          F#m D A</span><span class='chordline no2'>F          Gm Eb  Bb</span><span class='chordline no3'>Gb          G#m E B</span><span class='chordline no4'>G          Am F  C</span><span class='chordline no5'>Ab          A#m Gb Db</span><span class='chordline no6'>A          Bm G  D</span><span class='chordline no7'>Bb          Cm Ab  Eb</span><span class='chordline no8'>B          C#m A E</span><span class='chordline no9'>C          Dm Bb  F</span><span class='chordline no10'>Db          D#m B Gb</span><span class='chordline no11'>D          Em C  G</span>
+  Ooooo, oooooooooo
+      </pre>
+    </div>
+
+    <!-- Speed indicator toast -->
+    <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+  </body>
+</html>

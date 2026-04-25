@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Troglodyte</title>
+
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
+
+      <!-- Chords, TOC, Split in first row -->
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
+      <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Viagra Boys: Troglodyte</h1>
+
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
+<span class='chordline no0'>Tuning: E A D G B EKey: F#mCapo: No capo</span><span class='chordline no1'>Buning: F A# D# G# C FDey: GmC#apo: Fo capo</span><span class='chordline no2'>Buning: F# B E A C# F#Dey: G#mDapo: Fo capo</span><span class='chordline no3'>Buning: G C F A# D GDey: AmD#apo: Fo capo</span><span class='chordline no4'>Buning: G# C# F# B D# G#Dey: A#mEapo: Fo capo</span><span class='chordline no5'>Buning: A D G C E ADey: BmFapo: Fo capo</span><span class='chordline no6'>Buning: A# D# G# C# F A#Dey: CmF#apo: Fo capo</span><span class='chordline no7'>Buning: B E A D F# BDey: C#mGapo: Fo capo</span><span class='chordline no8'>Buning: C F A# D# G CDey: DmG#apo: Fo capo</span><span class='chordline no9'>Buning: C# F# B E G# C#Dey: D#mAapo: Fo capo</span><span class='chordline no10'>Buning: D G C F A DDey: EmA#apo: Fo capo</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Dey: FmBapo: Fo capo</span>
+
+
+<span class='chordline no0'>F#m</span><span class='chordline no1'>Gm</span><span class='chordline no2'>G#m</span><span class='chordline no3'>Am</span><span class='chordline no4'>A#m</span><span class='chordline no5'>Bm</span><span class='chordline no6'>Cm</span><span class='chordline no7'>C#m</span><span class='chordline no8'>Dm</span><span class='chordline no9'>D#m</span><span class='chordline no10'>Em</span><span class='chordline no11'>Fm</span>
+<span class='chordline no0'>A F#m D Bm</span><span class='chordline no1'>A# Gm D# Cm</span><span class='chordline no2'>B G#m E C#m</span><span class='chordline no3'>C Am F Dm</span><span class='chordline no4'>C# A#m F# D#m</span><span class='chordline no5'>D Bm G Em</span><span class='chordline no6'>D# Cm G# Fm</span><span class='chordline no7'>E C#m A F#m</span><span class='chordline no8'>F Dm A# Gm</span><span class='chordline no9'>F# D#m B G#m</span><span class='chordline no10'>G Em C Am</span><span class='chordline no11'>G# Fm C# A#m</span>
+
+
+<span class='chordline no0'>F#m</span><span class='chordline no1'>Gm</span><span class='chordline no2'>G#m</span><span class='chordline no3'>Am</span><span class='chordline no4'>A#m</span><span class='chordline no5'>Bm</span><span class='chordline no6'>Cm</span><span class='chordline no7'>C#m</span><span class='chordline no8'>Dm</span><span class='chordline no9'>D#m</span><span class='chordline no10'>Em</span><span class='chordline no11'>Fm</span>
+He goes to work on his computer he thinks about his gun at home
+<span class='chordline no0'>F#m                                                         A F#m D Bm</span><span class='chordline no1'>Gm                                                         A# Gm D# Cm</span><span class='chordline no2'>G#m                                                         B G#m E C#m</span><span class='chordline no3'>Am                                                         C Am F Dm</span><span class='chordline no4'>A#m                                                         C# A#m F# D#m</span><span class='chordline no5'>Bm                                                         D Bm G Em</span><span class='chordline no6'>Cm                                                         D# Cm G# Fm</span><span class='chordline no7'>C#m                                                         E C#m A F#m</span><span class='chordline no8'>Dm                                                         F Dm A# Gm</span><span class='chordline no9'>D#m                                                         F# D#m B G#m</span><span class='chordline no10'>Em                                                         G Em C Am</span><span class='chordline no11'>Fm                                                         G# Fm C# A#m</span>
+One day he's gonna be a shooter he's gonna bring his gun to work
+<span class='chordline no0'>F#m</span><span class='chordline no1'>Gm</span><span class='chordline no2'>G#m</span><span class='chordline no3'>Am</span><span class='chordline no4'>A#m</span><span class='chordline no5'>Bm</span><span class='chordline no6'>Cm</span><span class='chordline no7'>C#m</span><span class='chordline no8'>Dm</span><span class='chordline no9'>D#m</span><span class='chordline no10'>Em</span><span class='chordline no11'>Fm</span>
+He thinks about the ones who wronged him and the punishments they'll face
+<span class='chordline no0'>F#m                                                                          A F#m</span><span class='chordline no1'>Gm                                                                          A# Gm</span><span class='chordline no2'>G#m                                                                          B G#m</span><span class='chordline no3'>Am                                                                          C Am</span><span class='chordline no4'>A#m                                                                          C# A#m</span><span class='chordline no5'>Bm                                                                          D Bm</span><span class='chordline no6'>Cm                                                                          D# Cm</span><span class='chordline no7'>C#m                                                                          E C#m</span><span class='chordline no8'>Dm                                                                          F Dm</span><span class='chordline no9'>D#m                                                                          F# D#m</span><span class='chordline no10'>Em                                                                          G Em</span><span class='chordline no11'>Fm                                                                          G# Fm</span>
+But things  they would play out much different back in the time when we were apes
+<span class='chordline no0'> D Bm</span><span class='chordline no1'> D# Cm</span><span class='chordline no2'> E C#m</span><span class='chordline no3'> F Dm</span><span class='chordline no4'> F# D#m</span><span class='chordline no5'> G Em</span><span class='chordline no6'> G# Fm</span><span class='chordline no7'> A F#m</span><span class='chordline no8'> A# Gm</span><span class='chordline no9'> B G#m</span><span class='chordline no10'> C Am</span><span class='chordline no11'> C# A#m</span>
+
+
+<span class='chordline no0'>A B F#m</span><span class='chordline no1'>A# C Gm</span><span class='chordline no2'>B C# G#m</span><span class='chordline no3'>C D Am</span><span class='chordline no4'>C# D# A#m</span><span class='chordline no5'>D E Bm</span><span class='chordline no6'>D# F Cm</span><span class='chordline no7'>E F# C#m</span><span class='chordline no8'>F G Dm</span><span class='chordline no9'>F# G# D#m</span><span class='chordline no10'>G A Em</span><span class='chordline no11'>G# A# Fm</span>
+
+
+<span class='chordline no0'>F#m</span><span class='chordline no1'>Gm</span><span class='chordline no2'>G#m</span><span class='chordline no3'>Am</span><span class='chordline no4'>A#m</span><span class='chordline no5'>Bm</span><span class='chordline no6'>Cm</span><span class='chordline no7'>C#m</span><span class='chordline no8'>Dm</span><span class='chordline no9'>D#m</span><span class='chordline no10'>Em</span><span class='chordline no11'>Fm</span>
+When everybody was a monkey, we had to fight just to survive
+<span class='chordline no0'>F#m                                                          A F#m D Bm</span><span class='chordline no1'>Gm                                                          A# Gm D# Cm</span><span class='chordline no2'>G#m                                                          B G#m E C#m</span><span class='chordline no3'>Am                                                          C Am F Dm</span><span class='chordline no4'>A#m                                                          C# A#m F# D#m</span><span class='chordline no5'>Bm                                                          D Bm G Em</span><span class='chordline no6'>Cm                                                          D# Cm G# Fm</span><span class='chordline no7'>C#m                                                          E C#m A F#m</span><span class='chordline no8'>Dm                                                          F Dm A# Gm</span><span class='chordline no9'>D#m                                                          F# D#m B G#m</span><span class='chordline no10'>Em                                                          G Em C Am</span><span class='chordline no11'>Fm                                                          G# Fm C# A#m</span>
+And now you got yourself a weapon you think you choose who lives or dies
+<span class='chordline no0'>F#m</span><span class='chordline no1'>Gm</span><span class='chordline no2'>G#m</span><span class='chordline no3'>Am</span><span class='chordline no4'>A#m</span><span class='chordline no5'>Bm</span><span class='chordline no6'>Cm</span><span class='chordline no7'>C#m</span><span class='chordline no8'>Dm</span><span class='chordline no9'>D#m</span><span class='chordline no10'>Em</span><span class='chordline no11'>Fm</span>
+But when we had hairy arms and legs and you were still swimming 'round in a lake
+<span class='chordline no0'>F#m                                                      A F#m D Bm</span><span class='chordline no1'>Gm                                                      A# Gm D# Cm</span><span class='chordline no2'>G#m                                                      B G#m E C#m</span><span class='chordline no3'>Am                                                      C Am F Dm</span><span class='chordline no4'>A#m                                                      C# A#m F# D#m</span><span class='chordline no5'>Bm                                                      D Bm G Em</span><span class='chordline no6'>Cm                                                      D# Cm G# Fm</span><span class='chordline no7'>C#m                                                      E C#m A F#m</span><span class='chordline no8'>Dm                                                      F Dm A# Gm</span><span class='chordline no9'>D#m                                                      F# D#m B G#m</span><span class='chordline no10'>Em                                                      G Em C Am</span><span class='chordline no11'>Fm                                                      G# Fm C# A#m</span>
+Yeah, you were still a troglodyte you just evolved a bit too late
+
+
+<span class='chordline no0'>A                B               F#m</span><span class='chordline no1'>A#               C               Gm</span><span class='chordline no2'>B                C#              G#m</span><span class='chordline no3'>C                D               Am</span><span class='chordline no4'>C#               D#              A#m</span><span class='chordline no5'>D                E               Bm</span><span class='chordline no6'>D#               F               Cm</span><span class='chordline no7'>E                F#              C#m</span><span class='chordline no8'>F                G               Dm</span><span class='chordline no9'>F#               G#              D#m</span><span class='chordline no10'>G                A               Em</span><span class='chordline no11'>G#               A#              Fm</span>
+You ain't no ape, you're a troglodyte
+<span class='chordline no0'>A                B                A B F#m     A B F#m</span><span class='chordline no1'>A#               C                A# C Gm    A# C Gm</span><span class='chordline no2'>B                C#               B C# G#m    B C# G#m</span><span class='chordline no3'>C                D                C D Am     C D Am</span><span class='chordline no4'>C#               D#               C# D# A#m    C# D# A#m</span><span class='chordline no5'>D                E                D E Bm     D E Bm</span><span class='chordline no6'>D#               F                D# F Cm    D# F Cm</span><span class='chordline no7'>E                F#               E F# C#m    E F# C#m</span><span class='chordline no8'>F                G                F G Dm     F G Dm</span><span class='chordline no9'>F#               G#               F# G# D#m    F# G# D#m</span><span class='chordline no10'>G                A                G A Em     G A Em</span><span class='chordline no11'>G#               A#               G# A# Fm    G# A# Fm</span>
+You ain't no ape, you're a troglody-ay-ay-yte
+
+
+<span class='chordline no0'>A B F#m</span><span class='chordline no1'>A# C Gm</span><span class='chordline no2'>B C# G#m</span><span class='chordline no3'>C D Am</span><span class='chordline no4'>C# D# A#m</span><span class='chordline no5'>D E Bm</span><span class='chordline no6'>D# F Cm</span><span class='chordline no7'>E F# C#m</span><span class='chordline no8'>F G Dm</span><span class='chordline no9'>F# G# D#m</span><span class='chordline no10'>G A Em</span><span class='chordline no11'>G# A# Fm</span>
+
+
+<span class='chordline no0'>F#m</span><span class='chordline no1'>Gm</span><span class='chordline no2'>G#m</span><span class='chordline no3'>Am</span><span class='chordline no4'>A#m</span><span class='chordline no5'>Bm</span><span class='chordline no6'>Cm</span><span class='chordline no7'>C#m</span><span class='chordline no8'>Dm</span><span class='chordline no9'>D#m</span><span class='chordline no10'>Em</span><span class='chordline no11'>Fm</span>
+He says he don't believe in science he thinks that all the news is fake
+<span class='chordline no0'>F#m                                                                      A F#m D</span><span class='chordline no1'>Gm                                                                      A# Gm D#</span><span class='chordline no2'>G#m                                                                      B G#m E</span><span class='chordline no3'>Am                                                                      C Am F</span><span class='chordline no4'>A#m                                                                      C# A#m F#</span><span class='chordline no5'>Bm                                                                      D Bm G</span><span class='chordline no6'>Cm                                                                      D# Cm G#</span><span class='chordline no7'>C#m                                                                      E C#m A</span><span class='chordline no8'>Dm                                                                      F Dm A#</span><span class='chordline no9'>D#m                                                                      F# D#m B</span><span class='chordline no10'>Em                                                                      G Em C</span><span class='chordline no11'>Fm                                                                      G# Fm C#</span>
+And late at night he sits on his computer and writes about the things he hates
+<span class='chordline no0'>Bm</span><span class='chordline no1'>Cm</span><span class='chordline no2'>C#m</span><span class='chordline no3'>Dm</span><span class='chordline no4'>D#m</span><span class='chordline no5'>Em</span><span class='chordline no6'>Fm</span><span class='chordline no7'>F#m</span><span class='chordline no8'>Gm</span><span class='chordline no9'>G#m</span><span class='chordline no10'>Am</span><span class='chordline no11'>A#m</span>
+<span class='chordline no0'>F#m</span><span class='chordline no1'>Gm</span><span class='chordline no2'>G#m</span><span class='chordline no3'>Am</span><span class='chordline no4'>A#m</span><span class='chordline no5'>Bm</span><span class='chordline no6'>Cm</span><span class='chordline no7'>C#m</span><span class='chordline no8'>Dm</span><span class='chordline no9'>D#m</span><span class='chordline no10'>Em</span><span class='chordline no11'>Fm</span>
+But if it was a million years ago and we were still living in caves
+<span class='chordline no0'>F#m                                                                  A F#m D Bm</span><span class='chordline no1'>Gm                                                                  A# Gm D# Cm</span><span class='chordline no2'>G#m                                                                  B G#m E C#m</span><span class='chordline no3'>Am                                                                  C Am F Dm</span><span class='chordline no4'>A#m                                                                  C# A#m F# D#m</span><span class='chordline no5'>Bm                                                                  D Bm G Em</span><span class='chordline no6'>Cm                                                                  D# Cm G# Fm</span><span class='chordline no7'>C#m                                                                  E C#m A F#m</span><span class='chordline no8'>Dm                                                                  F Dm A# Gm</span><span class='chordline no9'>D#m                                                                  F# D#m B G#m</span><span class='chordline no10'>Em                                                                  G Em C Am</span><span class='chordline no11'>Fm                                                                  G# Fm C# A#m</span>
+You would not be welcomed by the other apes cause you evolved a bit too late
+
+
+<span class='chordline no0'>A                B               F#m</span><span class='chordline no1'>A#               C               Gm</span><span class='chordline no2'>B                C#              G#m</span><span class='chordline no3'>C                D               Am</span><span class='chordline no4'>C#               D#              A#m</span><span class='chordline no5'>D                E               Bm</span><span class='chordline no6'>D#               F               Cm</span><span class='chordline no7'>E                F#              C#m</span><span class='chordline no8'>F                G               Dm</span><span class='chordline no9'>F#               G#              D#m</span><span class='chordline no10'>G                A               Em</span><span class='chordline no11'>G#               A#              Fm</span>
+You ain't no ape, you're a troglodyte
+<span class='chordline no0'>A                B               A  B  F#m</span><span class='chordline no1'>A#               C               A# C  Gm</span><span class='chordline no2'>B                C#              B  C# G#m</span><span class='chordline no3'>C                D               C  D  Am</span><span class='chordline no4'>C#               D#              C# D# A#m</span><span class='chordline no5'>D                E               D  E  Bm</span><span class='chordline no6'>D#               F               D# F  Cm</span><span class='chordline no7'>E                F#              E  F# C#m</span><span class='chordline no8'>F                G               F  G  Dm</span><span class='chordline no9'>F#               G#              F# G# D#m</span><span class='chordline no10'>G                A               G  A  Em</span><span class='chordline no11'>G#               A#              G# A# Fm</span>
+You ain't no ape, you're a troglody-ay-ay-yte
+<span class='chordline no0'>               A     B  F#m</span><span class='chordline no1'>               A#    C  Gm</span><span class='chordline no2'>               B     C# G#m</span><span class='chordline no3'>               C     D  Am</span><span class='chordline no4'>               C#    D# A#m</span><span class='chordline no5'>               D     E  Bm</span><span class='chordline no6'>               D#    F  Cm</span><span class='chordline no7'>               E     F# C#m</span><span class='chordline no8'>               F     G  Dm</span><span class='chordline no9'>               F#    G# D#m</span><span class='chordline no10'>               G     A  Em</span><span class='chordline no11'>               G#    A# Fm</span>
+Yeah, you're a troglody-ay-ay-yte
+
+<span class='chordline no0'>A B F#m</span><span class='chordline no1'>A# C Gm</span><span class='chordline no2'>B C# G#m</span><span class='chordline no3'>C D Am</span><span class='chordline no4'>C# D# A#m</span><span class='chordline no5'>D E Bm</span><span class='chordline no6'>D# F Cm</span><span class='chordline no7'>E F# C#m</span><span class='chordline no8'>F G Dm</span><span class='chordline no9'>F# G# D#m</span><span class='chordline no10'>G A Em</span><span class='chordline no11'>G# A# Fm</span>
+      </pre>
+    </div>
+
+    <!-- Speed indicator toast -->
+    <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+  </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>With Arms Outstretched</title>
+
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
+
+      <!-- Chords, TOC, Split in first row -->
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
+      <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Rilo Kiley: With Arms Outstretched</h1>
+
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
+<span class='chordline no0'>Tuning: E A D G B EKey: ECapo: No capo</span><span class='chordline no1'>Buning: F A# D# G# C FDey: FC#apo: Fo capo</span><span class='chordline no2'>Buning: F# B E A C# F#Dey: F#Dapo: Fo capo</span><span class='chordline no3'>Buning: G C F A# D GDey: GD#apo: Fo capo</span><span class='chordline no4'>Buning: G# C# F# B D# G#Dey: G#Eapo: Fo capo</span><span class='chordline no5'>Buning: A D G C E ADey: AFapo: Fo capo</span><span class='chordline no6'>Buning: A# D# G# C# F A#Dey: A#F#apo: Fo capo</span><span class='chordline no7'>Buning: B E A D F# BDey: BGapo: Fo capo</span><span class='chordline no8'>Buning: C F A# D# G CDey: CG#apo: Fo capo</span><span class='chordline no9'>Buning: C# F# B E G# C#Dey: C#Aapo: Fo capo</span><span class='chordline no10'>Buning: D G C F A DDey: DA#apo: Fo capo</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Dey: D#Bapo: Fo capo</span>
+
+<span class='chordline no0'>E</span><span class='chordline no1'>F</span><span class='chordline no2'>F#</span><span class='chordline no3'>G</span><span class='chordline no4'>G#</span><span class='chordline no5'>A</span><span class='chordline no6'>A#</span><span class='chordline no7'>B</span><span class='chordline no8'>C</span><span class='chordline no9'>C#</span><span class='chordline no10'>D</span><span class='chordline no11'>D#</span>
+
+
+
+<span class='chordline no0'>E                    F#m</span><span class='chordline no1'>F                    Gm</span><span class='chordline no2'>F#                   G#m</span><span class='chordline no3'>G                    Am</span><span class='chordline no4'>G#                   A#m</span><span class='chordline no5'>A                    Bm</span><span class='chordline no6'>A#                   Cm</span><span class='chordline no7'>B                    C#m</span><span class='chordline no8'>C                    Dm</span><span class='chordline no9'>C#                   D#m</span><span class='chordline no10'>D                    Em</span><span class='chordline no11'>D#                   Fm</span>
+Sixteen miles to the promised land
+<span class='chordline no0'>      A                B7add11         E</span><span class='chordline no1'>      A#               C7add11         F</span><span class='chordline no2'>      B                C#7add11        F#</span><span class='chordline no3'>      C                D7add11         G</span><span class='chordline no4'>      C#               D#7add11        G#</span><span class='chordline no5'>      D                E7add11         A</span><span class='chordline no6'>      D#               F7add11         A#</span><span class='chordline no7'>      E                F#7add11        B</span><span class='chordline no8'>      F                G7add11         C</span><span class='chordline no9'>      F#               G#7add11        C#</span><span class='chordline no10'>      G                A7add11         D</span><span class='chordline no11'>      G#               A#7add11        D#</span>
+And I promise you, I'm doin' the best I can
+<span class='chordline no0'>          E                         F#m</span><span class='chordline no1'>          F                         Gm</span><span class='chordline no2'>          F#                        G#m</span><span class='chordline no3'>          G                         Am</span><span class='chordline no4'>          G#                        A#m</span><span class='chordline no5'>          A                         Bm</span><span class='chordline no6'>          A#                        Cm</span><span class='chordline no7'>          B                         C#m</span><span class='chordline no8'>          C                         Dm</span><span class='chordline no9'>          C#                        D#m</span><span class='chordline no10'>          D                         Em</span><span class='chordline no11'>          D#                        Fm</span>
+Now don't fool yourself in thinking you're more than a man
+<span class='chordline no0'>              A           B7add11</span><span class='chordline no1'>              A#          C7add11</span><span class='chordline no2'>              B           C#7add11</span><span class='chordline no3'>              C           D7add11</span><span class='chordline no4'>              C#          D#7add11</span><span class='chordline no5'>              D           E7add11</span><span class='chordline no6'>              D#          F7add11</span><span class='chordline no7'>              E           F#7add11</span><span class='chordline no8'>              F           G7add11</span><span class='chordline no9'>              F#          G#7add11</span><span class='chordline no10'>              G           A7add11</span><span class='chordline no11'>              G#          A#7add11</span>
+'Cause you'll probably end       up dead
+<span class='chordline no0'>E  E                     F#m</span><span class='chordline no1'>F  F                     Gm</span><span class='chordline no2'>F# F#                    G#m</span><span class='chordline no3'>G  G                     Am</span><span class='chordline no4'>G# G#                    A#m</span><span class='chordline no5'>A  A                     Bm</span><span class='chordline no6'>A# A#                    Cm</span><span class='chordline no7'>B  B                     C#m</span><span class='chordline no8'>C  C                     Dm</span><span class='chordline no9'>C# C#                    D#m</span><span class='chordline no10'>D  D                     Em</span><span class='chordline no11'>D# D#                    Fm</span>
+ I visit these mountains with frequency
+<span class='chordline no0'>      A                  B7add11</span><span class='chordline no1'>      A#                 C7add11</span><span class='chordline no2'>      B                  C#7add11</span><span class='chordline no3'>      C                  D7add11</span><span class='chordline no4'>      C#                 D#7add11</span><span class='chordline no5'>      D                  E7add11</span><span class='chordline no6'>      D#                 F7add11</span><span class='chordline no7'>      E                  F#7add11</span><span class='chordline no8'>      F                  G7add11</span><span class='chordline no9'>      F#                 G#7add11</span><span class='chordline no10'>      G                  A7add11</span><span class='chordline no11'>      G#                 A#7add11</span>
+And I stand here with my arms   up
+
+
+
+<span class='chordline no0'>E    F#m             B           E</span><span class='chordline no1'>F    Gm             C           F</span><span class='chordline no2'>F#   G#m             C#          F#</span><span class='chordline no3'>G    Am             D           G</span><span class='chordline no4'>G#   A#m             D#          G#</span><span class='chordline no5'>A    Bm             E           A</span><span class='chordline no6'>A#   Cm             F           A#</span><span class='chordline no7'>B    C#m             F#          B</span><span class='chordline no8'>C    Dm             G           C</span><span class='chordline no9'>C#   D#m             G#          C#</span><span class='chordline no10'>D    Em             A           D</span><span class='chordline no11'>D#   Fm             A#          D#</span>
+ Now some days, they last longer than others
+<span class='chordline no0'>    F#m             B                 E</span><span class='chordline no1'>    Gm             C                 F</span><span class='chordline no2'>    G#m             C#                F#</span><span class='chordline no3'>    Am             D                 G</span><span class='chordline no4'>    A#m             D#                G#</span><span class='chordline no5'>    Bm             E                 A</span><span class='chordline no6'>    Cm             F                 A#</span><span class='chordline no7'>    C#m             F#                B</span><span class='chordline no8'>    Dm             G                 C</span><span class='chordline no9'>    D#m             G#                C#</span><span class='chordline no10'>    Em             A                 D</span><span class='chordline no11'>    Fm             A#                D#</span>
+But this day by the lake went too fast
+<span class='chordline no0'>           F#m          B                C#m</span><span class='chordline no1'>           Gm          C                Dm</span><span class='chordline no2'>           G#m          C#               D#m</span><span class='chordline no3'>           Am          D                Em</span><span class='chordline no4'>           A#m          D#               Fm</span><span class='chordline no5'>           Bm          E                F#m</span><span class='chordline no6'>           Cm          F                Gm</span><span class='chordline no7'>           C#m          F#               G#m</span><span class='chordline no8'>           Dm          G                Am</span><span class='chordline no9'>           D#m          G#               A#m</span><span class='chordline no10'>           Em          A                Bm</span><span class='chordline no11'>           Fm          A#               Cm</span>
+And if you want me, you better speak up, I  won't wait
+<span class='chordline no0'>E       A      B7add11</span><span class='chordline no1'>F       A#     C7add11</span><span class='chordline no2'>F#      B      C#7add11</span><span class='chordline no3'>G       C      D7add11</span><span class='chordline no4'>G#      C#     D#7add11</span><span class='chordline no5'>A       D      E7add11</span><span class='chordline no6'>A#      D#     F7add11</span><span class='chordline no7'>B       E      F#7add11</span><span class='chordline no8'>C       F      G7add11</span><span class='chordline no9'>C#      F#     G#7add11</span><span class='chordline no10'>D       G      A7add11</span><span class='chordline no11'>D#      G#     A#7add11</span>
+ So you better move   fast
+
+
+
+<span class='chordline no0'>E E7      E                         F#m</span><span class='chordline no1'>F F7      F                         Gm</span><span class='chordline no2'>F# F#7     F#                        G#m</span><span class='chordline no3'>G G7      G                         Am</span><span class='chordline no4'>G# G#7     G#                        A#m</span><span class='chordline no5'>A A7      A                         Bm</span><span class='chordline no6'>A# A#7     A#                        Cm</span><span class='chordline no7'>B B7      B                         C#m</span><span class='chordline no8'>C C7      C                         Dm</span><span class='chordline no9'>C# C#7     C#                        D#m</span><span class='chordline no10'>D D7      D                         Em</span><span class='chordline no11'>D# D#7     D#                        Fm</span>
+    Don't fool yourself in thinking you're more than you are
+<span class='chordline no0'>          A                   B7add11</span><span class='chordline no1'>          A#                  C7add11</span><span class='chordline no2'>          B                   C#7add11</span><span class='chordline no3'>          C                   D7add11</span><span class='chordline no4'>          C#                  D#7add11</span><span class='chordline no5'>          D                   E7add11</span><span class='chordline no6'>          D#                  F7add11</span><span class='chordline no7'>          E                   F#7add11</span><span class='chordline no8'>          F                   G7add11</span><span class='chordline no9'>          F#                  G#7add11</span><span class='chordline no10'>          G                   A7add11</span><span class='chordline no11'>          G#                  A#7add11</span>
+With your arms outstretched to       me
+<span class='chordline no0'>E E7         E                    F#m</span><span class='chordline no1'>F F7         F                    Gm</span><span class='chordline no2'>F# F#7        F#                   G#m</span><span class='chordline no3'>G G7         G                    Am</span><span class='chordline no4'>G# G#7        G#                   A#m</span><span class='chordline no5'>A A7         A                    Bm</span><span class='chordline no6'>A# A#7        A#                   Cm</span><span class='chordline no7'>B B7         B                    C#m</span><span class='chordline no8'>C C7         C                    Dm</span><span class='chordline no9'>C# C#7        C#                   D#m</span><span class='chordline no10'>D D7         D                    Em</span><span class='chordline no11'>D# D#7        D#                   Fm</span>
+    Now it's sixteen miles to the promised land
+<span class='chordline no0'>      A               B7add11         E</span><span class='chordline no1'>      A#              C7add11         F</span><span class='chordline no2'>      B               C#7add11        F#</span><span class='chordline no3'>      C               D7add11         G</span><span class='chordline no4'>      C#              D#7add11        G#</span><span class='chordline no5'>      D               E7add11         A</span><span class='chordline no6'>      D#              F7add11         A#</span><span class='chordline no7'>      E               F#7add11        B</span><span class='chordline no8'>      F               G7add11         C</span><span class='chordline no9'>      F#              G#7add11        C#</span><span class='chordline no10'>      G               A7add11         D</span><span class='chordline no11'>      G#              A#7add11        D#</span>
+And I promise you I'm doin' the best I can
+
+
+
+<span class='chordline no0'>    F#m             B           E          Esus4</span><span class='chordline no1'>    Gm             C           F          Fsus4</span><span class='chordline no2'>    G#m             C#          F#         F#sus4</span><span class='chordline no3'>    Am             D           G          Gsus4</span><span class='chordline no4'>    A#m             D#          G#         G#sus4</span><span class='chordline no5'>    Bm             E           A          Asus4</span><span class='chordline no6'>    Cm             F           A#         A#sus4</span><span class='chordline no7'>    C#m             F#          B          Bsus4</span><span class='chordline no8'>    Dm             G           C          Csus4</span><span class='chordline no9'>    D#m             G#          C#         C#sus4</span><span class='chordline no10'>    Em             A           D          Dsus4</span><span class='chordline no11'>    Fm             A#          D#         D#sus4</span>
+Now some days, they last longer than others
+<span class='chordline no0'>E    F#m             B                 E Esus4</span><span class='chordline no1'>F    Gm             C                 F Fsus4</span><span class='chordline no2'>F#   G#m             C#                F# F#sus4</span><span class='chordline no3'>G    Am             D                 G Gsus4</span><span class='chordline no4'>G#   A#m             D#                G# G#sus4</span><span class='chordline no5'>A    Bm             E                 A Asus4</span><span class='chordline no6'>A#   Cm             F                 A# A#sus4</span><span class='chordline no7'>B    C#m             F#                B Bsus4</span><span class='chordline no8'>C    Dm             G                 C Csus4</span><span class='chordline no9'>C#   D#m             G#                C# C#sus4</span><span class='chordline no10'>D    Em             A                 D Dsus4</span><span class='chordline no11'>D#   Fm             A#                D# D#sus4</span>
+ But this day by the lake went too fast
+<span class='chordline no0'>E           F#m          B                C#m</span><span class='chordline no1'>F           Gm          C                Dm</span><span class='chordline no2'>F#          G#m          C#               D#m</span><span class='chordline no3'>G           Am          D                Em</span><span class='chordline no4'>G#          A#m          D#               Fm</span><span class='chordline no5'>A           Bm          E                F#m</span><span class='chordline no6'>A#          Cm          F                Gm</span><span class='chordline no7'>B           C#m          F#               G#m</span><span class='chordline no8'>C           Dm          G                Am</span><span class='chordline no9'>C#          D#m          G#               A#m</span><span class='chordline no10'>D           Em          A                Bm</span><span class='chordline no11'>D#          Fm          A#               Cm</span>
+ And if you want me, you better speak up, I  won't wait
+<span class='chordline no0'>E       A      B7add11</span><span class='chordline no1'>F       A#     C7add11</span><span class='chordline no2'>F#      B      C#7add11</span><span class='chordline no3'>G       C      D7add11</span><span class='chordline no4'>G#      C#     D#7add11</span><span class='chordline no5'>A       D      E7add11</span><span class='chordline no6'>A#      D#     F7add11</span><span class='chordline no7'>B       E      F#7add11</span><span class='chordline no8'>C       F      G7add11</span><span class='chordline no9'>C#      F#     G#7add11</span><span class='chordline no10'>D       G      A7add11</span><span class='chordline no11'>D#      G#     A#7add11</span>
+ So you better move   fast
+<span class='chordline no0'>E    F#m             B           E          Esus4</span><span class='chordline no1'>F    Gm             C           F          Fsus4</span><span class='chordline no2'>F#   G#m             C#          F#         F#sus4</span><span class='chordline no3'>G    Am             D           G          Gsus4</span><span class='chordline no4'>G#   A#m             D#          G#         G#sus4</span><span class='chordline no5'>A    Bm             E           A          Asus4</span><span class='chordline no6'>A#   Cm             F           A#         A#sus4</span><span class='chordline no7'>B    C#m             F#          B          Bsus4</span><span class='chordline no8'>C    Dm             G           C          Csus4</span><span class='chordline no9'>C#   D#m             G#          C#         C#sus4</span><span class='chordline no10'>D    Em             A           D          Dsus4</span><span class='chordline no11'>D#   Fm             A#          D#         D#sus4</span>
+ And some days, they last longer than others
+<span class='chordline no0'>E    F#m             B                 E Esus4</span><span class='chordline no1'>F    Gm             C                 F Fsus4</span><span class='chordline no2'>F#   G#m             C#                F# F#sus4</span><span class='chordline no3'>G    Am             D                 G Gsus4</span><span class='chordline no4'>G#   A#m             D#                G# G#sus4</span><span class='chordline no5'>A    Bm             E                 A Asus4</span><span class='chordline no6'>A#   Cm             F                 A# A#sus4</span><span class='chordline no7'>B    C#m             F#                B Bsus4</span><span class='chordline no8'>C    Dm             G                 C Csus4</span><span class='chordline no9'>C#   D#m             G#                C# C#sus4</span><span class='chordline no10'>D    Em             A                 D Dsus4</span><span class='chordline no11'>D#   Fm             A#                D# D#sus4</span>
+ But this day by the lake went too fast
+<span class='chordline no0'>E           F#m          B                C#m</span><span class='chordline no1'>F           Gm          C                Dm</span><span class='chordline no2'>F#          G#m          C#               D#m</span><span class='chordline no3'>G           Am          D                Em</span><span class='chordline no4'>G#          A#m          D#               Fm</span><span class='chordline no5'>A           Bm          E                F#m</span><span class='chordline no6'>A#          Cm          F                Gm</span><span class='chordline no7'>B           C#m          F#               G#m</span><span class='chordline no8'>C           Dm          G                Am</span><span class='chordline no9'>C#          D#m          G#               A#m</span><span class='chordline no10'>D           Em          A                Bm</span><span class='chordline no11'>D#          Fm          A#               Cm</span>
+ And if you want me, you better speak up, I  won't wait
+<span class='chordline no0'>E       A      B7add11    E</span><span class='chordline no1'>F       A#     C7add11    F</span><span class='chordline no2'>F#      B      C#7add11   F#</span><span class='chordline no3'>G       C      D7add11    G</span><span class='chordline no4'>G#      C#     D#7add11   G#</span><span class='chordline no5'>A       D      E7add11    A</span><span class='chordline no6'>A#      D#     F7add11    A#</span><span class='chordline no7'>B       E      F#7add11   B</span><span class='chordline no8'>C       F      G7add11    C</span><span class='chordline no9'>C#      F#     G#7add11   C#</span><span class='chordline no10'>D       G      A7add11    D</span><span class='chordline no11'>D#      G#     A#7add11   D#</span>
+ So you better move   fast
+      </pre>
+    </div>
+
+    <!-- Speed indicator toast -->
+    <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+  </body>
+</html>

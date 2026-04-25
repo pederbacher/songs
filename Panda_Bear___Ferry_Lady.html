@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ferry Lady</title>
+
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
+
+      <!-- Chords, TOC, Split in first row -->
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
+      <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Panda Bear: Ferry Lady</h1>
+
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
+<span class='chordline no0'>Tuning: E A D G B EKey: DbCapo:</span><span class='chordline no1'>Buning: F A# D# G# C FDey: DC#apo:</span><span class='chordline no2'>Buning: F# B E A C# F#Dey: EbDapo:</span><span class='chordline no3'>Buning: G C F A# D GDey: ED#apo:</span><span class='chordline no4'>Buning: G# C# F# B D# G#Dey: FEapo:</span><span class='chordline no5'>Buning: A D G C E ADey: GbFapo:</span><span class='chordline no6'>Buning: A# D# G# C# F A#Dey: GF#apo:</span><span class='chordline no7'>Buning: B E A D F# BDey: AbGapo:</span><span class='chordline no8'>Buning: C F A# D# G CDey: AG#apo:</span><span class='chordline no9'>Buning: C# F# B E G# C#Dey: BbAapo:</span><span class='chordline no10'>Buning: D G C F A DDey: BA#apo:</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Dey: CBapo:</span>
+
+
+<span class='chordline no0'>G F x4</span><span class='chordline no1'>G# F# x4</span><span class='chordline no2'>A G x4</span><span class='chordline no3'>A# G# x4</span><span class='chordline no4'>B A x4</span><span class='chordline no5'>C A# x4</span><span class='chordline no6'>C# B x4</span><span class='chordline no7'>D C x4</span><span class='chordline no8'>D# C# x4</span><span class='chordline no9'>E D x4</span><span class='chordline no10'>F D# x4</span><span class='chordline no11'>F# E x4</span>
+
+
+
+<span class='chordline no0'>G          F           G   F</span><span class='chordline no1'>G#         F#          G#  F#</span><span class='chordline no2'>A          G           A   G</span><span class='chordline no3'>A#         G#          A#  G#</span><span class='chordline no4'>B          A           B   A</span><span class='chordline no5'>C          A#          C   A#</span><span class='chordline no6'>C#         B           C#  B</span><span class='chordline no7'>D          C           D   C</span><span class='chordline no8'>D#         C#          D#  C#</span><span class='chordline no9'>E          D           E   D</span><span class='chordline no10'>F          D#          F   D#</span><span class='chordline no11'>F#         E           F#  E</span>
+Stiff wind on the street
+<span class='chordline no0'> G        F       G   F</span><span class='chordline no1'> G#       F#      G#  F#</span><span class='chordline no2'> A        G       A   G</span><span class='chordline no3'> A#       G#      A#  G#</span><span class='chordline no4'> B        A       B   A</span><span class='chordline no5'> C        A#      C   A#</span><span class='chordline no6'> C#       B       C#  B</span><span class='chordline no7'> D        C       D   C</span><span class='chordline no8'> D#       C#      D#  C#</span><span class='chordline no9'> E        D       E   D</span><span class='chordline no10'> F        D#      F   D#</span><span class='chordline no11'> F#       E       F#  E</span>
+Pull my jacket in
+<span class='chordline no0'>G       F           G   F</span><span class='chordline no1'>G#      F#          G#  F#</span><span class='chordline no2'>A       G           A   G</span><span class='chordline no3'>A#      G#          A#  G#</span><span class='chordline no4'>B       A           B   A</span><span class='chordline no5'>C       A#          C   A#</span><span class='chordline no6'>C#      B           C#  B</span><span class='chordline no7'>D       C           D   C</span><span class='chordline no8'>D#      C#          D#  C#</span><span class='chordline no9'>E       D           E   D</span><span class='chordline no10'>F       D#          F   D#</span><span class='chordline no11'>F#      E           F#  E</span>
+Feelin' incomplete
+<span class='chordline no0'>G         F       G    F</span><span class='chordline no1'>G#        F#      G#   F#</span><span class='chordline no2'>A         G       A    G</span><span class='chordline no3'>A#        G#      A#   G#</span><span class='chordline no4'>B         A       B    A</span><span class='chordline no5'>C         A#      C    A#</span><span class='chordline no6'>C#        B       C#   B</span><span class='chordline no7'>D         C       D    C</span><span class='chordline no8'>D#        C#      D#   C#</span><span class='chordline no9'>E         D       E    D</span><span class='chordline no10'>F         D#      F    D#</span><span class='chordline no11'>F#        E       F#   E</span>
+Feel it happenin'
+<span class='chordline no0'>G     F    G    F</span><span class='chordline no1'>G#    F#   G#   F#</span><span class='chordline no2'>A     G    A    G</span><span class='chordline no3'>A#    G#   A#   G#</span><span class='chordline no4'>B     A    B    A</span><span class='chordline no5'>C     A#   C    A#</span><span class='chordline no6'>C#    B    C#   B</span><span class='chordline no7'>D     C    D    C</span><span class='chordline no8'>D#    C#   D#   C#</span><span class='chordline no9'>E     D    E    D</span><span class='chordline no10'>F     D#   F    D#</span><span class='chordline no11'>F#    E    F#   E</span>
+Thought
+<span class='chordline no0'>         G    F   G  F</span><span class='chordline no1'>         G#   F#  G# F#</span><span class='chordline no2'>         A    G   A  G</span><span class='chordline no3'>         A#   G#  A# G#</span><span class='chordline no4'>         B    A   B  A</span><span class='chordline no5'>         C    A#  C  A#</span><span class='chordline no6'>         C#   B   C# B</span><span class='chordline no7'>         D    C   D  C</span><span class='chordline no8'>         D#   C#  D# C#</span><span class='chordline no9'>         E    D   E  D</span><span class='chordline no10'>         F    D#  F  D#</span><span class='chordline no11'>         F#   E   F# E</span>
+Lost in thought
+<span class='chordline no0'>         G     F  G  F</span><span class='chordline no1'>         G#    F# G# F#</span><span class='chordline no2'>         A     G  A  G</span><span class='chordline no3'>         A#    G# A# G#</span><span class='chordline no4'>         B     A  B  A</span><span class='chordline no5'>         C     A# C  A#</span><span class='chordline no6'>         C#    B  C# B</span><span class='chordline no7'>         D     C  D  C</span><span class='chordline no8'>         D#    C# D# C#</span><span class='chordline no9'>         E     D  E  D</span><span class='chordline no10'>         F     D# F  D#</span><span class='chordline no11'>         F#    E  F# E</span>
+Lost in thought
+<span class='chordline no0'>         G    F   G  F</span><span class='chordline no1'>         G#   F#  G# F#</span><span class='chordline no2'>         A    G   A  G</span><span class='chordline no3'>         A#   G#  A# G#</span><span class='chordline no4'>         B    A   B  A</span><span class='chordline no5'>         C    A#  C  A#</span><span class='chordline no6'>         C#   B   C# B</span><span class='chordline no7'>         D    C   D  C</span><span class='chordline no8'>         D#   C#  D# C#</span><span class='chordline no9'>         E    D   E  D</span><span class='chordline no10'>         F    D#  F  D#</span><span class='chordline no11'>         F#   E   F# E</span>
+Lost in thought
+
+
+
+<span class='chordline no0'>G            F</span><span class='chordline no1'>G#           F#</span><span class='chordline no2'>A            G</span><span class='chordline no3'>A#           G#</span><span class='chordline no4'>B            A</span><span class='chordline no5'>C            A#</span><span class='chordline no6'>C#           B</span><span class='chordline no7'>D            C</span><span class='chordline no8'>D#           C#</span><span class='chordline no9'>E            D</span><span class='chordline no10'>F            D#</span><span class='chordline no11'>F#           E</span>
+Even if you didn't mean it
+<span class='chordline no0'>G            F</span><span class='chordline no1'>G#           F#</span><span class='chordline no2'>A            G</span><span class='chordline no3'>A#           G#</span><span class='chordline no4'>B            A</span><span class='chordline no5'>C            A#</span><span class='chordline no6'>C#           B</span><span class='chordline no7'>D            C</span><span class='chordline no8'>D#           C#</span><span class='chordline no9'>E            D</span><span class='chordline no10'>F            D#</span><span class='chordline no11'>F#           E</span>
+Even if I didn't mean it
+<span class='chordline no0'>G            F               G    F</span><span class='chordline no1'>G#           F#              G#   F#</span><span class='chordline no2'>A            G               A    G</span><span class='chordline no3'>A#           G#              A#   G#</span><span class='chordline no4'>B            A               B    A</span><span class='chordline no5'>C            A#              C    A#</span><span class='chordline no6'>C#           B               C#   B</span><span class='chordline no7'>D            C               D    C</span><span class='chordline no8'>D#           C#              D#   C#</span><span class='chordline no9'>E            D               E    D</span><span class='chordline no10'>F            D#              F    D#</span><span class='chordline no11'>F#           E               F#   E</span>
+Even if it's not worth the time
+<span class='chordline no0'>G            F</span><span class='chordline no1'>G#           F#</span><span class='chordline no2'>A            G</span><span class='chordline no3'>A#           G#</span><span class='chordline no4'>B            A</span><span class='chordline no5'>C            A#</span><span class='chordline no6'>C#           B</span><span class='chordline no7'>D            C</span><span class='chordline no8'>D#           C#</span><span class='chordline no9'>E            D</span><span class='chordline no10'>F            D#</span><span class='chordline no11'>F#           E</span>
+Every little thing between us
+<span class='chordline no0'>G            F</span><span class='chordline no1'>G#           F#</span><span class='chordline no2'>A            G</span><span class='chordline no3'>A#           G#</span><span class='chordline no4'>B            A</span><span class='chordline no5'>C            A#</span><span class='chordline no6'>C#           B</span><span class='chordline no7'>D            C</span><span class='chordline no8'>D#           C#</span><span class='chordline no9'>E            D</span><span class='chordline no10'>F            D#</span><span class='chordline no11'>F#           E</span>
+Every little thing beneath us
+<span class='chordline no0'>G            F           G     F</span><span class='chordline no1'>G#           F#          G#    F#</span><span class='chordline no2'>A            G           A     G</span><span class='chordline no3'>A#           G#          A#    G#</span><span class='chordline no4'>B            A           B     A</span><span class='chordline no5'>C            A#          C     A#</span><span class='chordline no6'>C#           B           C#    B</span><span class='chordline no7'>D            C           D     C</span><span class='chordline no8'>D#           C#          D#    C#</span><span class='chordline no9'>E            D           E     D</span><span class='chordline no10'>F            D#          F     D#</span><span class='chordline no11'>F#           E           F#    E</span>
+Even if it's not on my mind
+
+
+
+<span class='chordline no0'>Em         A          D      G G/F#</span><span class='chordline no1'>Fm         A#         D#     G# G#/G</span><span class='chordline no2'>F#m        B          E      A A/G#</span><span class='chordline no3'>Gm         C          F      A# A#/A</span><span class='chordline no4'>G#m        C#         F#     B B/A#</span><span class='chordline no5'>Am         D          G      C C/B</span><span class='chordline no6'>A#m        D#         G#     C# C#/C</span><span class='chordline no7'>Bm         E          A      D D/C#</span><span class='chordline no8'>Cm         F          A#     D# D#/D</span><span class='chordline no9'>C#m        F#         B      E E/D#</span><span class='chordline no10'>Dm         G          C      F F/E</span><span class='chordline no11'>D#m        G#         C#     F# F#/F</span>
+Thought we'd be friends again
+<span class='chordline no0'>Em       A</span><span class='chordline no1'>Fm       A#</span><span class='chordline no2'>F#m      B</span><span class='chordline no3'>Gm       C</span><span class='chordline no4'>G#m      C#</span><span class='chordline no5'>Am       D</span><span class='chordline no6'>A#m      D#</span><span class='chordline no7'>Bm       E</span><span class='chordline no8'>Cm       F</span><span class='chordline no9'>C#m      F#</span><span class='chordline no10'>Dm       G</span><span class='chordline no11'>D#m      G#</span>
+Pushed to the end
+<span class='chordline no0'>D     G  G/F#</span><span class='chordline no1'>D#    G# G#/G</span><span class='chordline no2'>E     A  A/G#</span><span class='chordline no3'>F     A# A#/A</span><span class='chordline no4'>F#    B  B/A#</span><span class='chordline no5'>G     C  C/B</span><span class='chordline no6'>G#    C# C#/C</span><span class='chordline no7'>A     D  D/C#</span><span class='chordline no8'>A#    D# D#/D</span><span class='chordline no9'>B     E  E/D#</span><span class='chordline no10'>C     F  F/E</span><span class='chordline no11'>C#    F# F#/F</span>
+ We can but we don't
+<span class='chordline no0'>Em         A</span><span class='chordline no1'>Fm         A#</span><span class='chordline no2'>F#m        B</span><span class='chordline no3'>Gm         C</span><span class='chordline no4'>G#m        C#</span><span class='chordline no5'>Am         D</span><span class='chordline no6'>A#m        D#</span><span class='chordline no7'>Bm         E</span><span class='chordline no8'>Cm         F</span><span class='chordline no9'>C#m        F#</span><span class='chordline no10'>Dm         G</span><span class='chordline no11'>D#m        G#</span>
+The days we spent
+<span class='chordline no0'>D      G G/F#</span><span class='chordline no1'>D#     G# G#/G</span><span class='chordline no2'>E      A A/G#</span><span class='chordline no3'>F      A# A#/A</span><span class='chordline no4'>F#     B B/A#</span><span class='chordline no5'>G      C C/B</span><span class='chordline no6'>G#     C# C#/C</span><span class='chordline no7'>A      D D/C#</span><span class='chordline no8'>A#     D# D#/D</span><span class='chordline no9'>B      E E/D#</span><span class='chordline no10'>C      F F/E</span><span class='chordline no11'>C#     F# F#/F</span>
+ Now we don't care
+<span class='chordline no0'>Em         A          D      G G/F#</span><span class='chordline no1'>Fm         A#         D#     G# G#/G</span><span class='chordline no2'>F#m        B          E      A A/G#</span><span class='chordline no3'>Gm         C          F      A# A#/A</span><span class='chordline no4'>G#m        C#         F#     B B/A#</span><span class='chordline no5'>Am         D          G      C C/B</span><span class='chordline no6'>A#m        D#         G#     C# C#/C</span><span class='chordline no7'>Bm         E          A      D D/C#</span><span class='chordline no8'>Cm         F          A#     D# D#/D</span><span class='chordline no9'>C#m        F#         B      E E/D#</span><span class='chordline no10'>Dm         G          C      F F/E</span><span class='chordline no11'>D#m        G#         C#     F# F#/F</span>
+Thought we'd be friends again
+<span class='chordline no0'>          Em     A</span><span class='chordline no1'>          Fm     A#</span><span class='chordline no2'>          F#m    B</span><span class='chordline no3'>          Gm     C</span><span class='chordline no4'>          G#m    C#</span><span class='chordline no5'>          Am     D</span><span class='chordline no6'>          A#m    D#</span><span class='chordline no7'>          Bm     E</span><span class='chordline no8'>          Cm     F</span><span class='chordline no9'>          C#m    F#</span><span class='chordline no10'>          Dm     G</span><span class='chordline no11'>          D#m    G#</span>
+Now we're takin' a bow
+
+<span class='chordline no0'>G F x4</span><span class='chordline no1'>G# F# x4</span><span class='chordline no2'>A G x4</span><span class='chordline no3'>A# G# x4</span><span class='chordline no4'>B A x4</span><span class='chordline no5'>C A# x4</span><span class='chordline no6'>C# B x4</span><span class='chordline no7'>D C x4</span><span class='chordline no8'>D# C# x4</span><span class='chordline no9'>E D x4</span><span class='chordline no10'>F D# x4</span><span class='chordline no11'>F# E x4</span>
+
+
+
+<span class='chordline no0'>G             F</span><span class='chordline no1'>G#            F#</span><span class='chordline no2'>A             G</span><span class='chordline no3'>A#            G#</span><span class='chordline no4'>B             A</span><span class='chordline no5'>C             A#</span><span class='chordline no6'>C#            B</span><span class='chordline no7'>D             C</span><span class='chordline no8'>D#            C#</span><span class='chordline no9'>E             D</span><span class='chordline no10'>F             D#</span><span class='chordline no11'>F#            E</span>
+Gonna try and bend not break it
+<span class='chordline no0'>G              F</span><span class='chordline no1'>G#             F#</span><span class='chordline no2'>A              G</span><span class='chordline no3'>A#             G#</span><span class='chordline no4'>B              A</span><span class='chordline no5'>C              A#</span><span class='chordline no6'>C#             B</span><span class='chordline no7'>D              C</span><span class='chordline no8'>D#             C#</span><span class='chordline no9'>E              D</span><span class='chordline no10'>F              D#</span><span class='chordline no11'>F#             E</span>
+Lookin' at the steps I'm takin'
+<span class='chordline no0'>G             F                G    F</span><span class='chordline no1'>G#            F#               G#   F#</span><span class='chordline no2'>A             G                A    G</span><span class='chordline no3'>A#            G#               A#   G#</span><span class='chordline no4'>B             A                B    A</span><span class='chordline no5'>C             A#               C    A#</span><span class='chordline no6'>C#            B                C#   B</span><span class='chordline no7'>D             C                D    C</span><span class='chordline no8'>D#            C#               D#   C#</span><span class='chordline no9'>E             D                E    D</span><span class='chordline no10'>F             D#               F    D#</span><span class='chordline no11'>F#            E                F#   E</span>
+Lookin' but I can't find the track
+<span class='chordline no0'>G                 F</span><span class='chordline no1'>G#                F#</span><span class='chordline no2'>A                 G</span><span class='chordline no3'>A#                G#</span><span class='chordline no4'>B                 A</span><span class='chordline no5'>C                 A#</span><span class='chordline no6'>C#                B</span><span class='chordline no7'>D                 C</span><span class='chordline no8'>D#                C#</span><span class='chordline no9'>E                 D</span><span class='chordline no10'>F                 D#</span><span class='chordline no11'>F#                E</span>
+Feel like I could take or leave it
+<span class='chordline no0'>G         F</span><span class='chordline no1'>G#        F#</span><span class='chordline no2'>A         G</span><span class='chordline no3'>A#        G#</span><span class='chordline no4'>B         A</span><span class='chordline no5'>C         A#</span><span class='chordline no6'>C#        B</span><span class='chordline no7'>D         C</span><span class='chordline no8'>D#        C#</span><span class='chordline no9'>E         D</span><span class='chordline no10'>F         D#</span><span class='chordline no11'>F#        E</span>
+Only if I could believe it
+<span class='chordline no0'>G               F            G    F</span><span class='chordline no1'>G#              F#           G#   F#</span><span class='chordline no2'>A               G            A    G</span><span class='chordline no3'>A#              G#           A#   G#</span><span class='chordline no4'>B               A            B    A</span><span class='chordline no5'>C               A#           C    A#</span><span class='chordline no6'>C#              B            C#   B</span><span class='chordline no7'>D               C            D    C</span><span class='chordline no8'>D#              C#           D#   C#</span><span class='chordline no9'>E               D            E    D</span><span class='chordline no10'>F               D#           F    D#</span><span class='chordline no11'>F#              E            F#   E</span>
+Think I got the wind at my back
+
+
+
+<span class='chordline no0'>Em         A          D      G G/F#</span><span class='chordline no1'>Fm         A#         D#     G# G#/G</span><span class='chordline no2'>F#m        B          E      A A/G#</span><span class='chordline no3'>Gm         C          F      A# A#/A</span><span class='chordline no4'>G#m        C#         F#     B B/A#</span><span class='chordline no5'>Am         D          G      C C/B</span><span class='chordline no6'>A#m        D#         G#     C# C#/C</span><span class='chordline no7'>Bm         E          A      D D/C#</span><span class='chordline no8'>Cm         F          A#     D# D#/D</span><span class='chordline no9'>C#m        F#         B      E E/D#</span><span class='chordline no10'>Dm         G          C      F F/E</span><span class='chordline no11'>D#m        G#         C#     F# F#/F</span>
+Thought we'd be friends again
+<span class='chordline no0'>Em       A</span><span class='chordline no1'>Fm       A#</span><span class='chordline no2'>F#m      B</span><span class='chordline no3'>Gm       C</span><span class='chordline no4'>G#m      C#</span><span class='chordline no5'>Am       D</span><span class='chordline no6'>A#m      D#</span><span class='chordline no7'>Bm       E</span><span class='chordline no8'>Cm       F</span><span class='chordline no9'>C#m      F#</span><span class='chordline no10'>Dm       G</span><span class='chordline no11'>D#m      G#</span>
+Pushed to the end
+<span class='chordline no0'>D     G  G/F#</span><span class='chordline no1'>D#    G# G#/G</span><span class='chordline no2'>E     A  A/G#</span><span class='chordline no3'>F     A# A#/A</span><span class='chordline no4'>F#    B  B/A#</span><span class='chordline no5'>G     C  C/B</span><span class='chordline no6'>G#    C# C#/C</span><span class='chordline no7'>A     D  D/C#</span><span class='chordline no8'>A#    D# D#/D</span><span class='chordline no9'>B     E  E/D#</span><span class='chordline no10'>C     F  F/E</span><span class='chordline no11'>C#    F# F#/F</span>
+ We can but we don't
+<span class='chordline no0'>Em         A</span><span class='chordline no1'>Fm         A#</span><span class='chordline no2'>F#m        B</span><span class='chordline no3'>Gm         C</span><span class='chordline no4'>G#m        C#</span><span class='chordline no5'>Am         D</span><span class='chordline no6'>A#m        D#</span><span class='chordline no7'>Bm         E</span><span class='chordline no8'>Cm         F</span><span class='chordline no9'>C#m        F#</span><span class='chordline no10'>Dm         G</span><span class='chordline no11'>D#m        G#</span>
+The days we spent
+<span class='chordline no0'>D      G G/F#</span><span class='chordline no1'>D#     G# G#/G</span><span class='chordline no2'>E      A A/G#</span><span class='chordline no3'>F      A# A#/A</span><span class='chordline no4'>F#     B B/A#</span><span class='chordline no5'>G      C C/B</span><span class='chordline no6'>G#     C# C#/C</span><span class='chordline no7'>A      D D/C#</span><span class='chordline no8'>A#     D# D#/D</span><span class='chordline no9'>B      E E/D#</span><span class='chordline no10'>C      F F/E</span><span class='chordline no11'>C#     F# F#/F</span>
+ Now we don't care
+<span class='chordline no0'>Em         A          D      G G/F#</span><span class='chordline no1'>Fm         A#         D#     G# G#/G</span><span class='chordline no2'>F#m        B          E      A A/G#</span><span class='chordline no3'>Gm         C          F      A# A#/A</span><span class='chordline no4'>G#m        C#         F#     B B/A#</span><span class='chordline no5'>Am         D          G      C C/B</span><span class='chordline no6'>A#m        D#         G#     C# C#/C</span><span class='chordline no7'>Bm         E          A      D D/C#</span><span class='chordline no8'>Cm         F          A#     D# D#/D</span><span class='chordline no9'>C#m        F#         B      E E/D#</span><span class='chordline no10'>Dm         G          C      F F/E</span><span class='chordline no11'>D#m        G#         C#     F# F#/F</span>
+Thought we'd be friends again
+<span class='chordline no0'>          Em     A</span><span class='chordline no1'>          Fm     A#</span><span class='chordline no2'>          F#m    B</span><span class='chordline no3'>          Gm     C</span><span class='chordline no4'>          G#m    C#</span><span class='chordline no5'>          Am     D</span><span class='chordline no6'>          A#m    D#</span><span class='chordline no7'>          Bm     E</span><span class='chordline no8'>          Cm     F</span><span class='chordline no9'>          C#m    F#</span><span class='chordline no10'>          Dm     G</span><span class='chordline no11'>          D#m    G#</span>
+Weren't we sayin' a vow
+
+<span class='chordline no0'>G F x4</span><span class='chordline no1'>G# F# x4</span><span class='chordline no2'>A G x4</span><span class='chordline no3'>A# G# x4</span><span class='chordline no4'>B A x4</span><span class='chordline no5'>C A# x4</span><span class='chordline no6'>C# B x4</span><span class='chordline no7'>D C x4</span><span class='chordline no8'>D# C# x4</span><span class='chordline no9'>E D x4</span><span class='chordline no10'>F D# x4</span><span class='chordline no11'>F# E x4</span>
+
+
+
+<span class='chordline no0'>G              F        G   F</span><span class='chordline no1'>G#             F#       G#  F#</span><span class='chordline no2'>A              G        A   G</span><span class='chordline no3'>A#             G#       A#  G#</span><span class='chordline no4'>B              A        B   A</span><span class='chordline no5'>C              A#       C   A#</span><span class='chordline no6'>C#             B        C#  B</span><span class='chordline no7'>D              C        D   C</span><span class='chordline no8'>D#             C#       D#  C#</span><span class='chordline no9'>E              D        E   D</span><span class='chordline no10'>F              D#       F   D#</span><span class='chordline no11'>F#             E        F#  E</span>
+Black thoughts back again
+<span class='chordline no0'>G         F      G   F</span><span class='chordline no1'>G#        F#     G#  F#</span><span class='chordline no2'>A         G      A   G</span><span class='chordline no3'>A#        G#     A#  G#</span><span class='chordline no4'>B         A      B   A</span><span class='chordline no5'>C         A#     C   A#</span><span class='chordline no6'>C#        B      C#  B</span><span class='chordline no7'>D         C      D   C</span><span class='chordline no8'>D#        C#     D#  C#</span><span class='chordline no9'>E         D      E   D</span><span class='chordline no10'>F         D#     F   D#</span><span class='chordline no11'>F#        E      F#  E</span>
+Time to cut it out
+<span class='chordline no0'>G        F       G   F</span><span class='chordline no1'>G#       F#      G#  F#</span><span class='chordline no2'>A        G       A   G</span><span class='chordline no3'>A#       G#      A#  G#</span><span class='chordline no4'>B        A       B   A</span><span class='chordline no5'>C        A#      C   A#</span><span class='chordline no6'>C#       B       C#  B</span><span class='chordline no7'>D        C       D   C</span><span class='chordline no8'>D#       C#      D#  C#</span><span class='chordline no9'>E        D       E   D</span><span class='chordline no10'>F        D#      F   D#</span><span class='chordline no11'>F#       E       F#  E</span>
+Every now and then
+<span class='chordline no0'>G          F       G    F</span><span class='chordline no1'>G#         F#      G#   F#</span><span class='chordline no2'>A          G       A    G</span><span class='chordline no3'>A#         G#      A#   G#</span><span class='chordline no4'>B          A       B    A</span><span class='chordline no5'>C          A#      C    A#</span><span class='chordline no6'>C#         B       C#   B</span><span class='chordline no7'>D          C       D    C</span><span class='chordline no8'>D#         C#      D#   C#</span><span class='chordline no9'>E          D       E    D</span><span class='chordline no10'>F          D#      F    D#</span><span class='chordline no11'>F#         E       F#   E</span>
+More than I can count
+<span class='chordline no0'>G     F    G    F</span><span class='chordline no1'>G#    F#   G#   F#</span><span class='chordline no2'>A     G    A    G</span><span class='chordline no3'>A#    G#   A#   G#</span><span class='chordline no4'>B     A    B    A</span><span class='chordline no5'>C     A#   C    A#</span><span class='chordline no6'>C#    B    C#   B</span><span class='chordline no7'>D     C    D    C</span><span class='chordline no8'>D#    C#   D#   C#</span><span class='chordline no9'>E     D    E    D</span><span class='chordline no10'>F     D#   F    D#</span><span class='chordline no11'>F#    E    F#   E</span>
+Thought
+<span class='chordline no0'>         G    F   G  F</span><span class='chordline no1'>         G#   F#  G# F#</span><span class='chordline no2'>         A    G   A  G</span><span class='chordline no3'>         A#   G#  A# G#</span><span class='chordline no4'>         B    A   B  A</span><span class='chordline no5'>         C    A#  C  A#</span><span class='chordline no6'>         C#   B   C# B</span><span class='chordline no7'>         D    C   D  C</span><span class='chordline no8'>         D#   C#  D# C#</span><span class='chordline no9'>         E    D   E  D</span><span class='chordline no10'>         F    D#  F  D#</span><span class='chordline no11'>         F#   E   F# E</span>
+Lost in thought
+<span class='chordline no0'>         G     F  G  F</span><span class='chordline no1'>         G#    F# G# F#</span><span class='chordline no2'>         A     G  A  G</span><span class='chordline no3'>         A#    G# A# G#</span><span class='chordline no4'>         B     A  B  A</span><span class='chordline no5'>         C     A# C  A#</span><span class='chordline no6'>         C#    B  C# B</span><span class='chordline no7'>         D     C  D  C</span><span class='chordline no8'>         D#    C# D# C#</span><span class='chordline no9'>         E     D  E  D</span><span class='chordline no10'>         F     D# F  D#</span><span class='chordline no11'>         F#    E  F# E</span>
+Lost in thought
+<span class='chordline no0'>         G    F   G  F</span><span class='chordline no1'>         G#   F#  G# F#</span><span class='chordline no2'>         A    G   A  G</span><span class='chordline no3'>         A#   G#  A# G#</span><span class='chordline no4'>         B    A   B  A</span><span class='chordline no5'>         C    A#  C  A#</span><span class='chordline no6'>         C#   B   C# B</span><span class='chordline no7'>         D    C   D  C</span><span class='chordline no8'>         D#   C#  D# C#</span><span class='chordline no9'>         E    D   E  D</span><span class='chordline no10'>         F    D#  F  D#</span><span class='chordline no11'>         F#   E   F# E</span>
+Lost in thought
+
+
+
+<span class='chordline no0'>Em          A          D      G G/F#</span><span class='chordline no1'>Fm          A#         D#     G# G#/G</span><span class='chordline no2'>F#m         B          E      A A/G#</span><span class='chordline no3'>Gm          C          F      A# A#/A</span><span class='chordline no4'>G#m         C#         F#     B B/A#</span><span class='chordline no5'>Am          D          G      C C/B</span><span class='chordline no6'>A#m         D#         G#     C# C#/C</span><span class='chordline no7'>Bm          E          A      D D/C#</span><span class='chordline no8'>Cm          F          A#     D# D#/D</span><span class='chordline no9'>C#m         F#         B      E E/D#</span><span class='chordline no10'>Dm          G          C      F F/E</span><span class='chordline no11'>D#m         G#         C#     F# F#/F</span>
+ Thought we'd be friends again
+<span class='chordline no0'>Em       A</span><span class='chordline no1'>Fm       A#</span><span class='chordline no2'>F#m      B</span><span class='chordline no3'>Gm       C</span><span class='chordline no4'>G#m      C#</span><span class='chordline no5'>Am       D</span><span class='chordline no6'>A#m      D#</span><span class='chordline no7'>Bm       E</span><span class='chordline no8'>Cm       F</span><span class='chordline no9'>C#m      F#</span><span class='chordline no10'>Dm       G</span><span class='chordline no11'>D#m      G#</span>
+ Pushed to the end
+<span class='chordline no0'>D      G  G/F#</span><span class='chordline no1'>D#     G# G#/G</span><span class='chordline no2'>E      A  A/G#</span><span class='chordline no3'>F      A# A#/A</span><span class='chordline no4'>F#     B  B/A#</span><span class='chordline no5'>G      C  C/B</span><span class='chordline no6'>G#     C# C#/C</span><span class='chordline no7'>A      D  D/C#</span><span class='chordline no8'>A#     D# D#/D</span><span class='chordline no9'>B      E  E/D#</span><span class='chordline no10'>C      F  F/E</span><span class='chordline no11'>C#     F# F#/F</span>
+ We can but we don't
+<span class='chordline no0'>Em         A</span><span class='chordline no1'>Fm         A#</span><span class='chordline no2'>F#m        B</span><span class='chordline no3'>Gm         C</span><span class='chordline no4'>G#m        C#</span><span class='chordline no5'>Am         D</span><span class='chordline no6'>A#m        D#</span><span class='chordline no7'>Bm         E</span><span class='chordline no8'>Cm         F</span><span class='chordline no9'>C#m        F#</span><span class='chordline no10'>Dm         G</span><span class='chordline no11'>D#m        G#</span>
+ The days we spent
+<span class='chordline no0'>D      G G/F#</span><span class='chordline no1'>D#     G# G#/G</span><span class='chordline no2'>E      A A/G#</span><span class='chordline no3'>F      A# A#/A</span><span class='chordline no4'>F#     B B/A#</span><span class='chordline no5'>G      C C/B</span><span class='chordline no6'>G#     C# C#/C</span><span class='chordline no7'>A      D D/C#</span><span class='chordline no8'>A#     D# D#/D</span><span class='chordline no9'>B      E E/D#</span><span class='chordline no10'>C      F F/E</span><span class='chordline no11'>C#     F# F#/F</span>
+ Now we don't care
+<span class='chordline no0'>Em          A          D      G G/F#</span><span class='chordline no1'>Fm          A#         D#     G# G#/G</span><span class='chordline no2'>F#m         B          E      A A/G#</span><span class='chordline no3'>Gm          C          F      A# A#/A</span><span class='chordline no4'>G#m         C#         F#     B B/A#</span><span class='chordline no5'>Am          D          G      C C/B</span><span class='chordline no6'>A#m         D#         G#     C# C#/C</span><span class='chordline no7'>Bm          E          A      D D/C#</span><span class='chordline no8'>Cm          F          A#     D# D#/D</span><span class='chordline no9'>C#m         F#         B      E E/D#</span><span class='chordline no10'>Dm          G          C      F F/E</span><span class='chordline no11'>D#m         G#         C#     F# F#/F</span>
+ Thought we'd be friends again
+<span class='chordline no0'>          Em     A</span><span class='chordline no1'>          Fm     A#</span><span class='chordline no2'>          F#m    B</span><span class='chordline no3'>          Gm     C</span><span class='chordline no4'>          G#m    C#</span><span class='chordline no5'>          Am     D</span><span class='chordline no6'>          A#m    D#</span><span class='chordline no7'>          Bm     E</span><span class='chordline no8'>          Cm     F</span><span class='chordline no9'>          C#m    F#</span><span class='chordline no10'>          Dm     G</span><span class='chordline no11'>          D#m    G#</span>
+Now I'm back on the prowl
+
+<span class='chordline no0'>G F x4</span><span class='chordline no1'>G# F# x4</span><span class='chordline no2'>A G x4</span><span class='chordline no3'>A# G# x4</span><span class='chordline no4'>B A x4</span><span class='chordline no5'>C A# x4</span><span class='chordline no6'>C# B x4</span><span class='chordline no7'>D C x4</span><span class='chordline no8'>D# C# x4</span><span class='chordline no9'>E D x4</span><span class='chordline no10'>F D# x4</span><span class='chordline no11'>F# E x4</span>
+
+
+
+<span class='chordline no0'>G           F             G           F</span><span class='chordline no1'>G#          F#            G#          F#</span><span class='chordline no2'>A           G             A           G</span><span class='chordline no3'>A#          G#            A#          G#</span><span class='chordline no4'>B           A             B           A</span><span class='chordline no5'>C           A#            C           A#</span><span class='chordline no6'>C#          B             C#          B</span><span class='chordline no7'>D           C             D           C</span><span class='chordline no8'>D#          C#            D#          C#</span><span class='chordline no9'>E           D             E           D</span><span class='chordline no10'>F           D#            F           D#</span><span class='chordline no11'>F#          E             F#          E</span>
+Stiff wind on the street (stiff wind on the street)
+<span class='chordline no0'>G         F        G        F</span><span class='chordline no1'>G#        F#       G#       F#</span><span class='chordline no2'>A         G        A        G</span><span class='chordline no3'>A#        G#       A#       G#</span><span class='chordline no4'>B         A        B        A</span><span class='chordline no5'>C         A#       C        A#</span><span class='chordline no6'>C#        B        C#       B</span><span class='chordline no7'>D         C        D        C</span><span class='chordline no8'>D#        C#       D#       C#</span><span class='chordline no9'>E         D        E        D</span><span class='chordline no10'>F         D#       F        D#</span><span class='chordline no11'>F#        E        F#       E</span>
+ jacket in (pull my jacket in)
+<span class='chordline no0'>G       F           G       F</span><span class='chordline no1'>G#      F#          G#      F#</span><span class='chordline no2'>A       G           A       G</span><span class='chordline no3'>A#      G#          A#      G#</span><span class='chordline no4'>B       A           B       A</span><span class='chordline no5'>C       A#          C       A#</span><span class='chordline no6'>C#      B           C#      B</span><span class='chordline no7'>D       C           D       C</span><span class='chordline no8'>D#      C#          D#      C#</span><span class='chordline no9'>E       D           E       D</span><span class='chordline no10'>F       D#          F       D#</span><span class='chordline no11'>F#      E           F#      E</span>
+Feelin' incomplete (feelin' incomplete)
+<span class='chordline no0'>G         G        F     G</span><span class='chordline no1'>G#        G#       F#    G#</span><span class='chordline no2'>A         A        G     A</span><span class='chordline no3'>A#        A#       G#    A#</span><span class='chordline no4'>B         B        A     B</span><span class='chordline no5'>C         C        A#    C</span><span class='chordline no6'>C#        C#       B     C#</span><span class='chordline no7'>D         D        C     D</span><span class='chordline no8'>D#        D#       C#    D#</span><span class='chordline no9'>E         E        D     E</span><span class='chordline no10'>F         F        D#    F</span><span class='chordline no11'>F#        F#       E     F#</span>
+(Feel it happenin')
+<span class='chordline no0'>G F</span><span class='chordline no1'>G# F#</span><span class='chordline no2'>A G</span><span class='chordline no3'>A# G#</span><span class='chordline no4'>B A</span><span class='chordline no5'>C A#</span><span class='chordline no6'>C# B</span><span class='chordline no7'>D C</span><span class='chordline no8'>D# C#</span><span class='chordline no9'>E D</span><span class='chordline no10'>F D#</span><span class='chordline no11'>F# E</span>
+
+      </pre>
+    </div>
+
+    <!-- Speed indicator toast -->
+    <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+  </body>
+</html>

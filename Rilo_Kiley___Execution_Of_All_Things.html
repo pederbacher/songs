@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Execution Of All Things</title>
+
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
+
+      <!-- Chords, TOC, Split in first row -->
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
+      <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Rilo Kiley: Execution Of All Things</h1>
+
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
+The Execution of All Things, Rilo Kiley
+
+___________________________________________________________________________
+
+<span class='chordline no0'>(Bit before intro is    B   C#   Aadd9  B)</span><span class='chordline no1'>(Cit before intro is    C   D   A#add9 C)</span><span class='chordline no2'>(C#it before intro is   C#  D#   Badd9  C#)</span><span class='chordline no3'>(Dit before intro is    D   E   Cadd9  D)</span><span class='chordline no4'>(D#it before intro is   D#  F   C#add9 D#)</span><span class='chordline no5'>(Eit before intro is    E   F#   Dadd9  E)</span><span class='chordline no6'>(Fit before intro is    F   G   D#add9 F)</span><span class='chordline no7'>(F#it before intro is   F#  G#   Eadd9  F#)</span><span class='chordline no8'>(Git before intro is    G   A   Fadd9  G)</span><span class='chordline no9'>(G#it before intro is   G#  A#   F#add9 G#)</span><span class='chordline no10'>(Ait before intro is    A   B   Gadd9  A)</span><span class='chordline no11'>(A#it before intro is   A#  C   G#add9 A#)</span>
+
+<span class='chordline no0'>Intro is just    E  F#7   A   E</span><span class='chordline no1'>Cntro is just    F  G7   A#  F</span><span class='chordline no2'>Cntro is just    F# G#7   B   F#</span><span class='chordline no3'>Cntro is just    G  A7   C   G</span><span class='chordline no4'>Cntro is just    G# A#7   C#  G#</span><span class='chordline no5'>Cntro is just    A  B7   D   A</span><span class='chordline no6'>Cntro is just    A# C7   D#  A#</span><span class='chordline no7'>Cntro is just    B  C#7   E   B</span><span class='chordline no8'>Cntro is just    C  D7   F   C</span><span class='chordline no9'>Cntro is just    C# D#7   F#  C#</span><span class='chordline no10'>Cntro is just    D  E7   G   D</span><span class='chordline no11'>Cntro is just    D# F7   G#  D#</span>
+
+
+<span class='chordline no0'>E             F#7                 A                E</span><span class='chordline no1'>F             G7                 A#               F</span><span class='chordline no2'>F#            G#7                 B                F#</span><span class='chordline no3'>G             A7                 C                G</span><span class='chordline no4'>G#            A#7                 C#               G#</span><span class='chordline no5'>A             B7                 D                A</span><span class='chordline no6'>A#            C7                 D#               A#</span><span class='chordline no7'>B             C#7                 E                B</span><span class='chordline no8'>C             D7                 F                C</span><span class='chordline no9'>C#            D#7                 F#               C#</span><span class='chordline no10'>D             E7                 G                D</span><span class='chordline no11'>D#            F7                 G#               D#</span>
+Soldiers come quickly, I feel the earth beneath my feet.
+<span class='chordline no0'>E            F#7                  A             E</span><span class='chordline no1'>F            G7                  A#            F</span><span class='chordline no2'>F#           G#7                  B             F#</span><span class='chordline no3'>G            A7                  C             G</span><span class='chordline no4'>G#           A#7                  C#            G#</span><span class='chordline no5'>A            B7                  D             A</span><span class='chordline no6'>A#           C7                  D#            A#</span><span class='chordline no7'>B            C#7                  E             B</span><span class='chordline no8'>C            D7                  F             C</span><span class='chordline no9'>C#           D#7                  F#            C#</span><span class='chordline no10'>D            E7                  G             D</span><span class='chordline no11'>D#           F7                  G#            D#</span>
+I'm feeling badly, it's not an at-tempt at decency.
+<span class='chordline no0'>E                 F#7                  A             E</span><span class='chordline no1'>F                 G7                  A#            F</span><span class='chordline no2'>F#                G#7                  B             F#</span><span class='chordline no3'>G                 A7                  C             G</span><span class='chordline no4'>G#                A#7                  C#            G#</span><span class='chordline no5'>A                 B7                  D             A</span><span class='chordline no6'>A#                C7                  D#            A#</span><span class='chordline no7'>B                 C#7                  E             B</span><span class='chordline no8'>C                 D7                  F             C</span><span class='chordline no9'>C#                D#7                  F#            C#</span><span class='chordline no10'>D                 E7                  G             D</span><span class='chordline no11'>D#                F7                  G#            D#</span>
+And if you're well off, well then I'm happy some for you.
+<span class='chordline no0'>E                  F#7             A               C#m    B7</span><span class='chordline no1'>F                  G7             A#              Dm    C7</span><span class='chordline no2'>F#                 G#7             B               D#m    C#7</span><span class='chordline no3'>G                  A7             C               Em    D7</span><span class='chordline no4'>G#                 A#7             C#              Fm    D#7</span><span class='chordline no5'>A                  B7             D               F#m    E7</span><span class='chordline no6'>A#                 C7             D#              Gm    F7</span><span class='chordline no7'>B                  C#7             E               G#m    F#7</span><span class='chordline no8'>C                  D7             F               Am    G7</span><span class='chordline no9'>C#                 D#7             F#              A#m    G#7</span><span class='chordline no10'>D                  E7             G               Bm    A7</span><span class='chordline no11'>D#                 F7             G#              Cm    A#7</span>
+But I'd rather not celebrate my de-feat and humili-ation here with
+<span class='chordline no0'>E    F#7     A     E</span><span class='chordline no1'>F    G7     A#    F</span><span class='chordline no2'>F#   G#7     B     F#</span><span class='chordline no3'>G    A7     C     G</span><span class='chordline no4'>G#   A#7     C#    G#</span><span class='chordline no5'>A    B7     D     A</span><span class='chordline no6'>A#   C7     D#    A#</span><span class='chordline no7'>B    C#7     E     B</span><span class='chordline no8'>C    D7     F     C</span><span class='chordline no9'>C#   D#7     F#    C#</span><span class='chordline no10'>D    E7     G     D</span><span class='chordline no11'>D#   F7     G#    D#</span>
+you.
+
+
+
+<span class='chordline no0'>E             F#7                    A                E</span><span class='chordline no1'>F             G7                    A#               F</span><span class='chordline no2'>F#            G#7                    B                F#</span><span class='chordline no3'>G             A7                    C                G</span><span class='chordline no4'>G#            A#7                    C#               G#</span><span class='chordline no5'>A             B7                    D                A</span><span class='chordline no6'>A#            C7                    D#               A#</span><span class='chordline no7'>B             C#7                    E                B</span><span class='chordline no8'>C             D7                    F                C</span><span class='chordline no9'>C#            D#7                    F#               C#</span><span class='chordline no10'>D             E7                    G                D</span><span class='chordline no11'>D#            F7                    G#               D#</span>
+Someone come quickly, this place was built for moving out.
+<span class='chordline no0'>E             F#7                 A                  E</span><span class='chordline no1'>F             G7                 A#                 F</span><span class='chordline no2'>F#            G#7                 B                  F#</span><span class='chordline no3'>G             A7                 C                  G</span><span class='chordline no4'>G#            A#7                 C#                 G#</span><span class='chordline no5'>A             B7                 D                  A</span><span class='chordline no6'>A#            C7                 D#                 A#</span><span class='chordline no7'>B             C#7                 E                  B</span><span class='chordline no8'>C             D7                 F                  C</span><span class='chordline no9'>C#            D#7                 F#                 C#</span><span class='chordline no10'>D             E7                 G                  D</span><span class='chordline no11'>D#            F7                 G#                 D#</span>
+Leave behind buildings, the city planners got mapped out.
+<span class='chordline no0'>E              F#7          A                     E</span><span class='chordline no1'>F              G7          A#                    F</span><span class='chordline no2'>F#             G#7          B                     F#</span><span class='chordline no3'>G              A7          C                     G</span><span class='chordline no4'>G#             A#7          C#                    G#</span><span class='chordline no5'>A              B7          D                     A</span><span class='chordline no6'>A#             C7          D#                    A#</span><span class='chordline no7'>B              C#7          E                     B</span><span class='chordline no8'>C              D7          F                     C</span><span class='chordline no9'>C#             D#7          F#                    C#</span><span class='chordline no10'>D              E7          G                     D</span><span class='chordline no11'>D#             F7          G#                    D#</span>
+Bring with you history, and make your hard earned feast.
+<span class='chordline no0'>E                F#7      A                    C#m       B7</span><span class='chordline no1'>F                G7      A#                   Dm       C7</span><span class='chordline no2'>F#               G#7      B                    D#m       C#7</span><span class='chordline no3'>G                A7      C                    Em       D7</span><span class='chordline no4'>G#               A#7      C#                   Fm       D#7</span><span class='chordline no5'>A                B7      D                    F#m       E7</span><span class='chordline no6'>A#               C7      D#                   Gm       F7</span><span class='chordline no7'>B                C#7      E                    G#m       F#7</span><span class='chordline no8'>C                D7      F                    Am       G7</span><span class='chordline no9'>C#               D#7      F#                   A#m       G#7</span><span class='chordline no10'>D                E7      G                    Bm       A7</span><span class='chordline no11'>D#               F7      G#                   Cm       A#7</span>
+Then we'll go to Omaha to work and exploit the booming music
+<span class='chordline no0'>A               Am7       E      E</span><span class='chordline no1'>A#              A#m7      F      F</span><span class='chordline no2'>B               Bm7       F#     F#</span><span class='chordline no3'>C               Cm7       G      G</span><span class='chordline no4'>C#              C#m7      G#     G#</span><span class='chordline no5'>D               Dm7       A      A</span><span class='chordline no6'>D#              D#m7      A#     A#</span><span class='chordline no7'>E               Em7       B      B</span><span class='chordline no8'>F               Fm7       C      C</span><span class='chordline no9'>F#              F#m7      C#     C#</span><span class='chordline no10'>G               Gm7       D      D</span><span class='chordline no11'>G#              G#m7      D#     D#</span>
+scene   and hum-ility...
+
+<span class='chordline no0'>Bm    A    G    A</span><span class='chordline no1'>Cm    A#   G#   A#</span><span class='chordline no2'>C#m   B    A    B</span><span class='chordline no3'>Dm    C    A#   C</span><span class='chordline no4'>D#m   C#   B    C#</span><span class='chordline no5'>Em    D    C    D</span><span class='chordline no6'>Fm    D#   C#   D#</span><span class='chordline no7'>F#m   E    D    E</span><span class='chordline no8'>Gm    F    D#   F</span><span class='chordline no9'>G#m   F#   E    F#</span><span class='chordline no10'>Am    G    F    G</span><span class='chordline no11'>A#m   G#   F#   G#</span>
+
+<span class='chordline no0'>Bm                 A           G         F#</span><span class='chordline no1'>Cm                 A#          G#        G</span><span class='chordline no2'>C#m                B           A         G#</span><span class='chordline no3'>Dm                 C           A#        A</span><span class='chordline no4'>D#m                C#          B         A#</span><span class='chordline no5'>Em                 D           C         B</span><span class='chordline no6'>Fm                 D#          C#        C</span><span class='chordline no7'>F#m                E           D         C#</span><span class='chordline no8'>Gm                 F           D#        D</span><span class='chordline no9'>G#m                F#          E         D#</span><span class='chordline no10'>Am                 G           F         E</span><span class='chordline no11'>A#m                G#          F#        F</span>
+    And we've been talking all night...
+A (hold for 3 bars)    Am
+<span class='chordline no0'>E    F#7     A     E    (repeat)</span><span class='chordline no1'>F    G7     A#    F    (repeat)</span><span class='chordline no2'>F#   G#7     B     F#   (repeat)</span><span class='chordline no3'>G    A7     C     G    (repeat)</span><span class='chordline no4'>G#   A#7     C#    G#   (repeat)</span><span class='chordline no5'>A    B7     D     A    (repeat)</span><span class='chordline no6'>A#   C7     D#    A#   (repeat)</span><span class='chordline no7'>B    C#7     E     B    (repeat)</span><span class='chordline no8'>C    D7     F     C    (repeat)</span><span class='chordline no9'>C#   D#7     F#    C#   (repeat)</span><span class='chordline no10'>D    E7     G     D    (repeat)</span><span class='chordline no11'>D#   F7     G#    D#   (repeat)</span>
+(lead solo)
+
+
+
+
+<span class='chordline no0'>E           F#7              A             E</span><span class='chordline no1'>F           G7              A#            F</span><span class='chordline no2'>F#          G#7              B             F#</span><span class='chordline no3'>G           A7              C             G</span><span class='chordline no4'>G#          A#7              C#            G#</span><span class='chordline no5'>A           B7              D             A</span><span class='chordline no6'>A#          C7              D#            A#</span><span class='chordline no7'>B           C#7              E             B</span><span class='chordline no8'>C           D7              F             C</span><span class='chordline no9'>C#          D#7              F#            C#</span><span class='chordline no10'>D           E7              G             D</span><span class='chordline no11'>D#          F7              G#            D#</span>
+Oh god come quickly, the exe-cution of all things.
+<span class='chordline no0'>E                    F#7                    A                     E</span><span class='chordline no1'>F                    G7                    A#                    F</span><span class='chordline no2'>F#                   G#7                    B                     F#</span><span class='chordline no3'>G                    A7                    C                     G</span><span class='chordline no4'>G#                   A#7                    C#                    G#</span><span class='chordline no5'>A                    B7                    D                     A</span><span class='chordline no6'>A#                   C7                    D#                    A#</span><span class='chordline no7'>B                    C#7                    E                     B</span><span class='chordline no8'>C                    D7                    F                     C</span><span class='chordline no9'>C#                   D#7                    F#                    C#</span><span class='chordline no10'>D                    E7                    G                     D</span><span class='chordline no11'>D#                   F7                    G#                    D#</span>
+Let's start with the bears and the air and mountains, rivers, and streams.
+<span class='chordline no0'>E                      F#7                     A                         E</span><span class='chordline no1'>F                      G7                     A#                        F</span><span class='chordline no2'>F#                     G#7                     B                         F#</span><span class='chordline no3'>G                      A7                     C                         G</span><span class='chordline no4'>G#                     A#7                     C#                        G#</span><span class='chordline no5'>A                      B7                     D                         A</span><span class='chordline no6'>A#                     C7                     D#                        A#</span><span class='chordline no7'>B                      C#7                     E                         B</span><span class='chordline no8'>C                      D7                     F                         C</span><span class='chordline no9'>C#                     D#7                     F#                        C#</span><span class='chordline no10'>D                      E7                     G                         D</span><span class='chordline no11'>D#                     F7                     G#                        D#</span>
+Then we'll murder what matters to you and move on to your neighbours and kids
+<span class='chordline no0'>E                  F#7                A                      E</span><span class='chordline no1'>F                  G7                A#                     F</span><span class='chordline no2'>F#                 G#7                B                      F#</span><span class='chordline no3'>G                  A7                C                      G</span><span class='chordline no4'>G#                 A#7                C#                     G#</span><span class='chordline no5'>A                  B7                D                      A</span><span class='chordline no6'>A#                 C7                D#                     A#</span><span class='chordline no7'>B                  C#7                E                      B</span><span class='chordline no8'>C                  D7                F                      C</span><span class='chordline no9'>C#                 D#7                F#                     C#</span><span class='chordline no10'>D                  E7                G                      D</span><span class='chordline no11'>D#                 F7                G#                     D#</span>
+Crush all hopes of happiness with dis-ease cause of what you did.
+
+<span class='chordline no0'>E                      F#7        A                E</span><span class='chordline no1'>F                      G7        A#               F</span><span class='chordline no2'>F#                     G#7        B                F#</span><span class='chordline no3'>G                      A7        C                G</span><span class='chordline no4'>G#                     A#7        C#               G#</span><span class='chordline no5'>A                      B7        D                A</span><span class='chordline no6'>A#                     C7        D#               A#</span><span class='chordline no7'>B                      C#7        E                B</span><span class='chordline no8'>C                      D7        F                C</span><span class='chordline no9'>C#                     D#7        F#               C#</span><span class='chordline no10'>D                      E7        G                D</span><span class='chordline no11'>D#                     F7        G#               D#</span>
+And lastly, you're all alone with nothing left but sleep.
+<span class='chordline no0'>E               F#7                    A                 C#m    B7</span><span class='chordline no1'>F               G7                    A#                Dm    C7</span><span class='chordline no2'>F#              G#7                    B                 D#m    C#7</span><span class='chordline no3'>G               A7                    C                 Em    D7</span><span class='chordline no4'>G#              A#7                    C#                Fm    D#7</span><span class='chordline no5'>A               B7                    D                 F#m    E7</span><span class='chordline no6'>A#              C7                    D#                Gm    F7</span><span class='chordline no7'>B               C#7                    E                 G#m    F#7</span><span class='chordline no8'>C               D7                    F                 Am    G7</span><span class='chordline no9'>C#              D#7                    F#                A#m    G#7</span><span class='chordline no10'>D               E7                    G                 Bm    A7</span><span class='chordline no11'>D#              F7                    G#                Cm    A#7</span>
+But sleep never comes to you, it's the guilt and forever wakefulness of
+
+<span class='chordline no0'>    A               Am7</span><span class='chordline no1'>    A#              A#m7</span><span class='chordline no2'>    B               Bm7</span><span class='chordline no3'>    C               Cm7</span><span class='chordline no4'>    C#              C#m7</span><span class='chordline no5'>    D               Dm7</span><span class='chordline no6'>    D#              D#m7</span><span class='chordline no7'>    E               Em7</span><span class='chordline no8'>    F               Fm7</span><span class='chordline no9'>    F#              F#m7</span><span class='chordline no10'>    G               Gm7</span><span class='chordline no11'>    G#              G#m7</span>
+the weak. It's just you and me.
+
+<span class='chordline no0'>C#m          C#m7sus4*      A</span><span class='chordline no1'>Dm          Dm7sus4*      A#</span><span class='chordline no2'>D#m          D#m7sus4*      B</span><span class='chordline no3'>Em          Em7sus4*      C</span><span class='chordline no4'>Fm          Fm7sus4*      C#</span><span class='chordline no5'>F#m          F#m7sus4*      D</span><span class='chordline no6'>Gm          Gm7sus4*      D#</span><span class='chordline no7'>G#m          G#m7sus4*      E</span><span class='chordline no8'>Am          Am7sus4*      F</span><span class='chordline no9'>A#m          A#m7sus4*      F#</span><span class='chordline no10'>Bm          Bm7sus4*      G</span><span class='chordline no11'>Cm          Cm7sus4*      G#</span>
+     The exe-cution  of all things.
+<span class='chordline no0'>        C      Cm     C#m</span><span class='chordline no1'>        C#     C#m    Dm</span><span class='chordline no2'>        D      Dm     D#m</span><span class='chordline no3'>        D#     D#m    Em</span><span class='chordline no4'>        E      Em     Fm</span><span class='chordline no5'>        F      Fm     F#m</span><span class='chordline no6'>        F#     F#m    Gm</span><span class='chordline no7'>        G      Gm     G#m</span><span class='chordline no8'>        G#     G#m    Am</span><span class='chordline no9'>        A      Am     A#m</span><span class='chordline no10'>        A#     A#m    Bm</span><span class='chordline no11'>        B      Bm     Cm</span>
+The exe-cution of all things.
+<span class='chordline no0'>        B             A</span><span class='chordline no1'>        C             A#</span><span class='chordline no2'>        C#            B</span><span class='chordline no3'>        D             C</span><span class='chordline no4'>        D#            C#</span><span class='chordline no5'>        E             D</span><span class='chordline no6'>        F             D#</span><span class='chordline no7'>        F#            E</span><span class='chordline no8'>        G             F</span><span class='chordline no9'>        G#            F#</span><span class='chordline no10'>        A             G</span><span class='chordline no11'>        A#            G#</span>
+The exe-cution of all things.
+
+<span class='chordline no0'>C    B      E</span><span class='chordline no1'>C#   C      F</span><span class='chordline no2'>D    C#     F#</span><span class='chordline no3'>D#   D      G</span><span class='chordline no4'>E    D#     G#</span><span class='chordline no5'>F    E      A</span><span class='chordline no6'>F#   F      A#</span><span class='chordline no7'>G    F#     B</span><span class='chordline no8'>G#   G      C</span><span class='chordline no9'>A    G#     C#</span><span class='chordline no10'>A#   A      D</span><span class='chordline no11'>B    A#     D#</span>
+      </pre>
+    </div>
+
+    <!-- Speed indicator toast -->
+    <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+  </body>
+</html>

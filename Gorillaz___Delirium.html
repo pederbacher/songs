@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="da">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Delirium</title>
+
+    <!-- Song metadata (speed, etc.) parsed from # key=value lines in the .txt source -->
+    <script>window.SONG_META = {};</script>
+
+    <!-- Link your CSS and JS files -->
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+
+    <!-- Floating master controls (no fold button anymore) -->
+    <div id="controls" class="fullyHidden">
+      <!-- Scroll controls (control both panes in split mode) -->
+      <button id="startstop" type="button" onclick="startstop()">Start</button>
+      <button id="faster" class="speed-btn" type="button">+</button>
+      <button id="slower" class="speed-btn" type="button">-</button>
+
+      <!-- Chords, TOC, Split in first row -->
+      <button id="toggleChords" class="only-single" type="button" onclick="hideshowchords()">ChordsHide</button>
+      <button id="toc-btn" class="speed-btn" type="button" onclick="window.location.href='index.html'">TOC</button>
+      <button id="splitToggle" type="button">Split</button>
+      <div id="editButtons" class="only-single">
+        <button type="button" onclick="openEditor()">Edit</button>
+        <button type="button" onclick="newSong()">New</button>
+        <button id="rebuildBtn" type="button" onclick="rebuildHtml()">Rebuild</button>
+      </div>
+
+      <!-- Transpose buttons (only in single mode) — second row -->
+      <div id="transposeButtons" class="only-single">
+        <button type="button" onclick="showGroup(0)">0</button>
+        <button type="button" onclick="showGroup(1)">1</button>
+        <button type="button" onclick="showGroup(2)">2</button>
+        <button type="button" onclick="showGroup(3)">3</button>
+        <button type="button" onclick="showGroup(4)">4</button>
+        <button type="button" onclick="showGroup(5)">5</button>
+        <button type="button" onclick="showGroup(6)">6</button>
+        <button type="button" onclick="showGroup(7)">7</button>
+        <button type="button" onclick="showGroup(8)">8</button>
+        <button type="button" onclick="showGroup(9)">9</button>
+        <button type="button" onclick="showGroup(10)">10</button>
+        <button type="button" onclick="showGroup(11)">11</button>
+      </div>
+
+      <!-- Visible only in split mode: TOTAL width controls for the split area -->
+      <button id="narrower" class="only-split" type="button">-width</button>
+      <button id="wider"   class="only-split" type="button">+width</button>
+    </div>
+
+    <!-- Main page content (this will be cloned into split panes) -->
+    <div id="pageContent">
+      <h1>Gorillaz: Delirium</h1>
+
+      <!--
+        Put your full song content here.
+        Use .chordline and no0..no11 classes for transposed chord lines.
+        Example:
+        <div class="chordline no0">Am     Dm     G     C</div>
+      -->
+      <pre>
+<span class='chordline no0'>Tuning: E A D G B EKey: GmCapo: No capo</span><span class='chordline no1'>Buning: F A# D# G# C FDey: G#mC#apo: Fo capo</span><span class='chordline no2'>Buning: F# B E A C# F#Dey: AmDapo: Fo capo</span><span class='chordline no3'>Buning: G C F A# D GDey: A#mD#apo: Fo capo</span><span class='chordline no4'>Buning: G# C# F# B D# G#Dey: BmEapo: Fo capo</span><span class='chordline no5'>Buning: A D G C E ADey: CmFapo: Fo capo</span><span class='chordline no6'>Buning: A# D# G# C# F A#Dey: C#mF#apo: Fo capo</span><span class='chordline no7'>Buning: B E A D F# BDey: DmGapo: Fo capo</span><span class='chordline no8'>Buning: C F A# D# G CDey: D#mG#apo: Fo capo</span><span class='chordline no9'>Buning: C# F# B E G# C#Dey: EmAapo: Fo capo</span><span class='chordline no10'>Buning: D G C F A DDey: FmA#apo: Fo capo</span><span class='chordline no11'>Buning: D# G# C# F# A# D#Dey: F#mBapo: Fo capo</span>
+
+<span class='chordline no0'>Gm Eb</span><span class='chordline no1'>G#m E</span><span class='chordline no2'>Am F</span><span class='chordline no3'>A#m Gb</span><span class='chordline no4'>Bm G</span><span class='chordline no5'>Cm Ab</span><span class='chordline no6'>C#m A</span><span class='chordline no7'>Dm Bb</span><span class='chordline no8'>D#m B</span><span class='chordline no9'>Em C</span><span class='chordline no10'>Fm Db</span><span class='chordline no11'>F#m D</span>
+
+
+
+<span class='chordline no0'>         Gm</span><span class='chordline no1'>         G#m</span><span class='chordline no2'>         Am</span><span class='chordline no3'>         A#m</span><span class='chordline no4'>         Bm</span><span class='chordline no5'>         Cm</span><span class='chordline no6'>         C#m</span><span class='chordline no7'>         Dm</span><span class='chordline no8'>         D#m</span><span class='chordline no9'>         Em</span><span class='chordline no10'>         Fm</span><span class='chordline no11'>         F#m</span>
+Open the door
+<span class='chordline no0'>        Eb</span><span class='chordline no1'>        E</span><span class='chordline no2'>        F</span><span class='chordline no3'>        Gb</span><span class='chordline no4'>        G</span><span class='chordline no5'>        Ab</span><span class='chordline no6'>        A</span><span class='chordline no7'>        Bb</span><span class='chordline no8'>        B</span><span class='chordline no9'>        C</span><span class='chordline no10'>        Db</span><span class='chordline no11'>        D</span>
+Can you hear the drums?
+<span class='chordline no0'>        Eb                             Dm</span><span class='chordline no1'>        E                             D#m</span><span class='chordline no2'>        F                             Em</span><span class='chordline no3'>        Gb                             Fm</span><span class='chordline no4'>        G                             F#m</span><span class='chordline no5'>        Ab                             Gm</span><span class='chordline no6'>        A                             G#m</span><span class='chordline no7'>        Bb                             Am</span><span class='chordline no8'>        B                             A#m</span><span class='chordline no9'>        C                             Bm</span><span class='chordline no10'>        Db                             Cm</span><span class='chordline no11'>        D                             C#m</span>
+There's panic on the mountain 'cause a new god's come
+<span class='chordline no0'>   Eb                           Bb        Cm</span><span class='chordline no1'>   E                           B        C#m</span><span class='chordline no2'>   F                           C        Dm</span><span class='chordline no3'>   Gb                           Db        D#m</span><span class='chordline no4'>   G                           D        Em</span><span class='chordline no5'>   Ab                           Eb        Fm</span><span class='chordline no6'>   A                           E        F#m</span><span class='chordline no7'>   Bb                           F        Gm</span><span class='chordline no8'>   B                           Gb        G#m</span><span class='chordline no9'>   C                           G        Am</span><span class='chordline no10'>   Db                           Ab        A#m</span><span class='chordline no11'>   D                           A        Bm</span>
+He doesn't recognise himself or what he's done
+<span class='chordline no0'>    F                                  Cm      Eb</span><span class='chordline no1'>    F#                                 C#m     E</span><span class='chordline no2'>    G                                  Dm      F</span><span class='chordline no3'>    G#                                 D#m     Gb</span><span class='chordline no4'>    A                                  Em      G</span><span class='chordline no5'>    A#                                 Fm      Ab</span><span class='chordline no6'>    B                                  F#m     A</span><span class='chordline no7'>    C                                  Gm      Bb</span><span class='chordline no8'>    C#                                 G#m     B</span><span class='chordline no9'>    D                                  Am      C</span><span class='chordline no10'>    D#                                 A#m     Db</span><span class='chordline no11'>    E                                  Bm      D</span>
+But if you don't embrace him then it's time to run
+<span class='chordline no0'>F</span><span class='chordline no1'>F#</span><span class='chordline no2'>G</span><span class='chordline no3'>G#</span><span class='chordline no4'>A</span><span class='chordline no5'>A#</span><span class='chordline no6'>B</span><span class='chordline no7'>C</span><span class='chordline no8'>C#</span><span class='chordline no9'>D</span><span class='chordline no10'>D#</span><span class='chordline no11'>E</span>
+If you don't believe in him
+<span class='chordline no0'>         Gm       Eb</span><span class='chordline no1'>         G#m      E</span><span class='chordline no2'>         Am       F</span><span class='chordline no3'>         A#m      Gb</span><span class='chordline no4'>         Bm       G</span><span class='chordline no5'>         Cm       Ab</span><span class='chordline no6'>         C#m      A</span><span class='chordline no7'>         Dm       Bb</span><span class='chordline no8'>         D#m      B</span><span class='chordline no9'>         Em       C</span><span class='chordline no10'>         Fm       Db</span><span class='chordline no11'>         F#m      D</span>
+Open the door and let me in
+<span class='chordline no0'>     Eb                                Dm</span><span class='chordline no1'>     E                                D#m</span><span class='chordline no2'>     F                                Em</span><span class='chordline no3'>     Gb                                Fm</span><span class='chordline no4'>     G                                F#m</span><span class='chordline no5'>     Ab                                Gm</span><span class='chordline no6'>     A                                G#m</span><span class='chordline no7'>     Bb                                Am</span><span class='chordline no8'>     B                                A#m</span><span class='chordline no9'>     C                                Bm</span><span class='chordline no10'>     Db                                Cm</span><span class='chordline no11'>     D                                C#m</span>
+I've been out in the chat rooms waiting for the end to begin
+<span class='chordline no0'>            Eb               Bb     Cm</span><span class='chordline no1'>            E               B     C#m</span><span class='chordline no2'>            F               C     Dm</span><span class='chordline no3'>            Gb               Db     D#m</span><span class='chordline no4'>            G               D     Em</span><span class='chordline no5'>            Ab               Eb     Fm</span><span class='chordline no6'>            A               E     F#m</span><span class='chordline no7'>            Bb               F     Gm</span><span class='chordline no8'>            B               Gb     G#m</span><span class='chordline no9'>            C               G     Am</span><span class='chordline no10'>            Db               Ab     A#m</span><span class='chordline no11'>            D               A     Bm</span>
+Maybe I'm a young man with a broken wing
+<span class='chordline no0'>F                              Cm          Eb</span><span class='chordline no1'>F#                             C#m         E</span><span class='chordline no2'>G                              Dm          F</span><span class='chordline no3'>G#                             D#m         Gb</span><span class='chordline no4'>A                              Em          G</span><span class='chordline no5'>A#                             Fm          Ab</span><span class='chordline no6'>B                              F#m         A</span><span class='chordline no7'>C                              Gm          Bb</span><span class='chordline no8'>C#                             G#m         B</span><span class='chordline no9'>D                              Am          C</span><span class='chordline no10'>D#                             A#m         Db</span><span class='chordline no11'>E                              Bm          D</span>
+Maybe I'm just searching for a voice within me
+<span class='chordline no0'>F</span><span class='chordline no1'>F#</span><span class='chordline no2'>G</span><span class='chordline no3'>G#</span><span class='chordline no4'>A</span><span class='chordline no5'>A#</span><span class='chordline no6'>B</span><span class='chordline no7'>C</span><span class='chordline no8'>C#</span><span class='chordline no9'>D</span><span class='chordline no10'>D#</span><span class='chordline no11'>E</span>
+Hope you can hear me callin'
+<span class='chordline no0'>         Gm</span><span class='chordline no1'>         G#m</span><span class='chordline no2'>         Am</span><span class='chordline no3'>         A#m</span><span class='chordline no4'>         Bm</span><span class='chordline no5'>         Cm</span><span class='chordline no6'>         C#m</span><span class='chordline no7'>         Dm</span><span class='chordline no8'>         D#m</span><span class='chordline no9'>         Em</span><span class='chordline no10'>         Fm</span><span class='chordline no11'>         F#m</span>
+Open the door
+
+
+
+<span class='chordline no0'>Gm</span><span class='chordline no1'>G#m</span><span class='chordline no2'>Am</span><span class='chordline no3'>A#m</span><span class='chordline no4'>Bm</span><span class='chordline no5'>Cm</span><span class='chordline no6'>C#m</span><span class='chordline no7'>Dm</span><span class='chordline no8'>D#m</span><span class='chordline no9'>Em</span><span class='chordline no10'>Fm</span><span class='chordline no11'>F#m</span>
+Wild, wild
+<span class='chordline no0'>Gm</span><span class='chordline no1'>G#m</span><span class='chordline no2'>Am</span><span class='chordline no3'>A#m</span><span class='chordline no4'>Bm</span><span class='chordline no5'>Cm</span><span class='chordline no6'>C#m</span><span class='chordline no7'>Dm</span><span class='chordline no8'>D#m</span><span class='chordline no9'>Em</span><span class='chordline no10'>Fm</span><span class='chordline no11'>F#m</span>
+Wild, wild, wild, wild
+<span class='chordline no0'>Eb   F    D7   Gm</span><span class='chordline no1'>E   F#   D#7  G#m</span><span class='chordline no2'>F   G    E7   Am</span><span class='chordline no3'>Gb   G#   F7   A#m</span><span class='chordline no4'>G   A    F#7  Bm</span><span class='chordline no5'>Ab   A#   G7   Cm</span><span class='chordline no6'>A   B    G#7  C#m</span><span class='chordline no7'>Bb   C    A7   Dm</span><span class='chordline no8'>B   C#   A#7  D#m</span><span class='chordline no9'>C   D    B7   Em</span><span class='chordline no10'>Db   D#   C7   Fm</span><span class='chordline no11'>D   E    C#7  F#m</span>
+   Delirium, delirium
+<span class='chordline no0'>Gm        Cm</span><span class='chordline no1'>G#m       C#m</span><span class='chordline no2'>Am        Dm</span><span class='chordline no3'>A#m       D#m</span><span class='chordline no4'>Bm        Em</span><span class='chordline no5'>Cm        Fm</span><span class='chordline no6'>C#m       F#m</span><span class='chordline no7'>Dm        Gm</span><span class='chordline no8'>D#m       G#m</span><span class='chordline no9'>Em        Am</span><span class='chordline no10'>Fm        A#m</span><span class='chordline no11'>F#m       Bm</span>
+Sooner or later
+<span class='chordline no0'>Eb   F    D7   Gm</span><span class='chordline no1'>E   F#   D#7  G#m</span><span class='chordline no2'>F   G    E7   Am</span><span class='chordline no3'>Gb   G#   F7   A#m</span><span class='chordline no4'>G   A    F#7  Bm</span><span class='chordline no5'>Ab   A#   G7   Cm</span><span class='chordline no6'>A   B    G#7  C#m</span><span class='chordline no7'>Bb   C    A7   Dm</span><span class='chordline no8'>B   C#   A#7  D#m</span><span class='chordline no9'>C   D    B7   Em</span><span class='chordline no10'>Db   D#   C7   Fm</span><span class='chordline no11'>D   E    C#7  F#m</span>
+Delirium, delirium
+<span class='chordline no0'>Gm       Cm</span><span class='chordline no1'>G#m      C#m</span><span class='chordline no2'>Am       Dm</span><span class='chordline no3'>A#m      D#m</span><span class='chordline no4'>Bm       Em</span><span class='chordline no5'>Cm       Fm</span><span class='chordline no6'>C#m      F#m</span><span class='chordline no7'>Dm       Gm</span><span class='chordline no8'>D#m      G#m</span><span class='chordline no9'>Em       Am</span><span class='chordline no10'>Fm       A#m</span><span class='chordline no11'>F#m      Bm</span>
+Shrunken China Heads
+<span class='chordline no0'>Eb   F    D7   Gm</span><span class='chordline no1'>E   F#   D#7  G#m</span><span class='chordline no2'>F   G    E7   Am</span><span class='chordline no3'>Gb   G#   F7   A#m</span><span class='chordline no4'>G   A    F#7  Bm</span><span class='chordline no5'>Ab   A#   G7   Cm</span><span class='chordline no6'>A   B    G#7  C#m</span><span class='chordline no7'>Bb   C    A7   Dm</span><span class='chordline no8'>B   C#   A#7  D#m</span><span class='chordline no9'>C   D    B7   Em</span><span class='chordline no10'>Db   D#   C7   Fm</span><span class='chordline no11'>D   E    C#7  F#m</span>
+Delirium, delirium
+<span class='chordline no0'>Gm      Cm       Eb   F    D7   Gm</span><span class='chordline no1'>G#m     C#m      E   F#   D#7  G#m</span><span class='chordline no2'>Am      Dm       F   G    E7   Am</span><span class='chordline no3'>A#m     D#m      Gb   G#   F7   A#m</span><span class='chordline no4'>Bm      Em       G   A    F#7  Bm</span><span class='chordline no5'>Cm      Fm       Ab   A#   G7   Cm</span><span class='chordline no6'>C#m     F#m      A   B    G#7  C#m</span><span class='chordline no7'>Dm      Gm       Bb   C    A7   Dm</span><span class='chordline no8'>D#m     G#m      B   C#   A#7  D#m</span><span class='chordline no9'>Em      Am       C   D    B7   Em</span><span class='chordline no10'>Fm      A#m      Db   D#   C7   Fm</span><span class='chordline no11'>F#m     Bm       D   E    C#7  F#m</span>
+Peg-legged, limp slave trader
+
+
+<span class='chordline no0'>         Gm          Eb</span><span class='chordline no1'>         G#m         E</span><span class='chordline no2'>         Am          F</span><span class='chordline no3'>         A#m         Gb</span><span class='chordline no4'>         Bm          G</span><span class='chordline no5'>         Cm          Ab</span><span class='chordline no6'>         C#m         A</span><span class='chordline no7'>         Dm          Bb</span><span class='chordline no8'>         D#m         B</span><span class='chordline no9'>         Em          C</span><span class='chordline no10'>         Fm          Db</span><span class='chordline no11'>         F#m         D</span>
+Open the door, raise the alarm
+<span class='chordline no0'>        Eb                            Dm</span><span class='chordline no1'>        E                            D#m</span><span class='chordline no2'>        F                            Em</span><span class='chordline no3'>        Gb                            Fm</span><span class='chordline no4'>        G                            F#m</span><span class='chordline no5'>        Ab                            Gm</span><span class='chordline no6'>        A                            G#m</span><span class='chordline no7'>        Bb                            Am</span><span class='chordline no8'>        B                            A#m</span><span class='chordline no9'>        C                            Bm</span><span class='chordline no10'>        Db                            Cm</span><span class='chordline no11'>        D                            C#m</span>
+There's fires on the mountain and the full moon's come
+<span class='chordline no0'>          Eb                                Bb     Cm</span><span class='chordline no1'>          E                                B     C#m</span><span class='chordline no2'>          F                                C     Dm</span><span class='chordline no3'>          Gb                                Db     D#m</span><span class='chordline no4'>          G                                D     Em</span><span class='chordline no5'>          Ab                                Eb     Fm</span><span class='chordline no6'>          A                                E     F#m</span><span class='chordline no7'>          Bb                                F     Gm</span><span class='chordline no8'>          B                                Gb     G#m</span><span class='chordline no9'>          C                                G     Am</span><span class='chordline no10'>          Db                                Ab     A#m</span><span class='chordline no11'>          D                                A     Bm</span>
+If you're sitting in the darkness with your loaded gun
+<span class='chordline no0'>     F                                  Cm    Eb</span><span class='chordline no1'>     F#                                 C#m   E</span><span class='chordline no2'>     G                                  Dm    F</span><span class='chordline no3'>     G#                                 D#m   Gb</span><span class='chordline no4'>     A                                  Em    G</span><span class='chordline no5'>     A#                                 Fm    Ab</span><span class='chordline no6'>     B                                  F#m   A</span><span class='chordline no7'>     C                                  Gm    Bb</span><span class='chordline no8'>     C#                                 G#m   B</span><span class='chordline no9'>     D                                  Am    C</span><span class='chordline no10'>     D#                                 A#m   Db</span><span class='chordline no11'>     E                                  Bm    D</span>
+It's time you understood you gotta get up and run (ayy)
+<span class='chordline no0'>  F</span><span class='chordline no1'>  F#</span><span class='chordline no2'>  G</span><span class='chordline no3'>  G#</span><span class='chordline no4'>  A</span><span class='chordline no5'>  A#</span><span class='chordline no6'>  B</span><span class='chordline no7'>  C</span><span class='chordline no8'>  C#</span><span class='chordline no9'>  D</span><span class='chordline no10'>  D#</span><span class='chordline no11'>  E</span>
+I hope that you can hear me callin'
+
+
+
+
+<span class='chordline no0'>         Eb</span><span class='chordline no1'>         E</span><span class='chordline no2'>         F</span><span class='chordline no3'>         Gb</span><span class='chordline no4'>         G</span><span class='chordline no5'>         Ab</span><span class='chordline no6'>         A</span><span class='chordline no7'>         Bb</span><span class='chordline no8'>         B</span><span class='chordline no9'>         C</span><span class='chordline no10'>         Db</span><span class='chordline no11'>         D</span>
+Open the door
+
+
+<span class='chordline no0'>   F     D7 Gm</span><span class='chordline no1'>   F#    D#7 G#m</span><span class='chordline no2'>   G     E7 Am</span><span class='chordline no3'>   G#    F7 A#m</span><span class='chordline no4'>   A     F#7 Bm</span><span class='chordline no5'>   A#    G7 Cm</span><span class='chordline no6'>   B     G#7 C#m</span><span class='chordline no7'>   C     A7 Dm</span><span class='chordline no8'>   C#    A#7 D#m</span><span class='chordline no9'>   D     B7 Em</span><span class='chordline no10'>   D#    C7 Fm</span><span class='chordline no11'>   E     C#7 F#m</span>
+Delirium, delirium
+<span class='chordline no0'>Gm        Cm</span><span class='chordline no1'>G#m       C#m</span><span class='chordline no2'>Am        Dm</span><span class='chordline no3'>A#m       D#m</span><span class='chordline no4'>Bm        Em</span><span class='chordline no5'>Cm        Fm</span><span class='chordline no6'>C#m       F#m</span><span class='chordline no7'>Dm        Gm</span><span class='chordline no8'>D#m       G#m</span><span class='chordline no9'>Em        Am</span><span class='chordline no10'>Fm        A#m</span><span class='chordline no11'>F#m       Bm</span>
+Sooner or later
+<span class='chordline no0'>Eb F    D7   Gm</span><span class='chordline no1'>E F#   D#7  G#m</span><span class='chordline no2'>F G    E7   Am</span><span class='chordline no3'>Gb G#   F7   A#m</span><span class='chordline no4'>G A    F#7  Bm</span><span class='chordline no5'>Ab A#   G7   Cm</span><span class='chordline no6'>A B    G#7  C#m</span><span class='chordline no7'>Bb C    A7   Dm</span><span class='chordline no8'>B C#   A#7  D#m</span><span class='chordline no9'>C D    B7   Em</span><span class='chordline no10'>Db D#   C7   Fm</span><span class='chordline no11'>D E    C#7  F#m</span>
+ Delirium, delirium
+<span class='chordline no0'>Gm      Cm</span><span class='chordline no1'>G#m     C#m</span><span class='chordline no2'>Am      Dm</span><span class='chordline no3'>A#m     D#m</span><span class='chordline no4'>Bm      Em</span><span class='chordline no5'>Cm      Fm</span><span class='chordline no6'>C#m     F#m</span><span class='chordline no7'>Dm      Gm</span><span class='chordline no8'>D#m     G#m</span><span class='chordline no9'>Em      Am</span><span class='chordline no10'>Fm      A#m</span><span class='chordline no11'>F#m     Bm</span>
+Shrunken China Heads
+<span class='chordline no0'>Eb   F    D7   Gm</span><span class='chordline no1'>E   F#   D#7  G#m</span><span class='chordline no2'>F   G    E7   Am</span><span class='chordline no3'>Gb   G#   F7   A#m</span><span class='chordline no4'>G   A    F#7  Bm</span><span class='chordline no5'>Ab   A#   G7   Cm</span><span class='chordline no6'>A   B    G#7  C#m</span><span class='chordline no7'>Bb   C    A7   Dm</span><span class='chordline no8'>B   C#   A#7  D#m</span><span class='chordline no9'>C   D    B7   Em</span><span class='chordline no10'>Db   D#   C7   Fm</span><span class='chordline no11'>D   E    C#7  F#m</span>
+Delirium, delirium
+<span class='chordline no0'>Gm   Cm           Eb   F    D7   Gm</span><span class='chordline no1'>G#m  C#m          E   F#   D#7  G#m</span><span class='chordline no2'>Am   Dm           F   G    E7   Am</span><span class='chordline no3'>A#m  D#m          Gb   G#   F7   A#m</span><span class='chordline no4'>Bm   Em           G   A    F#7  Bm</span><span class='chordline no5'>Cm   Fm           Ab   A#   G7   Cm</span><span class='chordline no6'>C#m  F#m          A   B    G#7  C#m</span><span class='chordline no7'>Dm   Gm           Bb   C    A7   Dm</span><span class='chordline no8'>D#m  G#m          B   C#   A#7  D#m</span><span class='chordline no9'>Em   Am           C   D    B7   Em</span><span class='chordline no10'>Fm   A#m          Db   D#   C7   Fm</span><span class='chordline no11'>F#m  Bm           D   E    C#7  F#m</span>
+Peg-legged, limp slave trader
+<span class='chordline no0'>    Eb        F    D7    Gm                    Cm</span><span class='chordline no1'>    E        F#   D#7   G#m                   C#m</span><span class='chordline no2'>    F        G    E7    Am                    Dm</span><span class='chordline no3'>    Gb        G#   F7    A#m                   D#m</span><span class='chordline no4'>    G        A    F#7   Bm                    Em</span><span class='chordline no5'>    Ab        A#   G7    Cm                    Fm</span><span class='chordline no6'>    A        B    G#7   C#m                   F#m</span><span class='chordline no7'>    Bb        C    A7    Dm                    Gm</span><span class='chordline no8'>    B        C#   A#7   D#m                   G#m</span><span class='chordline no9'>    C        D    B7    Em                    Am</span><span class='chordline no10'>    Db        D#   C7    Fm                    A#m</span><span class='chordline no11'>    D        E    C#7   F#m                   Bm</span>
+You shrunken China-chief-head dealer (open the door)
+<span class='chordline no0'>    Eb        F    D7    Gm                         Cm</span><span class='chordline no1'>    E        F#   D#7   G#m                        C#m</span><span class='chordline no2'>    F        G    E7    Am                         Dm</span><span class='chordline no3'>    Gb        G#   F7    A#m                        D#m</span><span class='chordline no4'>    G        A    F#7   Bm                         Em</span><span class='chordline no5'>    Ab        A#   G7    Cm                         Fm</span><span class='chordline no6'>    A        B    G#7   C#m                        F#m</span><span class='chordline no7'>    Bb        C    A7    Dm                         Gm</span><span class='chordline no8'>    B        C#   A#7   D#m                        G#m</span><span class='chordline no9'>    C        D    B7    Em                         Am</span><span class='chordline no10'>    Db        D#   C7    Fm                         A#m</span><span class='chordline no11'>    D        E    C#7   F#m                        Bm</span>
+With wooden tits on the front of the ship (open the door)
+<span class='chordline no0'>Eb   F    D7   Gm                   Cm</span><span class='chordline no1'>E   F#   D#7  G#m                  C#m</span><span class='chordline no2'>F   G    E7   Am                   Dm</span><span class='chordline no3'>Gb   G#   F7   A#m                  D#m</span><span class='chordline no4'>G   A    F#7  Bm                   Em</span><span class='chordline no5'>Ab   A#   G7   Cm                   Fm</span><span class='chordline no6'>A   B    G#7  C#m                  F#m</span><span class='chordline no7'>Bb   C    A7   Dm                   Gm</span><span class='chordline no8'>B   C#   A#7  D#m                  G#m</span><span class='chordline no9'>C   D    B7   Em                   Am</span><span class='chordline no10'>Db   D#   C7   Fm                   A#m</span><span class='chordline no11'>D   E    C#7  F#m                  Bm</span>
+Shrunken China-chief head (open the door)
+<span class='chordline no0'>Eb   F    D7   Gm                   Cm</span><span class='chordline no1'>E   F#   D#7  G#m                  C#m</span><span class='chordline no2'>F   G    E7   Am                   Dm</span><span class='chordline no3'>Gb   G#   F7   A#m                  D#m</span><span class='chordline no4'>G   A    F#7  Bm                   Em</span><span class='chordline no5'>Ab   A#   G7   Cm                   Fm</span><span class='chordline no6'>A   B    G#7  C#m                  F#m</span><span class='chordline no7'>Bb   C    A7   Dm                   Gm</span><span class='chordline no8'>B   C#   A#7  D#m                  G#m</span><span class='chordline no9'>C   D    B7   Em                   Am</span><span class='chordline no10'>Db   D#   C7   Fm                   A#m</span><span class='chordline no11'>D   E    C#7  F#m                  Bm</span>
+Open the door
+<span class='chordline no0'>Eb   F    D7   Gm                   Cm</span><span class='chordline no1'>E   F#   D#7  G#m                  C#m</span><span class='chordline no2'>F   G    E7   Am                   Dm</span><span class='chordline no3'>Gb   G#   F7   A#m                  D#m</span><span class='chordline no4'>G   A    F#7  Bm                   Em</span><span class='chordline no5'>Ab   A#   G7   Cm                   Fm</span><span class='chordline no6'>A   B    G#7  C#m                  F#m</span><span class='chordline no7'>Bb   C    A7   Dm                   Gm</span><span class='chordline no8'>B   C#   A#7  D#m                  G#m</span><span class='chordline no9'>C   D    B7   Em                   Am</span><span class='chordline no10'>Db   D#   C7   Fm                   A#m</span><span class='chordline no11'>D   E    C#7  F#m                  Bm</span>
+Coming home, sinner
+<span class='chordline no0'>Eb   F    D7   Gm</span><span class='chordline no1'>E   F#   D#7  G#m</span><span class='chordline no2'>F   G    E7   Am</span><span class='chordline no3'>Gb   G#   F7   A#m</span><span class='chordline no4'>G   A    F#7  Bm</span><span class='chordline no5'>Ab   A#   G7   Cm</span><span class='chordline no6'>A   B    G#7  C#m</span><span class='chordline no7'>Bb   C    A7   Dm</span><span class='chordline no8'>B   C#   A#7  D#m</span><span class='chordline no9'>C   D    B7   Em</span><span class='chordline no10'>Db   D#   C7   Fm</span><span class='chordline no11'>D   E    C#7  F#m</span>
+You shrunken China-chief-head dealer
+      </pre>
+    </div>
+
+    <!-- Speed indicator toast -->
+    <div id="speedIndicator"></div>
+
+    <!-- Song editor overlay -->
+    <div id="editorOverlay">
+      <div id="editorBox">
+        <h2 id="editorTitle">Edit song</h2>
+        <textarea id="editorTextarea" spellcheck="false"></textarea>
+        <div id="editorStatus"></div>
+        <div id="editorButtons">
+          <button type="button" onclick="saveEditor(true)">Save and close</button>
+          <button type="button" onclick="closeEditor()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Split container is created dynamically after #pageContent -->
+
+  </body>
+</html>
