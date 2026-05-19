@@ -1,0 +1,96 @@
+Start på A chordline
+
+[Verse 1]
+D        G              A         Dsus
+How many roofs must the sun shine on
+  D       G            D
+Before we trust in the day?
+       D        G           A           D
+Yes, n how many blades must spin in the breeze
+  D        G          A
+Before the coal walks away?
+       D        G              A            D
+Yes, n how many storms will it take till we know
+         D       G           D
+That the wind is blowing our way?
+
+[Chorus 1]
+    G          A                   D           Bm
+The answer, my friend, is like the bird in the wind,
+    G         A             D
+The answer is flyin' in the wind.
+
+[Verse 2]
+D        G              A          Dsus
+How many homes must the heat pumps warm
+  D        G          D
+Before the gas fades away?
+       D        G          A            D
+Yes, n how many demos must show that it works
+  D       G               A
+Before sustainable is the way?
+       D        G           A            D
+Yes, n how many models must learn how to dream
+  D            G        D
+Before we breathe a new day?
+
+[Chorus 2]
+    G          A                   D           Bm
+The answer, my friend, is like the bird in the wind,
+    G         A             D
+The answer is flyin' in the wind.
+
+[Verse 3]
+D        G               A         Dsus
+How many borders can our blue earth hold
+  D        G       D
+Before her climate gives way?
+       D           G        A            D
+Yes, n how many of nine red lines can we cross
+  D        G            A
+Before the seas turn to grey?
+       D        G          A             D
+Yes, n how many wings of a bluebird must beat
+  D       G            D
+Before we live the new day?
+
+[Chorus 3]
+    G          A                   D           Bm
+The answer, my friend, is like the bird in the wind,
+    G         A             D
+The answer is flyin' in the wind.
+
+
+[Guidelines]
+Solo scales:
+
+The chord set in your file (D, G, A, Bm, Dsus) is straight D major, so
+soloing options:
+
+  - D major scale:
+    — D E F# G A B C# D
+    - The default. Fits every chord in the song, gives a melodic,
+      folk-singer feel. Good for following the vocal phrasing.
+  - D major pentatonic:
+    — D E F# A B
+    - Same flavour, fewer notes, almost impossible to play a wrong
+      one. Best starting point if you just want to riff over the
+    changes.
+  - B minor pentatonic:
+    — B D E F# A
+    - The relative minor, exact same notes as D major pentatonic but
+    rooted on B. Gives a more pensive, slightly bluesy ache. Leans
+    into the contemplative Dylan tone.
+  - D mixolydian:
+    - D E F# G A B C
+    — only if you drop the C# to a C natural; gives a
+      more modal, drone-y folk colour. Works over D and G but clashes a
+      touch with the A chord (which wants C#). Use sparingly.
+
+Practical pick: noodle in D major pentatonic for the verse, slide into
+B minor pentatonic  when you want the line to sigh, and pull in the C#
+from the full D major scale when you land on or pass through the A chord.
+
+If you play harmonica (Dylan's solo instrument here), a G harp played
+in 2nd position gives you D mixolydian naturally — that's the classic
+sound on the original.

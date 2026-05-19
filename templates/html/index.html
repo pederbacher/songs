@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<title>PageTitle</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  thead th { cursor: pointer; user-select: none; }
+  thead th:hover { text-decoration: underline; }
+  thead th.sort-asc::after  { content: " ▲"; font-size: 0.75em; }
+  thead th.sort-desc::after { content: " ▼"; font-size: 0.75em; }
+</style>
+<script>window.TOC_META = TocMetaJSON;</script>
+<script src="toc-script.js" defer></script>
+</head>
+<body>
+
+<div id="toc-controls" class="fullyHidden">
+  <div id="toc-nav-links">
+    TocNavLinks
+  </div>
+  <div id="toc-edit-buttons">
+    <button id="toc-editBtn" type="button" onclick="tocOpenEditor()">Edit</button>
+    <button type="button" onclick="tocNewCollection()">New</button>
+    <button id="toc-rebuildBtn" type="button" onclick="tocRebuildHtml()">Rebuild</button>
+  </div>
+</div>
+
+<div id="editorOverlay">
+  <div id="editorBox">
+    <h2 id="editorTitle">Edit collection</h2>
+    <textarea id="editorTextarea" spellcheck="false"></textarea>
+    <div id="editorStatus"></div>
+    <div id="editorButtons">
+      <button type="button" onclick="saveEditor(true)">Save and close</button>
+      <button type="button" onclick="closeEditor()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<pre>
+<table>
+  <thead>
+    <tr>
+      <th>Artist</th>
+      <th>Song</th>
+      <th>Versions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ArtistName</td>
+      <td><a href="SongUrl.html">SongName</a></td>
+    </tr>
+  </tbody>
+</table>
+</pre>
+
+<script>
+(function () {
+  var lastTh = null, asc = true;
+  document.querySelectorAll("thead th").forEach(function (th, col) {
+    th.addEventListener("click", function () {
+      var tbody = document.querySelector("tbody");
+      var rows  = Array.from(tbody.querySelectorAll("tr"));
+      if (lastTh === th) { asc = !asc; } else { asc = true; }
+      if (lastTh) { lastTh.classList.remove("sort-asc", "sort-desc"); }
+      th.classList.toggle("sort-asc",  asc);
+      th.classList.toggle("sort-desc", !asc);
+      lastTh = th;
+
+      // Build order map from data-order="val1;val2;..." if present
+      var orderMap = null;
+      var orderAttr = th.getAttribute("data-order");
+      if (orderAttr) {
+        orderMap = {};
+        orderAttr.split(";").forEach(function (v, i) {
+          orderMap[v.trim().toLowerCase()] = i;
+        });
+      }
+
+      rows.sort(function (a, b) {
+        var ta = (a.cells[col] ? a.cells[col].textContent : "").trim();
+        var tb = (b.cells[col] ? b.cells[col].textContent : "").trim();
+        if (orderMap) {
+          var ia = orderMap.hasOwnProperty(ta.toLowerCase()) ? orderMap[ta.toLowerCase()] : Infinity;
+          var ib = orderMap.hasOwnProperty(tb.toLowerCase()) ? orderMap[tb.toLowerCase()] : Infinity;
+          // Non-matching (Infinity) always stay below matching
+          if (ia === Infinity && ib === Infinity) return ta.localeCompare(tb);
+          if (ia !== ib) return asc ? ia - ib : ib - ia;
+          return ta.localeCompare(tb);
+        }
+        return asc
+          ? ta.toLowerCase().localeCompare(tb.toLowerCase())
+          : tb.toLowerCase().localeCompare(ta.toLowerCase());
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+Start: H-C-D chordline
+Scale: G chordline
+
+[Verse 1]
+        D         (C)    G
+ In the town where I was born
+(Em)     Am     (C)        D
+ Lived a man who tuned the grid
+(G)     D      (C)     G
+ And he told us with a wink
+(Em)    Am     (C)   D
+ Of a flexing bluebird world
+
+(G)    D        (C)     G
+ So we plugged into the sun
+(Em)     Am       (C)       D
+ And the windmills sang all along
+(G)     D      (C)        G
+ Heat pumps humming, batteries full
+(Em)    Am    (C)   D
+ In our buzzing bluebird world
+
+[Chorus]
+G                D7
+We all live in a Bluebird World
+D7                G
+A Bluebird World, a Bluebird World
+G                D7
+We all live in a Bluebird World
+D7                G
+A Bluebird World, a Bluebird World
+
+[Verse 2]
+        D          (C)       G
+And our neighbours nudge the dial
+(Em)    Am       (C)      D
+ Just a click or two each day
+(G)        D   (C)   G
+ While the algorithm hums
+(Em)    Am       (C)      D
+ In our cheerful bluebird world
+
+(G)    D     (C)      G
+ As we live a life of ease
+(Em)  Am        (C)         D
+ Every one of us has all we need
+(G)     D       (C)       G
+ Sky of blue and roofs of green
+(Em)    Am  (C)  D
+ In our dreaming bluebird world
+
+[Chorus x2 — End on G]
+
+
+[Guideline]
+
+Solo scales
+
+Key: G major
+
+- G major pentatonic (G A B D E) — safe default, sing-along feel
+- E minor pentatonic (E G A B D) — bluesier, soulful contrast
+- G major (G A B C D E F#) — melodic, follows the vocal
+- G mixolydian (G A B C D E F) — for a bluesier lean over the D7

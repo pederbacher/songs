@@ -1,0 +1,71 @@
+Start på D chordline
+
+[Verse 1]
+G                        C
+ Imagine no more coal smoke
+G                    C
+ It's easy if you try
+G               C
+ Just sun upon the roof
+G                C
+ And wind farms in the sky
+C        Em/b        Am    -/g
+ Imagine all the bluebirds
+D                D
+ Tuning up the day...
+
+G                        C
+ Imagine there's no borders
+G                   C
+ The wind just blows on through
+G                     C
+ Our thermostats are dreaming
+G                  C
+ Of what the grid will do
+C        Em/b     Am    -/g
+ Imagine all the bluebirds
+D                D      -7        C
+ Charging EVs free...you hoo - o
+
+        D         G        B7   C
+You may say I'm a dreamer, ahh
+        D               G B7 C
+But I'm not the only one, ahh
+           D          G        B7  C
+I hope someday you'll join us, ahh
+        D          G
+And the world will be as one
+
+G                 C
+ Imagine smart electrons
+G                  C
+ I wonder if you can
+G                        C
+ The boiler reads your moods now
+G                  C
+ A brotherhood of man
+C        Em/b        Am    -/g
+ Imagine all the bluebirds
+D                D       -7        C
+ Dreaming like we do...you hoo - o
+
+        D         G        B7   C
+You may say I'm a dreamer, ahh
+        D               G B7 C
+But I'm not the only one, ahh
+           D          G        B7  C
+I hope someday you'll join us, ahh
+        D          G
+And the world will be as one
+
+
+[Guidelines]
+
+Solo scales
+
+Key: G major
+
+- G major pentatonic (G A B D E) — safe default, dreamy hymn feel
+- E minor pentatonic (E G A B D) — wistful, contemplative contrast
+- G major (G A B C D E F#) — melodic, follows the vocal
+- B mixolydian (B C# D# E F# G# A) — briefly, over the B7, for the classic lift into Em

@@ -1,0 +1,101 @@
+[Strum]
+    Fmaj7   Em7    F/C   Cmaj7    G      F      C
+e|---0-------x------x------x------3------1------0----|
+B|---1-------3------1------0------3------1------1----|
+G|---2-------0------2------0------0------2------0----|
+D|---3-------0------3------2------0------3------2----|
+A|---3-------2------3------3------2------3------3----|
+E|---x------(0)-----x------x------3------1------x----|
+
+N.B it's important to dampen the strings not being used in the intro to really emphasise the walking down bass pattern of E D C B (the E in Fmaj7, the D in Em7, the C in C/F and the B in Cmaj7) so keep the chords really tight and it'll sound great. The open E string on the Em7 chord is optional, but i think it makes the chord sound "dirty".
+[Strum]
+this is the keyboard part arranged for guitar with added chords for your strumming pleasure:
+
+   Fmaj7              Em7                   C/F                Cmaj7
+e|--0------3-3-0-5--3-----------3-3-0-5--3---------3-3-0-5--3-----------------|
+B|--1------------------3--------------------1------------------0-------1--3---|
+G|---------------------0--------------------2------------------0-------2--4---|
+D|----------------------------------------------------------------------------|  X2
+A|----------------------------------------------------------------------------|
+E|----------------------------------------------------------------------------|
+
+   G
+e|-0-------|
+B|------3--|
+G|---------|
+D|---------|
+A|---------|
+E|---------|
+
+[Intro]
+Fmaj7  Em7  C/F  Cmaj7  G
+
+(Start på E)
+C                   F
+Two scientists were racing
+        G              C
+For the good of all mankind
+            F
+Both of the side by side
+C               G
+So Determined
+
+C                F
+Locked in heated battle
+        G                  C
+For the cure that is their prize
+            F
+But it's so dangerous
+    C
+But they're determined
+
+Fmaj7
+Theirs is to win
+Em7
+If it kills them
+Fmaj7
+They're just humans
+     G
+With wives and children
+
+Fmaj7  Em7  C/F  Cmaj7  G
+
+[Verse 2]
+C              F
+Upwards to the vanguard
+          G               C
+Where the pressure is too high
+          F
+Under the microscope
+C                    G
+Hope against hope
+
+C               F
+Forging for the future
+       G                C
+But to sarcrifice their lives
+             F
+Both of them side by side
+C
+So determined
+
+Fmaj7
+Theirs is to win
+Em7
+If it kills them
+Fmaj7
+They're just humans
+G
+With wives and children
+
+Fmaj7  Em7  C/F  Cmaj7  G
+
+[Verse 3]
+Fmaj7
+Theirs is to win
+Em7
+It will kill them
+Fmaj7
+They're just humans
+     G
+With wives and children
