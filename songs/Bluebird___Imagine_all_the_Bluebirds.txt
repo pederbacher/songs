@@ -14,36 +14,36 @@ C        Em/b        Am    -/g
 D                D
  Tuning up the day...
 
-G                        C
- Imagine there's no borders
 G                   C
+ Imagine there's no borders
+G              C
  The wind just blows on through
 G                     C
  Our thermostats are dreaming
-G                  C
+G                 C
  Of what the grid will do
 C        Em/b     Am    -/g
  Imagine all the bluebirds
-D                D      -7        C
+D              D     -7        C
  Charging EVs free...you hoo - o
 
         D         G        B7   C
 You may say I'm a dreamer, ahh
-        D               G B7 C
+        D            G    B7  C
 But I'm not the only one, ahh
            D          G        B7  C
 I hope someday you'll join us, ahh
         D          G
 And the world will be as one
 
+G               C
+ Imagine smart grids working
 G                 C
- Imagine smart electrons
-G                  C
  I wonder if you can
-G                        C
+G                      C
  The boiler reads your moods now
-G                  C
- A brotherhood of man
+G                   C
+ A clever charging plan 
 C        Em/b        Am    -/g
  Imagine all the bluebirds
 D                D       -7        C
@@ -51,7 +51,7 @@ D                D       -7        C
 
         D         G        B7   C
 You may say I'm a dreamer, ahh
-        D               G B7 C
+        D            G    B7  C
 But I'm not the only one, ahh
            D          G        B7  C
 I hope someday you'll join us, ahh
