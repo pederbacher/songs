@@ -1,0 +1,100 @@
+# Bluebirds in the air
+
+[Intro]
+C
+
+
+[Verse 1]
+C                                           Fmaj7
+Bluebirds in the air, everywhere I look around
+C                                              Fmaj7
+Bluebirds in the air, every gust and every sound
+           G                     F
+And I don't know if I'm just charging
+G                           Am
+Don't know if the wind will rise
+         Ab                           C
+But it's something that we must believe in
+         C#dim7                    Dm7 G
+And it's free when the sun's in the sky
+
+
+[Verse 2]
+C                                         Fmaj7
+Bluebirds in the air, in the spinning of the blades
+C                                         Fmaj7
+Bluebirds in the air, in the humming of the breeze
+           G                     F
+And I don't know if I'm just dancing
+G                        Am
+Don't know if I'll behave
+         Ab                           C
+But it's something that we must believe in
+         C#dim7                    Dm7 Dm7b5 G
+And it sways when you call out my name
+
+
+[Chorus]
+C                  Fmaj7 C
+Bluebirds in the air,      bluebirds in the air
+Fmaj7     Em Am Ab G
+     Oh...
+
+
+[Verse 3]
+C                                        Fmaj7
+Bluebirds in the air, in the rising of the sun
+C                                              Fmaj7
+Bluebirds in the air, when the day is nearly done
+           G                   F
+And I don't know if you're a turbine
+G
+Don't know if the price is true
+Am           Ab                           C
+  But you're something that I must believe in
+           C#dim7                    Dm7   G
+And you charge when I reach out for   you
+
+
+[Verse 4]
+C                                           Fmaj7
+Bluebirds in the air, everywhere I look around
+C                                              Fmaj7
+Bluebirds in the air, every gust and every sound
+           G                     F
+And I don't know if I'm just charging
+G                           Am
+Don't know if the wind will rise
+         Ab                      C
+But it's something that we must believe in
+         C#dim7                    Dm7 Dm7b5 G
+And it's free when the sun's in the sky
+
+
+[Chorus]
+C                  Fmaj7 C
+Bluebirds in the air,      bluebirds in the air
+Fmaj7     Em Am Ab G
+     Oh...
+Oh!
+
+
+[Outro]
+C                  Fmaj7
+Bluebirds in the air,
+
+
+[Fade Out]
+C                 Fmaj7
+bluebirds in the air
+Oh...
+Em Am Ab G
+
+
+## Solo scales
+
+Key: C major
+
+- C major scale (C D E F G A B) — safe default, warm and easy
+- C major pentatonic (C D E G A) — simplest default, sunny singalong leads
+- A minor pentatonic (A C D E G) — relative minor, a contrasting colour
