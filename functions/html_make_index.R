@@ -118,7 +118,7 @@ html_make_index <- function(collection="", writeit=TRUE, outfile=""){
 
         ref <- if(nrow(base_rows) > 0) base_rows[1, ] else version_rows[1, ]
         artist_name <- gsub("_", " ", ref$artist_id)
-        song_name   <- substr(gsub("_", " ", ref$song_base_id), 1, 24)
+        song_name   <- substr(gsub("_", " ", ref$song_base_id), 1, 48)
 
         song_cell <- if(nrow(base_rows) > 0){
             pst('<a href="', ref$nm, '.html">', song_name, '</a>')
