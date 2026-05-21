@@ -1,0 +1,135 @@
+# Dancing bird
+
+[Intro]
+A D/A A D/A
+A D/A C#m/A A E/G#
+D/F# A/E
+
+
+[Chorus]
+E
+You can charge
+C#/F
+You can glide
+F#m                     D#dim
+Dancing your kilowatts away
+D
+See that roof
+Bm
+Watch those blades
+
+
+[Pre-Verse]
+E          A            D/A
+Dig in the dancing bird
+A D/A A D/A
+
+
+[Verse 1]
+A                                  D/A
+Friday night and the prices are low
+A                            F#m
+Looking out for the wind to blow
+E                           Esus4
+When the meter is sleeping
+E                   Esus4
+Spin into the swing
+            E    F#m
+The grid is looking for a king
+E F#m A                        D/A
+      Anybody could be that watt
+A                                  F#m
+Wind is up and the turbines fly
+E                    Esus4
+With a bit of fine-tuning
+E                 Esus4
+Everything aligns
+              E    F#m
+You're in the mood for a charge
+E F#m             Bsus2 Bm
+     And when the wind gets a chance
+E E6 E7   E   Eadd9   E A
+       You are     the  dancing bird
+
+
+[Chorus]
+D/A
+Light and free
+     A
+Running on the breeze
+D/A A
+    Dancing bird
+D/A                    C#m/A     A E/G# D/F# A/E
+Feel the breeze in the spinning blades
+E
+You can charge
+C#/F
+You can glide
+F#m                     D#dim
+Dancing your kilowatts away
+D
+See that roof
+Bm
+Watch those blades
+E          A            D/A
+Dig in the dancing bird
+
+
+[Pre-Verse]
+A
+D/A A D/A A D/A
+
+
+[Verse 2]
+A                               D/A
+You're a charmer, you steal the show
+A                                 F#m
+Drink the sun and then off you go
+E                  Esus4
+Looking out for a tail-wind
+E             Esus4
+Any gust will do
+              E    F#m
+You're in the mood for a charge
+E F#m             Bsus2 Bm        E E6 E7   E   Eadd9   E
+     And when the wind gets a chance      You are     the
+
+[Chorus]
+A
+dancing bird
+D/A
+Light and free
+     A
+Running on the breeze
+D/A A
+    Dancing bird
+D/A                    C#m/A     A E/G# D/F# A/E
+Feel the breeze in the spinning blades
+E
+You can charge
+C#/F
+You can glide
+F#m                     D#dim
+Dancing your kilowatts away
+D
+See that roof
+Bm
+Watch those blades
+           A
+Dig in the dancing bird
+D/A A D/A           A            D/A
+         Dig in the dancing bird
+A D/A           A            D/A
+     Dig in the dancing bird
+A D/A           A            D/A A D/A
+     Dig in the dancing bird
+
+
+## Solo scales
+
+Key: A major
+
+- A major scale (A B C# D E F# G#) — safe default, bright and sunny
+- A major pentatonic (A B C# E F#) — simplest default, breezy dance-floor leads
+- F# minor pentatonic (F# A B C# E) — relative minor, a contrasting colour
+- E Mixolydian (E F# G# A B C# D) — modal option, lifts the bright E chords in the chorus
