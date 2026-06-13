@@ -39,12 +39,27 @@ writeLines(c(
 ), header_path)
 
 
-# Read a collection file: one filename per non-comment line (comma-separated fields)
+# Read a collection file: one filename per non-comment line (comma-separated fields).
+# A line whose first field is "regex: <pattern>" expands to every song filename
+# matching <pattern> (sorted), inserted at that line's position.
 read_collection <- function(path){
     x <- scan(path, what="character", sep="\n", blank.lines.skip=TRUE, quiet=TRUE)
     x <- x[!grepl("^\\s*#", x)]
     x <- x[nchar(trimws(x)) > 0]
-    sapply(strsplit(x, ","), function(p) trimws(p[1]))
+    first <- sapply(strsplit(x, ","), function(p) trimws(p[1]))
+    all_songs <- basename(dir("songs", "___", recursive=TRUE))
+    out <- character(0)
+    for(f in first){
+        if(grepl("^regex:", f)){
+            pat  <- trimws(sub("^regex:", "", f))
+            hits <- sort(all_songs[grepl(pat, all_songs)])
+            if(length(hits) == 0) warning("collection regex matched no songs: ", pat)
+            out <- c(out, hits)
+        }else{
+            out <- c(out, f)
+        }
+    }
+    unique(out)
 }
 
 

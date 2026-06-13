@@ -16,6 +16,7 @@ html_make_index()
 html_make_index("songs/collection-primabacher_2026.txt")
 html_make_index("songs/collection-roskilde_2026.txt")
 html_make_index("songs/collection-bluebird.txt")
+html_make_index("songs/collection-dynsys.txt")
 ################################################################
 
 
@@ -36,7 +37,7 @@ if(Sys.getenv("SANGE_NO_SERVER_RESTART") != "1"){
     system("python3 server.py 8000 &")
     Sys.sleep(0.5)  # brief pause so server is ready before Firefox opens
     #    system("firefox http://localhost:8000/index.html &")
-    system("firefox http://localhost:8000/bluebird.html &")
+    system("firefox http://localhost:8000/dynsys.html &")
 }
 #system(pst("firefox http://localhost:8000/primabacher_2026.html &"))
 #system(pst("firefox http://localhost:8000/roskilde_2026.html &"))

@@ -25,13 +25,22 @@ html_make_index <- function(collection="", writeit=TRUE, outfile=""){
                 raw          <- raw[-1]
             }
 
-            # Parse each line: first field = filename, rest = extra values
+            # Parse each line: first field = filename, rest = extra values.
+            # A "regex: <pattern>" first field expands to every matching song
+            # filename, each carrying that line's extra values.
+            all_songs <- basename(songs)
             parsed <- lapply(raw, function(line){
                 parts <- trimws(strsplit(line, ",")[[1]])
                 if(length(parts) == 0) return(NULL)
-                list(file = parts[1], extra = parts[-1])
+                if(grepl("^regex:", parts[1])){
+                    pat  <- trimws(sub("^regex:", "", parts[1]))
+                    hits <- sort(all_songs[grepl(pat, all_songs)])
+                    if(length(hits) == 0) warning("collection regex matched no songs: ", pat)
+                    return(lapply(hits, function(f) list(file = f, extra = parts[-1])))
+                }
+                list(list(file = parts[1], extra = parts[-1]))
             })
-            parsed <- Filter(Negate(is.null), parsed)
+            parsed <- unlist(Filter(Negate(is.null), parsed), recursive = FALSE)
 
             filenames <- sapply(parsed, `[[`, "file")
 
