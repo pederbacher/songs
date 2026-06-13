@@ -1,0 +1,151 @@
+Start E chordline
+
+[Verse]
+Am
+What shall we do with dynamical systems?
+G
+What shall we do with dynamical systems?
+Am
+What shall we do with dynamical systems?
+Am      G     Am
+Sailing windy waters
+
+[Chorus]
+Am
+We are the brainy vikings
+G
+We are the brainy vikings
+Am
+We are the brainy vikings
+Am       G        Am
+Gathered from all nations
+
+[Verse]
+   Am
+We model every ships dynamics
+   G
+   model every ships dynamics
+   Am
+   model every ships dynamics
+Am       G     Am
+Tracking every movement
+
+[Chorus]
+    Am
+Use numbers and equations
+    G
+    numbers and equations
+    Am
+    numbers and equations
+Am       G        Am
+Gathered from all nations
+
+[Verse]
+   Am
+at day we use the white box models
+   G
+at night we use the black box models
+   Am
+at day we use the black box models
+     Am       G       Am
+When foggy we use the grey ones
+
+[Chorus]
+Am
+We are the nerdy vikings
+G
+We are the nerdy vikings
+Am
+We are the nerdy vikings
+Am       G        Am
+Gathered from all nations
+
+[Verse]
+Am
+we build ships for the sea of chaos 
+G
+we build ships for the sea of chaos 
+Am
+we build ships for the sea of chaos 
+        Am             G     Am
+setting course through noisy waves
+
+[Chorus]
+Am
+hey ho mathematical models
+G
+hey ho mathematical models
+Am
+hey ho mathematical models
+Am       G        Am
+Gathered from all nations
+
+[Verse]
+Am
+What shall we do with an O-D-E?
+G
+What shall we do with an O-D-E?
+Am
+What shall we do with an O-D-E?
+Am        G   Am
+Integrate the function
+
+[Chorus]
+
+        Am
+you can always use Eulers method
+        G
+        always use Eulers method
+        Am
+        always use Eulers method
+         Am           G     Am
+or maybe improve with Runge Kutta
+
+[Verse]
+Am
+What shall we do with an S-D-E?
+G
+What shall we do with an S-D-E?
+Am
+What shall we do with an S-D-E?
+Am    G      Am
+Use a Kalman filter
+
+[Chorus]
+Am
+We drift around in brownian motion
+G
+We drift around in brownian motion
+Am
+We drift around in brownian motion
+Am            G      Am
+diffussed but not confused
+
+[Verse]
+Am
+What are we doin' in the Dynsys section?
+G
+What are we doin' in the Dynsys section?
+Am
+What are we doin' in the Dynsys section?
+Am      G    Am
+solving math together
+
+[Chorus]
+Am
+We are the Dynsys vikings
+G
+We are the Dynsys vikings
+Am
+We are the Dynsys vikings
+Am       G        Am
+Gathered from all nations
+
+
+## Solo scales
+Key: A minor (modal — built on the Am–G vamp)
+- A natural minor / Aeolian (A B C D E F G) — safe default, dark shanty feel
+- A minor pentatonic (A C D E G) — simplest default, can't miss over the riff
+- C major pentatonic (C D E G A) — relative major, brighter lift for a contrasting pass
+- A Dorian (A B C D E F# G) — modal option; the raised F# over the G is the classic "Drunken Sailor" colour
+- Fiddle / tin whistle: stay in A Dorian and lean on the F# against the G for the sea-shanty bounce
