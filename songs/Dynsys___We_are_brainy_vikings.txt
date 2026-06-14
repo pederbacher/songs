@@ -98,8 +98,8 @@ you can always use Eulers method
         always use Eulers method
         Am
         always use Eulers method
-         Am           G     Am
-or maybe improve with Runge Kutta
+     Am         G     Am
+or improve with Runge Kutta
 
 [Verse]
 Am
