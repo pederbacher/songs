@@ -1,4 +1,4 @@
-start G-A G-A
+start G-A G-A chordline
 
 [Intro]
 A Em7 G D

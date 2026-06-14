@@ -1,0 +1,5 @@
+# , Day (Onsdag;Torsdag;Fredag;Lørdag), Stage
+Cure___Boys_dont_cry.txt, Onsdag,
+Cure___Why_cant_I_be_you.txt, Onsdag,
+Cure___Lovecats.txt, Onsdag,
+

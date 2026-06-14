@@ -1,0 +1,5 @@
+Bob_Dylan___Mr_Tambourine_Man.txt
+Cohen___So_long_Marianne.txt
+CV_Jørgensen___Costa_del_Sol.txt
+Misc___Kringsatt_av_fiender.txt
+regex: ^Townes_van_zandt___.*
