@@ -1,3 +1,4 @@
+[chords]
 Start G-A
 Key: C#m
 Capo: 4th fret
