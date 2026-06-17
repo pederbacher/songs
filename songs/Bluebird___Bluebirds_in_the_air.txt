@@ -91,6 +91,7 @@ Oh...
 Em Am Ab G
 
 
+[Guidelines]
 ## Solo scales
 
 Key: C major

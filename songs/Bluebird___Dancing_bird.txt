@@ -123,6 +123,7 @@ A D/A           A            D/A A D/A
      Dig in the dancing bird
 
 
+[Guidelines]
 ## Solo scales
 
 Key: A major
