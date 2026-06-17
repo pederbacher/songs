@@ -1,5 +1,5 @@
-Key:Am
-Capo:no capo
+Key: Am
+start: E
 
 [Strum]
 Chords used:
