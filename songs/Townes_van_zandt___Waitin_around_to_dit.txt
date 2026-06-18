@@ -1,5 +1,5 @@
 [chords]
-Start A-B
+Start F#-E
 Key: C#m
 Capo: 4th fret
 
