@@ -38,8 +38,7 @@ if(Sys.getenv("SANGE_NO_SERVER_RESTART") != "1"){
     Sys.sleep(0.5)  # brief pause so server is ready before Firefox opens
     #    system("firefox http://localhost:8000/index.html &")
     system("firefox http://localhost:8000/dynsys.html &")
-}
-#system(pst("firefox http://localhost:8000/primabacher_2026.html &"))
+(pst("firefox http://localhost:8000/primabacher_2026.html &"))
 #system(pst("firefox http://localhost:8000/roskilde_2026.html &"))
 # The server stays running in the background after the script finishes, so you can keep testing without
 # restarting it. If you ever want to stop it manually: fuser -k 8000/tcp.
