@@ -45,23 +45,23 @@ if(Sys.getenv("SANGE_NO_SERVER_RESTART") != "1"){
 ################################################################
 
 
-################################################################
-if(FALSE){
+## ################################################################
+## if(FALSE){
 
-    # Commit changes
-    system("git pull")
-    system("git add .")
-    system("git commit -m 'more'")
-    system("git push")
+##     # Commit changes
+##     system("git pull")
+##     system("git add .")
+##     system("git commit -m 'more'")
+##     system("git push")
     
-    # Put online
-    unlink("output_git", recursive=TRUE)
-    system("git clone git@github.com:pederbacher/songs.git output_git")
-    system("cp output_html/* output_git/")
-    system("git -C output_git status")
-    system("git -C output_git add .")
-    system("git -C output_git commit -m 'more'")
-    system("git -C output_git push")
+##     # Put online
+##     unlink("output_git", recursive=TRUE)
+##     system("git clone git@github.com:pederbacher/songs.git output_git")
+##     system("cp output_html/* output_git/")
+##     system("git -C output_git status")
+##     system("git -C output_git add .")
+##     system("git -C output_git commit -m 'more'")
+##     system("git -C output_git push")
 
-}
-################################################################
+## }
+## ################################################################
