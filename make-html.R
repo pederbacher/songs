@@ -11,12 +11,11 @@ makeit_html(songs)
 
 
 ################################################################
-# Write the index
+# Write the indexes
+for(collection in dir("songs", pattern="^collection-", full.names=TRUE)){
+    html_make_index(collection)
+}
 html_make_index()    
-html_make_index("songs/collection-primabacher_2026.txt")
-html_make_index("songs/collection-roskilde_2026.txt")
-html_make_index("songs/collection-bluebird.txt")
-html_make_index("songs/collection-dynsys.txt")
 ################################################################
 
 
@@ -48,12 +47,13 @@ if(Sys.getenv("SANGE_NO_SERVER_RESTART") != "1"){
 ## ################################################################
 ## if(FALSE){
 
-##     # Commit changes
-##     system("git pull")
-##     system("git add .")
-##     system("git commit -m 'more'")
-##     system("git push")
-    
+     # Commit changes
+     system("git pull")
+     system("git add .")
+     system("git commit -m 'more'")
+     system("git push")
+}
+
 ##     # Put online
 ##     unlink("output_git", recursive=TRUE)
 ##     system("git clone git@github.com:pederbacher/songs.git output_git")
