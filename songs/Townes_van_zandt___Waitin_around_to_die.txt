@@ -1,6 +1,6 @@
 [chords]
-Start F#-E
-Key: C#m
+Start D-E
+Key: Am
 Capo: 4th fret
 
 [Intro]

@@ -1,4 +1,7 @@
-Tuning: E A D G B ECapo: 1st fret
+Capo: 1st fret
+Start: A-A-E chordline
+
+[guidelines]
 Rhythm guitar:
  
     Dm                      Dm                       Dm                       
