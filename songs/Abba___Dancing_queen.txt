@@ -1,4 +1,7 @@
 [Intro]
+A  Bb  A  C  Bb  C  D  Bb  D
+A  Bb  A
+B  Bb  B
 A D/A A D/A
 A D/A C#m/A A E/G#
 D/F# A/E

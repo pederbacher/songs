@@ -36,8 +36,9 @@ if(Sys.getenv("SANGE_NO_SERVER_RESTART") != "1"){
     system("python3 server.py 8000 &")
     Sys.sleep(0.5)  # brief pause so server is ready before Firefox opens
 #        system("firefox http://localhost:8000/index.html &")
-#    system("firefox http://localhost:8000/dynsys.html &")
-    system(pst("firefox http://localhost:8000/Townes_van_zandt___Fare_thee_well_miss_carousel.html &"))
+    system("firefox http://localhost:8000/roskilde_2026_final.html &")
+    #    system(pst("firefox http://localhost:8000/Aphaca___En_drøm_om_et_menneske.html &"))
+        #system(pst("firefox http://localhost:8000/Abba___Dancing_queen.html &"))
 }
 #system(pst("firefox http://localhost:8000/roskilde_2026.html &"))
 # The server stays running in the background after the script finishes, so you can keep testing without

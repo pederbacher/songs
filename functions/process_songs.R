@@ -15,9 +15,12 @@ process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
         # Remove whitespace in the end
         x <- trimws(x, which="right") 
         # Identify chord lines
-        i <- grep("(^| |\\|)[ABHCDEFG][b#]?/?\\*?m?(maj)?\\d?(sus4)?( |$)|¤|\\([sS]tar|sweep pick|syng på", x)
+        #browser()
+        #i <- grep("(^| |\\|)[ABHCDEFG]([b#])?/[ABHCDEFG][b#]?\\*?m?(maj)?\\d?(sus4)?( |$)|¤|\\([sS]tar|sweep pick|syng på", x)
+        i <- grep("[ABHCDEFGb#\\|]", x)
+
         if(length(i) > 0){
-            # Remove special cases
+            # Remove
             # Ratio between normal letters and capitalized
             ratio <- lengths(regmatches(x[i], gregexpr("[a-z]", x[i]))) / lengths(regmatches(x[i], gregexpr("[A-Z]", x[i])))
             irm <- which(ratio > 4)
@@ -26,7 +29,7 @@ process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
             # Remove them
             if(length(irm) > 0){ i <- i[-irm]}
             # Add some special cases
-            i <- c(i, grep("¤|\\([sS]tart|nochord", x))
+            i <- c(i, grep("¤|[sS]tart|nochord", x))
         }
         # Also tag all lines inside [chords]...[next section] blocks
         chord_starts <- grep("^\\[chords\\]$|^\\[guideline", x, ignore.case=TRUE)

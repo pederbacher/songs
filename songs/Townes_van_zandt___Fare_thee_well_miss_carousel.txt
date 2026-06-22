@@ -9,14 +9,14 @@ G F
 C
  
 [Verse 1]
-          C                     Em
- Well the drunken clown's still hanging around
+         C                     Em
+Well the drunken clowns still hanging around
          F         Em         Dm
 But it's plain the laughter's all died down
     G                  F                C
 The tears you tried so hard to hide are flowing
-       C                  Em
- And a blind man with his knife in hand
+      C                  Em
+And a blind man with his knife in hand
        F         Em           Dm
 Has convinced himself that he understands
   G                   G7
@@ -31,18 +31,20 @@ Am                  Em
 You're sure that you don't need me then?
      Am                 Em
 I'll stand outside your window
-    F                 Em   G G7
+    F                 Em
 And proudly call your name
- 
+
+Em G G7
+
 [Verse 2]
-           C                     Em
- Well, the lady's been told that all the gold
-   F        Em           Dm
-Is worth so much it can't  be sold
+          C                     Em
+Well, the lady's been told that all the gold
+   F        Em      Dm
+Is worth so much it can't be sold
 G                       F                C
 No time to weep, she'll need her sleep tomorrow
-          C                       Em
- When she carries her face to the market place
+         C                       Em
+When she carries her face to the market place
     F       Em     Dm
 And bets it on the opening race
         G                      G7
@@ -57,18 +59,20 @@ Am                   Em
 You're sure that you don't need me then?
      Am                 Em
 I'll stand outside your window
-    F                 Em    G G7
+    F                 Em
 And proudly call your name
- 
+
+Em G G7
+
 [Verse 3]
-            C                  Em
- Well, it's always done, every mother's son
+           C                  Em
+Well, it's always done, every mother's son
    F          Em        Dm
 Is shown that grown men never run
 G                  F               C
 So they fight with all the might inside them
-          C                                Em
- When the battle's been fought and they've all been taught
+         C                                Em
+When the battle's been fought and they've all been taught
          F        Em       Dm
 That the trick is just not being caught
          G                   G7
@@ -77,24 +81,26 @@ Will you give 'em hell, Miss Carousel
 When they're begging you to hide them?
  
 [Chorus]
-Am                   Em
-  Won't you come and get me when
+Am                  Em
+ Won't you come and get me when
        Am                  Em
 You're sure that you don't need me then?
      Am                 Em
 I'll stand outside your window
-    F                 Em   G G7
+    F                 Em   
 And proudly call your name
- 
+
+Em G G7
+
 [Verse 4]
-          C                Em
- When the need arose, your eyes fell closed
+         C                Em
+When the need arose, your eyes fell closed
     F            Em       Dm
 You clamped your fingers around your nose
           G            F          C
 Would you say - that's any way to judge him?
-           C                 Em
- Well, you haven't got the authority
+          C                 Em
+Well, you haven't got the authority
    F        Em     Dm
 To kill him in the first degree
               G                    G7
@@ -108,14 +114,14 @@ Am Em F Em
 Em G G7
  
 [Verse 5]
-      C                  Em
- On a velvet beach far beneath the reach
+     C                  Em
+On a velvet beach far beneath the reach
    F          Em      Dm
 Of those that come to pry and preach
     G                F                 C
 The natural man that tried to stand is fallin'
-           C                 Em
- Well, how long will it be before he sees
+          C                 Em
+Well, how long will it be before he sees
     F       Em            Dm
 You own his legs, but his mind is free?
      G                  G7
@@ -124,8 +130,8 @@ Only you can tell, Miss Carousel
 How long will he be crawling?
  
 [Chorus]
-Am                   Em
-  Won't you come and get me when
+Am                  Em
+ Won't you come and get me when
        Am                  Em
 You're sure that you don't need me then?
      Am                 Em
@@ -134,14 +140,14 @@ I'll stand outside your window
 And proudly call your name
 
 [Verse 6]
-        C               Em
- Ah the castle wall has grown so tall
+       C               Em
+Ah the castle wall has grown so tall
 F           Em       Dm             G
 Seems there ain't no hope at all to reach the top
      F                   C
 Even though you stop for breathing
-       C                  Em
- But I ain't gonna try to make you cry
+      C                  Em
+But I ain't gonna try to make you cry
     F          Em       Dm
 The tear drops couldn't find your eyes
      G                    G7
@@ -150,14 +156,17 @@ It's all been swell, Miss Carousel
 But the time has come for leaving
  
 [Chorus]
-Am                   Em
-  Won't you come and get me when
+Am                  Em
+ Won't you come and get me when
        Am                   Em
 You're sure  that you don't need me then?
      Am                 Em
 I'll stand outside your window
-    F                 Em   G G7
+    F                 Em
 And proudly call your name
+
+Em G G7
+
 Am                   Em
   Won't you come and get me when
        Am                  Em
@@ -167,25 +176,31 @@ I'll stand outside your window
     F                 Em    G G7
 And proudly call your name
 
-Am                   Em
-  Won't you come and get me when
+Am                  Em
+ Won't you come and get me when
        Am                   Em
 You're sure  that you don't need me then?
      Am                 Em
 I'll stand outside your window
-    F                     Em G G7
+    F                     Em
 And proudly call your name
-Am                   Em
-  Won't you come and get me when
+
+Em G G7
+
+Am                  Em
+ Won't you come and get me when
        Am                   Em
 You're sure  that you don't need me then?
  
 [Fade Out]
      Am                 Em
 I'll stand outside your window
-    F                     Em G G7
+    F                     Em
 And proudly call your name
-Am                   Em
-  Won't you come and get me when
-       Am                   Em
-You're sure  that you don't need me then?
+
+Em G G7
+
+Am                  Em
+ Won't you come and get me when
+       Am                  Em
+You're sure that you don't need me then?
