@@ -48,6 +48,12 @@ process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
             }
         }
         i <- sort(unique(i))
+        # Finally, remove the specifically marked textlines
+        ii <- grep("textline$", x)
+        if(length(ii) > 0){
+            i <- i[!(i %in% ii)]
+            x[ii] <- trimws(gsub("textline", "", x[ii]))
+        }
         # Add a tag in the end of the lines
         x[i] <- pst(x[i], " chordline")
         # Keep it
