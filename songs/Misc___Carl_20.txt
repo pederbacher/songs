@@ -1,82 +1,74 @@
-Start F#-E-F#
+Start B-A-B
 
-[Vers 1]
-Carl,
-       D               A7
+Carl, textline
+       G               D7
 der er ingen bånd, der binder dig
-A7            D
+D7            G
 Du er fri, og klar til leg
-   D               A7
+   G               D7
 Du havde bånd, men nu er du fri
-   A7            D
+   D7            G
 Så du kan stå på ski - når du vil
 
-[Omkvæd 1]
-    F#7        Bm
+    B7         Em
 men hej-hov en million valg
-    F#7                 Bm
+    B7                  Em
 der er jo ikke noget du skal!?
-   E7           A7
+   A7           D7
 og planerne, ja hvad med dem?
-            E7                   A7
+            A7                   D7
 der er vist flere end til ni til fem
 
-[Vers 2]
-      D             A7
+      G             D7
 Nu er du student og stor
-  A7              D
+  D7              G
 I sabbatår er der tid til at scor'
-    E7             A7
+    A7             D7
 Nej tak til online-tjeneste
-        E7           A7
+        A7           D7
 virkeligheden er det reneste
 
-[Omkvæd 2]
-    F#7        Bm
+    B7         Em
 men hej-hov en million valg
-F#7               Bm
+B7                Em
 du må ud og danse bal
-       E7              A7
+       A7              D7
 Det er lig'som spil og sang
-       E7                    A7
+       A7                    D7
 Det er bare med at komme igang
 
-[Vers 3]
-        D            A7
+        G            D7
 Kan man kalde Calle' Klimaduks?
-    A7               D
+    D7               G
 Han syns' ihvertfald det' noget juks
-    D                A7
+    G                D7
 med kapitalistisk forbrugskultur
-    A7              D
+    D7              G
 Det gør ham faktisk sur
 
-[Omkvæd 3]
-    F#7        Bm
+    B7         Em
 men hej-hov en million valg
-F#7                 Bm
+B7                  Em
 du er nørd og guitargal'
-    E7             A7
+    A7             D7
 Gi' volumen nok et ordentligt hop
-   E7           A7
+   A7           D7
 Så bliver livet helt i top
 
-[Vers 4]
-D                   A7
+G                   D7
 Carl, du finder din egen tro
-    A7          D
-Det koster ikke CO2
-D            A7
+    D7          G
+Get koster ikke FO2
+G            D7
 du ka' flyve med dig selv
-  A7                  D
+  D7                  G
 Måske er det skæbnens held!?
 
-[Omkvæd 4]
-    F#7        Bm
+    B7         Em
 men hej-hov en million valg
-   F#7                 Bm
+   B7                  Em
 du vælger nok noget me'tal
-E7              A7
+A7              D7
 Det er hinsides godt og ondt
-   E7                        A7
+   A7                        D7
 og med lidt løb, er det sgu' sundt
