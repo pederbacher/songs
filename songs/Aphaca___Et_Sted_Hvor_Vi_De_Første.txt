@@ -1,19 +1,18 @@
 [Intro]
 Gm
  
- 
 [Verse 1]
 Gm
   Hun er fra en by ude mod vandet
 Der, hvor bolgerne larmer men tit, sa larmer stilheden mer'
                                    F/G                    Gm
 Jeg spurgt' hend': "Hva' vil du vaere, nar du bli'r stor?"
-                      F/G                                           Gm
-"Alt andet end min mor   eller far, jeg vil vaer' der, hvor man gror
+                      F/G                                         Gm
+"Alt andet end min mor eller far, jeg vil vaer' der, hvor man gror
                  F/G
 Og vokser sig storre, mellem himmel og jord
-Gm               F/A                         Bb
-  Hun vil lave om   pa de ting, som vores foraeldre aldrig fik gjort
+Gm               F/A                        Bb
+  Hun vil lave om på de ting, som vores foraeldre aldrig fik gjort
  
  
 [Chorus]
@@ -24,32 +23,30 @@ Et sted,  som ingen andre har vaeret
 Ebmaj7                           Gm
 Meter under solen, bag ved de bla  bjerge
        Bb                                   Dm
-Der bygger vi pa ny jord, og starter med freden
- 
+Der bygger vi på ny jord, og starter med freden textline
  
 [Interlude]
 Gm Dadd11 Ebmaj7 F Gm Dadd11 Ebmaj7 F
- 
  
 [Verse 2]
 Gm
        Dadd11    Ebmaj7               F
 Han er fra   den,      store lysende, blinkende by
 Gm         Dadd11           Ebmaj7 F
-  Der hvor,      tankerne korer i fart med dem, der suser forbi
-Gm Dadd11                                Ebmaj7 F                      Gm    
-         Jeg spurgt' ham: "Hva' vil du gore, nar de kun lytter til dem selv?"
+  Der hvor,  tankerne korer i fart med dem, der suser forbi
+Gm Dadd11                                Ebmaj7 F
+         Jeg spurgt' ham: "Hva' vil du gore,
+	                           Gm
+	 nar de kun lytter til dem selv?"
 Dadd11
                         Ebmaj7              F
 "Jeg vil sy vinger i ryggen pa dem, der vil flyv' vaek og starte igen
- 
  
 [Bridge]
 Ebmaj7                   F                     Gm
       Og vokse sig storre mellem himmel og jord
                F/A                         Bb6      Dm
-Han vil lave om   pa de ting, som vores foraeldre aldrig fik gjort
- 
+Han vil lave om på de ting, som vores foraeldre aldrig fik gjort
  
 [Chorus]
 Ebmaj7                                Gm
@@ -60,7 +57,6 @@ Ebmaj7                           Gm
 Meter under solen, bag ved de bla  bjerge
        Bb
 Der byger vi pa ny jord, og starter med freden
- 
  
 [Outro]
 Dm          Ebmaj7

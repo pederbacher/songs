@@ -109,6 +109,15 @@ song_md <- function(filename, trstep, variant){
     artist <- gsub("_", " ", parts[1])
     title  <- gsub("_", " ", parts[2])
     heading <- pst("## ", artist, " - ", title)
+    ## Finally, remove double empty lines
+    if(variant == "nochords"){
+        x <- trimws(x)
+    }
+    i <- grep("^$",x)
+    irm <- i[-1][diff(i) == 1]
+    if(length(irm) > 0){
+        x <- x[-irm]
+    }
     # Raw LaTeX Verbatim block so \color commands are respected, monospace kept
     c(heading, "", "\\begin{Verbatim}", x, "\\end{Verbatim}", "")
 }
@@ -164,3 +173,8 @@ for(coll in collections){
 }
 
 cat("\nDone. Output in output_pdf/\n")
+
+process_songs()
+coll <- "songs/collection-roskilde_2026_final.txt"
+build(coll, "chords")
+build(coll, "nochords")

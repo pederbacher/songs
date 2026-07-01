@@ -1,7 +1,7 @@
+[guidelines]
 Capo: 1st fret
 Start: A-A-E chordline
 
-[guidelines]
 Rhythm guitar:
  
     Dm                      Dm                       Dm                       
@@ -19,16 +19,12 @@ Dm        D#/A#
 6----------------------|
 -----------7--7--------|
  
- 
 [Intro]
- 
 Dm (x3) Dm  D#/A#
  
 Ooo, ooo, ooo, ooo
  
- 
 [Chorus]
- 
          Dm                           Dm
 I ain't happy, I'm feelin' glad, I got sunshine in a bag
      Dm                          Dm        D#/A#
@@ -41,10 +37,8 @@ I'm useless, but not for long the future is comin' on
 It's comin' on, it's comin' on,
      Dm
 It's comin' on, it's comin' on,
- 
  
 [Verse 1]
- 
 Dm
 Finally someone let me outta my cage
     Dm
@@ -58,13 +52,13 @@ Intangible, I bet you didn't think so I command you to
 Dm
 Panoramic view, Look I'll make it all manageable
 Dm
-  Pick and choose, Sit and lose, all you different crews
+Pick and choose, Sit and lose, all you different crews
 Dm                             D#/A#
-  Chicks and dudes, so who you think is really kickin' tunes?
+Chicks and dudes, so who you think is really kickin' tunes?
 Dm
 Picture you gettin' down in tha picture tube,
 Dm
- Like you lit the fuse, you think it's fictional?
+Like you lit the fuse, you think it's fictional?
 Dm
 Mystical? maybe, Spiritual?
          Dm                                      D#/A#
@@ -78,9 +72,7 @@ You like it? Gun smokin' Righteous with one toke
 Dm                   D#/A#
 Psychic among those, Possess you with one go
  
- 
 [Chorus]
- 
          Dm                           Dm
 I ain't happy, I'm feelin' glad, I got sunshine in a bag
      Dm                          Dm        D#/A#
@@ -93,10 +85,8 @@ I'm useless, but not for long the future is comin' on
 It's comin' on, it's comin' on,
      Dm
 It's comin' on, it's comin' on,
- 
  
 [Verse 2]
- 
 Dm
 The essence, the basics, without that you make it
 Dm
@@ -134,9 +124,7 @@ Feelings, sensations that you thought was dead
    Dm                  N.C.
 No squealing, remember that it's all in your head
  
- 
 [Chorus]
- 
          Dm                           Dm
 I ain't happy, I'm feelin' glad, I got sunshine in a bag
      Dm                          Dm        D#/A#
