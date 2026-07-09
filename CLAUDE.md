@@ -20,7 +20,7 @@ PDF layout is controlled by sourcing one of the setup files before `make-pdfs.R`
 - `setup-withchords_normal-16x10.R` — with chords, 16:10 landscape
 - `setup-nochords_normal-16x9.R` — lyrics only, 16:9 landscape
 
-External dependencies: `knitr`, `pdflatex`, `gdown`, `docx2txt`.
+External dependencies: `knitr`, `pdflatex`, `gdown`, `docx2txt`, `lilypond` (provides the `lilypond` binary; also bundles `midi2ly`, though we use our own patched copy — see below), ImageMagick (`convert`).
 
 ## Architecture
 
@@ -45,8 +45,11 @@ songs/*.txt
 | `html_make_index.R` | Generates HTML index pages |
 | `read_from_google_drive.R` | Downloads songs from Google Drive |
 | `getnm.R`, `add.R`, `postfix.R` | File naming and song formatting helpers |
+| `midi_to_score.R` | Renders `midi/*.mid` → cropped notation-image PNGs in `songs/scores/` |
 
 **HTML output** uses `templates/html/` — each song page embeds all 12 transpositions with CSS classes (`chordline no0`…`chordline no11`); `script.js` switches between them client-side.
+
+**Short note scores:** drop a `.mid` file in `midi/`, then reference it from a song's `.txt` with a markdown image tag: `![Tema](song_tema.mid)` (filename only, no path). `render_scores()` (called from `make-html.R`) converts every `midi/*.mid` into a cropped 5-line-staff PNG in `songs/scores/` via `functions/vendor/midi2ly` (`.mid`→`.ly`) → `lilypond` (`.ly`→`.png`) → `convert -trim` (autocrop), skipping files that are already up to date. `makeit_html.R` turns the tag into an `<img class="score">`; `make-pdfs.R` drops the tag line entirely (scores are HTML-only). `songs/scores/*.png` are committed to the repo like any other asset — CI does **not** install lilypond, it just ships whatever's already committed there, so always run `make-html.R` locally after adding/changing a `.mid` and commit the resulting PNG alongside it. `functions/vendor/midi2ly` is a one-line-patched copy of the system script (upstream divides with `/` instead of `//`, which crashes under Python 3) — always invoke that vendored copy, not a system `midi2ly`.
 
 **Publishing:** The whole project lives in the GitHub repo `pederbacher/songs`. On push, `.github/workflows/deploy.yml` reruns `make-html.R` headless (`SANGE_NO_SERVER_RESTART=1`, base R only — no pdflatex) and deploys `output_html/` to GitHub Pages via the Actions artifact. Pages **must** be set to *Build and deployment → Source: GitHub Actions* in repo settings. `output_html/` is generated in CI and need not be committed. (The legacy `output_git/` local-clone push flow in the `if(FALSE)` block of `make-html.R` is superseded.)
 

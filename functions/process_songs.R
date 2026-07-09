@@ -1,6 +1,6 @@
 process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
     # Open the songs
-    files <- dir(infolder, "___", recursive=TRUE, full.names=TRUE)
+    files <- dir(infolder, "___.*\\.txt$", recursive=TRUE, full.names=TRUE)
     #
     unlink(pst(outfolder,"/"), recursive=TRUE)
     dir.create(outfolder)
@@ -48,6 +48,13 @@ process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
             }
         }
         i <- sort(unique(i))
+        # Never chord-tag a line containing [ and ] (section markers, annotations
+        # like [x2], and markdown score-image tags like ![Tema](song_tema.mid)) --
+        # otherwise such a line can slip through chord detection (e.g. "[Hook]"
+        # matches on its capital H) and later removal steps can't find it because
+        # it's been rewritten into a <span> before they run.
+        has_brackets <- grepl("\\[.*\\]", x)
+        i <- i[!has_brackets[i]]
         # Finally, remove the specifically marked textlines
         ii <- grep("textline$", x)
         if(length(ii) > 0){

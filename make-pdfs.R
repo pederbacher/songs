@@ -7,7 +7,7 @@
 
 rm(list=ls())
 pst <- paste0
-sapply(dir("functions/", full.names=TRUE), source)
+sapply(dir("functions/", pattern="\\.R$", full.names=TRUE), source)
 
 ################################################################
 # OPTIONS
@@ -47,7 +47,7 @@ read_collection <- function(path){
     x <- x[!grepl("^\\s*#", x)]
     x <- x[nchar(trimws(x)) > 0]
     first <- sapply(strsplit(x, ","), function(p) trimws(p[1]))
-    all_songs <- basename(dir("songs", "___", recursive=TRUE))
+    all_songs <- basename(dir("songs", "___.*\\.txt$", recursive=TRUE))
     out <- character(0)
     for(f in first){
         if(grepl("^regex:", f)){
@@ -74,6 +74,8 @@ song_md <- function(filename, trstep, variant){
     x <- scan(path, what="character", sep="\n", blank.lines.skip=FALSE, quiet=TRUE)
     # Drop metadata lines (# key=value)
     x <- x[!grepl("^#\\s*\\w+\\s*=", x)]
+    # Drop markdown score-image tags, e.g. ![Tema](song_tema.mid) -- HTML-only
+    x <- x[!grepl("^!\\[.*\\]\\(.*\\.mid\\)\\s*$", x)]
     # Drop entire [Tabs] blocks (from the [Tabs] marker up to the next section marker)
     sec_idx    <- grep("^\\[.+\\]$", x)
     tabs_start <- grep("^\\[[Tt]abs?\\]$", x)
@@ -86,8 +88,9 @@ song_md <- function(filename, trstep, variant){
         }
         x <- x[-drop]
     }
-    # Drop section markers ([Verse 1], [Chorus], [chords], ...)
-    x <- x[!grepl("^\\[.*\\]$", x)]
+    # Drop any line containing a [ ... ] annotation (section markers,
+    # [x2]-style repeat notes, etc.)
+    x <- x[!grepl("\\[.*\\]", x)]
     # Chord vs lyric handling
     is_chord <- grepl("chordline$", x)
     if(variant == "nochords"){

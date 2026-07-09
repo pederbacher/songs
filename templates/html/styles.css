@@ -41,6 +41,13 @@ pre {
   font-family: var(--mono-font);
 }
 
+.score {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0.6em 0;
+}
+
 table {
   border-collapse: collapse;
   width: 100%;

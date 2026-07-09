@@ -44,10 +44,21 @@ makeit_html <- function(songs){
             tmp <- pst("<span class='chordline no",trstep,"'>",tmp,"</span>")
             x[i] <- pst(x[i], tmp)
         }
+        # Replace markdown score-image tags, e.g. ![Tema](song_tema.mid), with <img> tags
+        ################################
+        score_re <- "^!\\[(.*)\\]\\((.+\\.mid)\\)\\s*$"
+        iscore <- grep(score_re, x)
+        for(si in iscore){
+            m <- regmatches(x[si], regexec(score_re, x[si]))[[1]]
+            alt <- m[2]
+            pngname <- pst(tools::file_path_sans_ext(basename(m[3])), ".png")
+            x[si] <- pst("<img class='score' src='scores/", pngname, "' alt='", alt, "'>")
+        }
         # Remove parts
         ################################
-        # Find the headers and remove if specified
-        irm <- grep("\\]$", x)
+        # Remove any line containing a [ ... ] annotation (section markers,
+        # [x2]-style repeat notes, etc.)
+        irm <- grep("\\[.*\\]", x)
         # Any to remove?
         if(length(irm) > 0){
             # Remove the lines by setting blank
