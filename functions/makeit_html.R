@@ -39,7 +39,7 @@ makeit_html <- function(songs){
         for(trstep in 0:11){
             tmp <- scan(pst(dirname(songs[isong]),"Transposed/",nm,"_trans",trstep,".txt"), what="character", sep="\n", blank.lines.skip=FALSE, quiet=TRUE)
             # Take chordlines and stack them
-            tmp <- gsub("chordline", "", tmp[i])
+            tmp <- gsub("chordline|tabsblock", "", tmp[i])
             tmp <- trimws(tmp, which="right")
             tmp <- pst("<span class='chordline no",trstep,"'>",tmp,"</span>")
             x[i] <- pst(x[i], tmp)
@@ -54,16 +54,6 @@ makeit_html <- function(songs){
             n <- if(nchar(m[5]) > 0) m[5] else "1"
             pngname <- pst(tools::file_path_sans_ext(basename(m[3])), "_n", n, ".png")
             x[si] <- pst("<img class='score' src='midiscores/", pngname, "' alt='", alt, "'>")
-        }
-        # Remove parts
-        ################################
-        # Remove any line containing a [ ... ] annotation (section markers,
-        # [x2]-style repeat notes, etc.)
-        irm <- grep("\\[.*\\]", x)
-        # Any to remove?
-        if(length(irm) > 0){
-            # Remove the lines by setting blank
-            x[irm] <- ""
         }
         # Wrap in the html
         isplit <- grep("SongContent", xhtml)

@@ -47,6 +47,19 @@ process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
                 }
             }
         }
+        # Tag [Tabs]...[next section] block content with "tabsblock" so
+        # make-pdfs.R can still find and drop the ASCII tab diagram for
+        # print, even though the [Tabs] marker line itself is about to be
+        # deleted below (along with every other bracket-marker line).
+        tabs_starts <- grep("^\\[[Tt]abs?\\]$", x)
+        for(ts in tabs_starts){
+            after <- next_sections[next_sections > ts]
+            end <- if(length(after) > 0) after[1] - 1 else length(x)
+            block <- (ts+1):end
+            block <- block[block <= length(x)]
+            block <- block[nchar(trimws(x[block])) > 0]
+            x[block] <- pst(x[block], " tabsblock")
+        }
         i <- sort(unique(i))
         # Never chord-tag a line containing [ and ] (section markers, annotations
         # like [x2], and markdown score-image tags like ![Tema](song_tema.mid)) --
@@ -63,6 +76,14 @@ process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
         }
         # Add a tag in the end of the lines
         x[i] <- pst(x[i], " chordline")
+        # Remove section-marker/annotation lines entirely (not just blanked --
+        # otherwise stacked markers like repeated [Verse] tags leave behind
+        # stacked blank lines downstream) -- e.g. [Verse], [Hook], [x2] -- but
+        # keep markdown score-image tags (![Alt](midi/file.mid)[N]), which
+        # still need to reach makeit_html.R (turned into <img>) / make-pdfs.R
+        # (explicitly dropped there).
+        is_score_tag <- grepl("^!\\[.*\\]\\(.*\\.mid\\)(\\[[0-9]+\\])?\\s*$", x)
+        x <- x[is_score_tag | !grepl("\\[.*\\]", x)]
         # Keep it
         newnm <- pst(outfolder,"/",basename(nm))
         L[[newnm]] <- x

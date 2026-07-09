@@ -76,21 +76,11 @@ song_md <- function(filename, trstep, variant){
     x <- x[!grepl("^#\\s*\\w+\\s*=", x)]
     # Drop markdown score-image tags, e.g. ![Tema](midi/song_tema.mid)[2] -- HTML-only
     x <- x[!grepl("^!\\[.*\\]\\(.*\\.mid\\)(\\[[0-9]+\\])?\\s*$", x)]
-    # Drop entire [Tabs] blocks (from the [Tabs] marker up to the next section marker)
-    sec_idx    <- grep("^\\[.+\\]$", x)
-    tabs_start <- grep("^\\[[Tt]abs?\\]$", x)
-    if(length(tabs_start) > 0){
-        drop <- integer(0)
-        for(ts in tabs_start){
-            after <- sec_idx[sec_idx > ts]
-            end   <- if(length(after) > 0) after[1] - 1 else length(x)
-            drop  <- c(drop, ts:end)
-        }
-        x <- x[-drop]
-    }
-    # Drop any line containing a [ ... ] annotation (section markers,
-    # [x2]-style repeat notes, etc.)
-    x <- x[!grepl("\\[.*\\]", x)]
+    # Drop entire [Tabs] blocks: process_songs() tags their content lines
+    # "tabsblock" (the literal [Tabs] marker line itself, along with every
+    # other section-marker/annotation line, is already gone from the cache
+    # by this point -- see process_songs.R).
+    x <- x[!grepl("tabsblock", x)]
     # Chord vs lyric handling
     is_chord <- grepl("chordline$", x)
     if(variant == "nochords"){
