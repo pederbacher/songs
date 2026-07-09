@@ -5,108 +5,111 @@ Start E
 Eadd9 B
  
 [Verse 1]
-E           E                         A
- There's no stronger wind than the one that blows
-                         E
+           E                      A
+There's no stronger wind than the one that blows
+       A                 E
 Down a lonesome railroad line
+   E
 No prettier sight than looking back
-         C#m/F#
-On a town    you left behind
-B B7         E
-    There is nothin' that's as real
+     C#m/F#          B    B7
+On a town you left behind
+         E
+There is nothin' that's as real
      A                 E
 As a love that's in my mind
  
- 
 [Chorus]
 B
 Close your eyes
-                           A
+                    A
 I'll be here in the morning
 B
 Close your eyes
-     A                  C#m
+     A             C#m
 I'll be here for a while
- 
+
+B B7
  
 [Verse 2]
-B B7        E               A
-    There's lots of things along the road
-                      E
+        E               A
+There's lots of things along the road
+    A              E
 I'd surely like to see
+    E
 I'd like to lean into the wind
-C#m/F#              B
+    C#m/F#          B    B7
 And tell myself I'm free
-B7         E
-  But your softest whisper's louder
-             A            E
+         E
+But your softest whisper's louder
+         A                E
 Than the highways call to me
  
- 
 [Chorus]
 B
 Close your eyes
-                           A
+                    A
 I'll be here in the morning
 B
 Close your eyes
-     A                  C#m
+     A             C#m
 I'll be here for a while
- 
+
+B B7
  
 [Verse 3]
-B B7        E
-    All the mountains and the rivers
-        A                    E
+        E
+All the mountains and the rivers
+        A                E
 And the valleys can't compare
+        E
 To your blue lit dancin' eyes
-    C#m/F#             B
+    C#m/F#         B    B7
 And yellow shining hair
-B7        E
-  I could never hit the open road
-    A                     E
+        E
+I could never hit the open road
+    A                E
 And leave you layin' there
  
- 
 [Chorus]
 B
 Close your eyes
-                           A
+                    A
 I'll be here in the morning
 B
 Close your eyes
-     A                  C#m B B7
+     A             C#m
 I'll be here for a while
- 
- 
+
+B B7
+  
 [Verse 4]
-E                    A
+E                  A
 Lay your head back easy, love,
-                      E
+A                 E
 Close your cryin' eyes
+        E
 I'll be layin' here beside you
-            C#m/F#               B
-When the sun    comes on the rise
-B7     E
-  I'll stay as long as the cuckoo wails
+         C#m/F#           B    B7
+When the sun comes on the rise
+     E
+I'll stay as long as the cuckoo wails
         A                E
-And the lonesome bluejay cries.
- 
+And the lonesome bluejay cries
  
 [Chorus]
 B
 Close your eyes
-                           A
+                    A
 I'll be here in the morning
 B
 Close your eyes
-     A                  C#m
+     A             C#m
 I'll be here for a while
 B
 Close your eyes
-     B7                    A
+     B7             A
 I'll be here in the morning
 B
 Close your eyes
-     A                  C#m
+     A             C#m
 I'll be here for a while
