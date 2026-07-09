@@ -74,8 +74,8 @@ song_md <- function(filename, trstep, variant){
     x <- scan(path, what="character", sep="\n", blank.lines.skip=FALSE, quiet=TRUE)
     # Drop metadata lines (# key=value)
     x <- x[!grepl("^#\\s*\\w+\\s*=", x)]
-    # Drop markdown score-image tags, e.g. ![Tema](song_tema.mid) -- HTML-only
-    x <- x[!grepl("^!\\[.*\\]\\(.*\\.mid\\)\\s*$", x)]
+    # Drop markdown score-image tags, e.g. ![Tema](midi/song_tema.mid)[2] -- HTML-only
+    x <- x[!grepl("^!\\[.*\\]\\(.*\\.mid\\)(\\[[0-9]+\\])?\\s*$", x)]
     # Drop entire [Tabs] blocks (from the [Tabs] marker up to the next section marker)
     sec_idx    <- grep("^\\[.+\\]$", x)
     tabs_start <- grep("^\\[[Tt]abs?\\]$", x)

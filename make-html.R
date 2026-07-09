@@ -6,7 +6,7 @@ unlink("cache", recursive=TRUE)
 dir.create("cache")
 # Go
 songs <- process_songs()
-render_scores()   # convert midi/*.mid -> songs/scores/*.png (skips up-to-date ones)
+render_scores()   # convert tagged songs/midi/*.mid -> output_midiscores/*.png (skips up-to-date ones)
 makeit_html(songs)
 ################################
 
@@ -25,8 +25,8 @@ html_make_index()
 file.copy("templates/html/styles.css",   "output_html/styles.css",   overwrite=TRUE)
 file.copy("templates/html/script.js",    "output_html/script.js",    overwrite=TRUE)
 file.copy("templates/html/toc-script.js","output_html/toc-script.js",overwrite=TRUE)
-dir.create("output_html/scores", showWarnings=FALSE)
-file.copy(dir("songs/scores", full.names=TRUE), "output_html/scores/", overwrite=TRUE)
+dir.create("output_html/midiscores", showWarnings=FALSE)
+file.copy(dir("output_midiscores", full.names=TRUE), "output_html/midiscores/", overwrite=TRUE)
 ################################################################
 
 

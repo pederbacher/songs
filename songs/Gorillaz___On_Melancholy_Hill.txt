@@ -12,6 +12,9 @@ A|-------------------------------------------------------------------------|
 E|-------------------------------------------------------------------------|
 
 [Verse]
+[Verse]
+[Verse]
+[Verse]
 C
 Up on melancholy hill
                     G
@@ -38,8 +41,7 @@ When you're close to me
 When you're close to me
 
 (C)  G   Am   F G F G
-![Tema](Gorillaz___On_Melancholy_Hill_tema.mid)
-
+![Tema](midi/Gorillaz___On_Melancholy_Hill_tema.mid)[3]
 
 [Verse]
    C

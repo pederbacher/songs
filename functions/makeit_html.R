@@ -44,15 +44,16 @@ makeit_html <- function(songs){
             tmp <- pst("<span class='chordline no",trstep,"'>",tmp,"</span>")
             x[i] <- pst(x[i], tmp)
         }
-        # Replace markdown score-image tags, e.g. ![Tema](song_tema.mid), with <img> tags
+        # Replace markdown score-image tags, e.g. ![Tema](midi/song_tema.mid)[2], with <img> tags
         ################################
-        score_re <- "^!\\[(.*)\\]\\((.+\\.mid)\\)\\s*$"
+        score_re <- "^!\\[(.*)\\]\\((.+\\.mid)\\)(\\[([0-9]+)\\])?\\s*$"
         iscore <- grep(score_re, x)
         for(si in iscore){
             m <- regmatches(x[si], regexec(score_re, x[si]))[[1]]
             alt <- m[2]
-            pngname <- pst(tools::file_path_sans_ext(basename(m[3])), ".png")
-            x[si] <- pst("<img class='score' src='scores/", pngname, "' alt='", alt, "'>")
+            n <- if(nchar(m[5]) > 0) m[5] else "1"
+            pngname <- pst(tools::file_path_sans_ext(basename(m[3])), "_n", n, ".png")
+            x[si] <- pst("<img class='score' src='midiscores/", pngname, "' alt='", alt, "'>")
         }
         # Remove parts
         ################################

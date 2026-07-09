@@ -7,10 +7,13 @@
 # means integer division, which produces a float and crashes under Python 3
 # (`"'" * commas` in Note.dump()). We vendor a one-line fix instead of relying
 # on a system install being patched.
-midi_to_score <- function(mid_path, out_dir="songs/scores", overwrite=FALSE,
+#
+# n = how many score lines (systems) to break the piece into, each covering
+# roughly an equal share of the music (LilyPond's system-count paper variable).
+midi_to_score <- function(mid_path, n=1, out_dir="output_midiscores", overwrite=FALSE,
                            duration_quant=16, start_quant=16, resolution=200){
     stopifnot(file.exists(mid_path))
-    out_png <- pst(out_dir, "/", tools::file_path_sans_ext(basename(mid_path)), ".png")
+    out_png <- pst(out_dir, "/", tools::file_path_sans_ext(basename(mid_path)), "_n", n, ".png")
 
     # Cache: skip if already rendered and up to date
     if(!overwrite && file.exists(out_png) &&
@@ -40,14 +43,22 @@ midi_to_score <- function(mid_path, out_dir="songs/scores", overwrite=FALSE,
     ly <- ly[!grepl("Staff\\.instrumentName", ly)]
     write(ly, ly_path)
 
-    # Wrap with a tight, single-system, title-less paper block
+    # Wrap with a tight, title-less paper block, split into `n` systems of
+    # roughly equal length, and no auto bar-number label on systems 2+
     wrapper_path <- pst(tmp, "/wrapper.ly")
     writeLines(c(
         "\\paper {",
+        if(n > 1) pst("  system-count = ", n),
         "  indent = 0",
         "  ragged-right = ##t",
         "  print-page-number = ##f",
         "  tagline = ##f",
+        "}",
+        "\\layout {",
+        "  \\context {",
+        "    \\Score",
+        "    \\omit BarNumber",
+        "  }",
         "}",
         "\\include \"score.ly\""
     ), wrapper_path)
@@ -77,29 +88,51 @@ midi_to_score <- function(mid_path, out_dir="songs/scores", overwrite=FALSE,
     return(invisible(out_png))
 }
 
-# Render every midi/*.mid into songs/scores/*.png (skipping up-to-date ones).
-# Score PNGs are committed to the repo (they're small, derived assets that
-# only need regenerating when a .mid changes), so CI does not install
-# lilypond/midi2ly/convert -- it just ships whatever is already committed
-# under songs/scores/. If those tools aren't present (e.g. on CI), skip
+# Scan every songs/*.txt for score-image tags -- ![Alt](midi/name.mid) or
+# ![Alt](midi/name.mid)[N] -- and render each referenced (file, n) pair into
+# output_midiscores/*.png (skipping up-to-date ones). Score PNGs are committed
+# to the repo (small, derived assets that only need regenerating when a .mid
+# changes; output_midiscores/ has a .gitignore exception for this), so CI
+# does not install lilypond/midi2ly/convert -- it just ships whatever is
+# already committed there. If those tools aren't present (e.g. on CI), skip
 # rendering entirely rather than failing the whole html build.
-render_scores <- function(midi_dir="midi", out_dir="songs/scores"){
-    mids <- dir(midi_dir, pattern="\\.mid$", full.names=TRUE)
-    if(length(mids) == 0) return(invisible(character(0)))
+render_scores <- function(songs_dir="songs", out_dir="output_midiscores"){
+    txts <- dir(songs_dir, pattern="___.*\\.txt$", recursive=TRUE, full.names=TRUE)
+    tag_re <- "!\\[.*\\]\\((.+\\.mid)\\)(\\[([0-9]+)\\])?"
+
+    todo <- list()
+    for(txt in txts){
+        x <- scan(txt, what="character", sep="\n", blank.lines.skip=FALSE, quiet=TRUE)
+        matches <- regmatches(x, regexec(tag_re, x))
+        for(m in matches){
+            if(length(m) == 0) next
+            midrel <- m[2]
+            n <- if(nchar(m[4]) > 0) as.integer(m[4]) else 1
+            key <- pst(midrel, "|", n)
+            todo[[key]] <- list(path=file.path(songs_dir, midrel), n=n)
+        }
+    }
+    if(length(todo) == 0) return(invisible(character(0)))
+
     if(Sys.which("lilypond") == "" || Sys.which("convert") == "" || Sys.which("python3") == ""){
         warning("lilypond/convert/python3 not found -- skipping score rendering; ",
                 "using whatever is already committed under ", out_dir)
         return(invisible(character(0)))
     }
-    cat("\nRendering scores from:", midi_dir, "\n")
+
+    cat("\nRendering scores referenced from", songs_dir, "*.txt\n")
     out <- character(0)
-    for(mid in mids){
-        res <- tryCatch(midi_to_score(mid, out_dir=out_dir), error=function(e){
-            warning("score render failed for ", mid, ": ", conditionMessage(e))
+    for(item in todo){
+        if(!file.exists(item$path)){
+            warning("score tag references missing file: ", item$path)
+            next
+        }
+        res <- tryCatch(midi_to_score(item$path, n=item$n, out_dir=out_dir), error=function(e){
+            warning("score render failed for ", item$path, " [n=", item$n, "]: ", conditionMessage(e))
             NULL
         })
         if(!is.null(res)){
-            cat("  ", mid, "->", res, "\n")
+            cat("  ", item$path, " [n=", item$n, "] -> ", res, "\n", sep="")
             out <- c(out, res)
         }
     }
