@@ -5,11 +5,11 @@
 |Em -D|Em|Em -D|Em|  
 
 [Verse 1]
-Em (start g)   H
+Em (start g)   B
 Vi blev født i hatten
 D                      Am
   vi kender alle jeres tricks
-    Em              H
+    Em              B
 men vi blev født om natten
   D                        Am
 I regner os for nul og nix
@@ -25,7 +25,7 @@ Am                           Em
 kalder de dig Gud så hvisker vi at du er fanden
 
 [Chorus2 1]
-         Em      H
+         Em      B
 Vi er de vilde kaniner
    D                        Am
 vi undergraver grænserne og parrer os
@@ -35,7 +35,7 @@ graver grøfter mellem øst og vest
 og vi forbinder søerne
 Am
 nord og syd og dig og mig
-   H
+   B
 og munden op til ørerne
 
 [Chorus3 1]
@@ -47,11 +47,11 @@ vilde kaniner  x2
 |Em -D|Em|Em -D|Em|
 
 [Verse 2]
-      Em            H
+      Em            B
 I kan gemme jer bag jerntæpper
 D                   Am
   I kan lægge miner
-         Em             H
+         Em             B
 selv Det Hvide Hus blev malet gråt
 D                  Am
    af vilde kaniner
@@ -65,7 +65,7 @@ har du fred i den ene hånd og krig i den anden
 Am                           Em
 kalder de dig Gud så hvisker vi at du er fanden
 
-         Em      H
+         Em      B
 Vi er de vilde kaniner
    D                        Am
 vi undergraver grænserne og parrer os
@@ -75,7 +75,7 @@ graver grøfter mellem øst og vest
 og vi forbinder søerne
 Am
 nord og syd og dig og mig
-   H
+   B
 og munden op til ørerne
 
 [Chorus3 2]
@@ -91,11 +91,11 @@ Uh-uh, yeah
 |Em D|Am Em| x4
 
 [Verse 3]
-     Em                  H
+     Em                  B
 Hvad så med de røde øjne?
 D                          Am
   kan jeg høre nogen spørge
-        Em              H
+        Em              B
 jo, min mor var indianer
 D                      Am
   forklædt som hængeøre
