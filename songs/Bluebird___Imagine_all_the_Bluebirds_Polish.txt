@@ -1,0 +1,70 @@
+Start på D chordline
+
+[Verse 1]
+G                        C
+ Wyobraź świat bez węgla
+G                    C
+ To łatwe, spróbuj sam
+G               C
+ Na dachu słońca blask
+G                C
+ Wiatraki w niebie tam
+C        Em/b        Am    -/g
+ Wyobraź modre ptaki
+D                D
+ Stroją nowy dzień...
+
+G                        C
+ Wyobraź świat bez granic
+G                   C
+ Wiatr wieje — ptaku, leć
+G                     C
+ Termostat sobie marzy
+G                  C
+ O tym, co zrobi sieć
+C        Em/b     Am    -/g
+ Wyobraź modre ptaki
+D                D      -7        C
+ Auta za friko...u-hu - u
+
+        D         G        B7   C
+Mówisz, że tylko marzę, ahh
+        D               G B7 C
+Ale to nie ja jeden, ahh
+           D          G        B7  C
+Może kiedyś dołączysz, ahh
+        D          G
+Wtedy świat będzie jeden
+
+G                 C
+ Wyobraź mądre prądy
+G                  C
+ Czy umiesz? To nie trud
+G                        C
+ Piec czyta twe humory
+G                  C
+ I jeden ludzki ród
+C        Em/b        Am    -/g
+ Wyobraź modre ptaki
+D                D       -7        C
+ Marzą tak jak my...u-hu - u
+
+        D         G        B7   C
+Mówisz, że tylko marzę, ahh
+        D               G B7 C
+Ale to nie ja jeden, ahh
+           D          G        B7  C
+Może kiedyś dołączysz, ahh
+        D          G
+Wtedy świat będzie jeden
+
+
+[Guidelines]
+Solo scales
+
+Key: G major
+
+- G major pentatonic (G A B D E) — safe default, dreamy hymn feel
+- E minor pentatonic (E G A B D) — wistful, contemplative contrast
+- G major (G A B C D E F#) — melodic, follows the vocal
+- B mixolydian (B C# D# E F# G# A) — briefly, over the B7, for the classic lift into Em
