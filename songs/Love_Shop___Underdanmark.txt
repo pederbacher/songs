@@ -29,10 +29,10 @@ C            G                   D        D
  Banegårdsterrænet, og du ligger her
 
 [Chorus 2]
-Em   Em  Am   C D Em        Em      Am  C D    G    G
+Em   Em  Am   C D Em        Em      Am  C D    G
 Hjertet trænger.    Nogen trænger hårdt
-           C     G D D         C      G  D   D
-  Iskold, brænder.   Iskold, brænder
+G       C      G D D       C      G  D   D
+Iskold, brænder.   Iskold, brænder
 
 [Verse 3]
     C            G          D              D
@@ -45,10 +45,10 @@ Under nat på underklasse, tag ned i Underdanmark
 Selv en kneppemaskine fra Valby har brug for ømhed nu og da
 
 [Chorus 3]
-Em   Em   Am  C D Em        Em      Am  C D     G    G
+Em   Em  Am   C D Em        Em      Am  C D    G
 Hjertet trænger.    Nogen trænger hårdt
-           C     G D D         C      G  D   D
-  Iskold, brænder.   Iskold, brænder
+G       C      G D D       C      G  D   D
+Iskold, brænder.   Iskold, brænder
 
 [Verse 4]
     C            G          D           D
@@ -61,7 +61,7 @@ C             G                    D       D
  Lever for at sulte, sulter for at dø
 C              G                    D       D    C   G  D  D
  Lever for at sulte, sulter for at dø
-          C     G D D         C      G  D   D
-Iskold, brænder.    Iskold, brænder
           C     G D D         C      G  D
+Iskold, brænder.    Iskold, brænder
+D         C     G D D         C      G  D
 Iskold, brænder.    Iskold, brænder
