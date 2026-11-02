@@ -40,8 +40,8 @@ if(Sys.getenv("SANGE_NO_SERVER_RESTART") != "1"){
     Sys.sleep(0.5)  # brief pause so server is ready before Firefox opens
 #        system("firefox http://localhost:8000/index.html &")
     #system("firefox http://localhost:8000/roskilde_2026_final.html &")
-    system(pst("firefox http://localhost:8000/Gorillaz___On_Melancholy_Hill.html &"))
-        #system(pst("firefox http://localhost:8000/Abba___Dancing_queen.html &"))
+#    system(pst("firefox http://localhost:8000/Gorillaz___On_Melancholy_Hill.html &"))
+    system(pst("firefox http://localhost:8000/Neil_Young___Down_by_the_river.html &"))
 }
 #system(pst("firefox http://localhost:8000/roskilde_2026.html &"))
 # The server stays running in the background after the script finishes, so you can keep testing without
