@@ -6,6 +6,7 @@ Love_Shop___Underdanmark.txt
 Misc___Sensommervise.txt
 Misc___Noget_om_Helte.txt
 Mouritz___Kom_Kom_Kom.txt
+Mouritz___Festsang.txt
 Skammens_vogn___Kender_du_det.txt
 Skousen_og_Ingemannn___Herfra_hvor_vi_står.txt
 Ulige_Numre___Frit_land.txt
