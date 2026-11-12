@@ -1,2 +1,0 @@
-Aphaca___En_drøm_om_et_menneske.txt
-regex: Vico.*
