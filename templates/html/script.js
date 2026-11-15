@@ -64,25 +64,28 @@ function allTargetsAtBottom(targets) {
    MASTER MENU: Appear when mouse enters rightmost 10% (both modes)
    Auto-hide after 3s of inactivity.
    ============================================================ */
-let mouseOverControls = false;
 
 function autoHideMenu() {
   controls.classList.add("fullyHidden");
 }
+// Hide after 500ms without mouse movement, or 4.5s when the mouse rests on
+// the menu itself. Any mouse movement (in the top zone or over the menu)
+// shows it again.
+const HOVER_HIDE_DELAY_MS = 4500;
+let mouseOverControls = false;
 function resetAutoHideTimer() {
   clearTimeout(autoHideTimeout);
-  if (!mouseOverControls) {
-    autoHideTimeout = setTimeout(autoHideMenu, 500);
-  }
+  autoHideTimeout = setTimeout(autoHideMenu, mouseOverControls ? HOVER_HIDE_DELAY_MS : 500);
 }
 function showControls() {
   controls.classList.remove("fullyHidden");
   resetAutoHideTimer();
 }
 
-// Keep controls visible while the mouse is over them
-controls.addEventListener("mouseenter", () => { mouseOverControls = true;  clearTimeout(autoHideTimeout); });
-controls.addEventListener("mouseleave", () => { mouseOverControls = false; resetAutoHideTimer(); });
+// Moving the mouse over the menu keeps it visible (restarts the timer)
+controls.addEventListener("mousemove", () => { if (!splitMode) showControls(); }, { passive: true });
+controls.addEventListener("mouseenter", () => { mouseOverControls = true;  }, { passive: true });
+controls.addEventListener("mouseleave", () => { mouseOverControls = false; resetAutoHideTimer(); }, { passive: true });
 
 // Track mouse — in single mode show controls when in top zone; hidden in split mode
 window.addEventListener("mousemove", (e) => {
@@ -546,18 +549,16 @@ function showPaneControls(paneKey) {
   if (!toolbar) return;
   toolbar.classList.remove("hidden");
 
-  // Clear any pending hide timer
-  if (paneHide[paneKey].timer) {
-    clearTimeout(paneHide[paneKey].timer);
-    paneHide[paneKey].timer = null;
-  }
+  // (Re)start the hide timer: the toolbar hides when the mouse stops moving,
+  // even if it rests on the toolbar; moving it again shows the toolbar.
+  hidePaneControlsLater(paneKey);
 }
 function hidePaneControlsLater(paneKey) {
   if (paneHide[paneKey].timer) clearTimeout(paneHide[paneKey].timer);
   paneHide[paneKey].timer = setTimeout(() => {
     const toolbar = document.querySelector(`#pane${capitalize(paneKey)} .paneControls`);
     toolbar?.classList.add("hidden");
-  }, HIDE_DELAY_MS);
+  }, paneHide[paneKey].hovered ? HOVER_HIDE_DELAY_MS : HIDE_DELAY_MS);
 }
 function installPaneAutoHide(paneKey) {
   if (paneHide[paneKey].installed) return; // install only once
@@ -578,9 +579,10 @@ function installPaneAutoHide(paneKey) {
     }
   });
 
-  // Keep visible while hovering the toolbar itself
-  toolbar.addEventListener("mouseenter", () => showPaneControls(paneKey));
-  toolbar.addEventListener("mouseleave", () => hidePaneControlsLater(paneKey));
+  // Moving over the toolbar itself keeps it visible (restarts the timer)
+  toolbar.addEventListener("mousemove", () => showPaneControls(paneKey), { passive: true });
+  toolbar.addEventListener("mouseenter", () => { paneHide[paneKey].hovered = true;  }, { passive: true });
+  toolbar.addEventListener("mouseleave", () => { paneHide[paneKey].hovered = false; hidePaneControlsLater(paneKey); }, { passive: true });
 
   // Start hidden shortly after enabling split
   setTimeout(() => hidePaneControlsLater(paneKey), 1200);

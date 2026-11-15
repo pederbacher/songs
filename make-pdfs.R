@@ -42,6 +42,8 @@ writeLines(c(
 # Read a collection file: one filename per non-comment line (comma-separated fields).
 # A line whose first field is "regex: <pattern>" expands to every song filename
 # matching <pattern> (sorted), inserted at that line's position.
+# A line "exclude regex: <pattern>" removes every song matching <pattern> from
+# the final list, no matter where (or how) it was included.
 read_collection <- function(path){
     x <- scan(path, what="character", sep="\n", blank.lines.skip=TRUE, quiet=TRUE)
     x <- x[!grepl("^\\s*#", x)]
@@ -49,8 +51,11 @@ read_collection <- function(path){
     first <- sapply(strsplit(x, ","), function(p) trimws(p[1]))
     all_songs <- basename(dir("songs", "___.*\\.txt$", recursive=TRUE))
     out <- character(0)
+    exclude_pats <- character(0)
     for(f in first){
-        if(grepl("^regex:", f)){
+        if(grepl("^exclude regex:", f)){
+            exclude_pats <- c(exclude_pats, trimws(sub("^exclude regex:", "", f)))
+        }else if(grepl("^regex:", f)){
             pat  <- trimws(sub("^regex:", "", f))
             hits <- sort(all_songs[grepl(pat, all_songs)])
             if(length(hits) == 0) warning("collection regex matched no songs: ", pat)
@@ -59,6 +64,7 @@ read_collection <- function(path){
             out <- c(out, f)
         }
     }
+    for(pat in exclude_pats) out <- out[!grepl(pat, out)]
     unique(out)
 }
 

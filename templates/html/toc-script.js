@@ -2,6 +2,7 @@
 
 const TOP_ZONE_PX = 110;
 let autoHideTimeout = null;
+const HOVER_HIDE_DELAY_MS = 4500;  // hide delay while the mouse rests on the menu
 let mouseOverControls = false;
 let _editorFile = null;
 
@@ -10,15 +11,18 @@ const controls = document.getElementById("toc-controls");
 function autoHideMenu() { controls.classList.add("fullyHidden"); }
 function resetAutoHideTimer() {
   clearTimeout(autoHideTimeout);
-  if (!mouseOverControls) autoHideTimeout = setTimeout(autoHideMenu, 500);
+  // Hide after 500ms without mouse movement, or 4.5s when resting on the menu
+  autoHideTimeout = setTimeout(autoHideMenu, mouseOverControls ? HOVER_HIDE_DELAY_MS : 500);
 }
 function showControls() {
   controls.classList.remove("fullyHidden");
   resetAutoHideTimer();
 }
 
-controls.addEventListener("mouseenter", () => { mouseOverControls = true; clearTimeout(autoHideTimeout); });
-controls.addEventListener("mouseleave", () => { mouseOverControls = false; resetAutoHideTimer(); });
+// Moving the mouse over the menu keeps it visible (restarts the timer)
+controls.addEventListener("mousemove", showControls, { passive: true });
+controls.addEventListener("mouseenter", () => { mouseOverControls = true;  }, { passive: true });
+controls.addEventListener("mouseleave", () => { mouseOverControls = false; resetAutoHideTimer(); }, { passive: true });
 
 window.addEventListener("mousemove", (e) => {
   if (e.clientY <= TOP_ZONE_PX) showControls();

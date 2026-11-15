@@ -2,6 +2,7 @@ html_make_index <- function(collection="", writeit=TRUE, outfile=""){
     extra_headers <- character(0)   # names for extra columns (from # header line)
     extra_lookup  <- list()         # nm -> character vector of extra values
     collection_src <- collection    # remember original before it gets overwritten
+    exclude_pats  <- character(0)   # "exclude regex:" patterns from the collection file
 
     if(length(collection) == 1){
         if(collection == ""){
@@ -28,10 +29,16 @@ html_make_index <- function(collection="", writeit=TRUE, outfile=""){
             # Parse each line: first field = filename, rest = extra values.
             # A "regex: <pattern>" first field expands to every matching song
             # filename, each carrying that line's extra values.
+            # An "exclude regex: <pattern>" first field removes every song
+            # matching <pattern> from the collection, wherever it was included.
             all_songs <- basename(songs)
             parsed <- lapply(raw, function(line){
                 parts <- trimws(strsplit(line, ",")[[1]])
                 if(length(parts) == 0) return(NULL)
+                if(grepl("^exclude regex:", parts[1])){
+                    exclude_pats <<- c(exclude_pats, trimws(sub("^exclude regex:", "", parts[1])))
+                    return(NULL)
+                }
                 if(grepl("^regex:", parts[1])){
                     pat  <- trimws(sub("^regex:", "", parts[1]))
                     hits <- sort(all_songs[grepl(pat, all_songs)])
@@ -69,6 +76,10 @@ html_make_index <- function(collection="", writeit=TRUE, outfile=""){
     base_keys <- sub("\\..*$", "", sapply(collection, function(s) getnm(basename(s))))
     all_keys  <- sub("\\..*$", "", sapply(songs, function(s) getnm(basename(s))))
     collection <- songs[all_keys %in% base_keys]
+    # Apply "exclude regex:" patterns last, so they win over any inclusion
+    for(pat in exclude_pats){
+        collection <- collection[!grepl(pat, basename(collection))]
+    }
 
     # Parse each song into: artist, base song name, version
     nms        <- sapply(collection, getnm)
