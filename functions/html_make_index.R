@@ -188,11 +188,15 @@ html_make_index <- function(collection="", writeit=TRUE, outfile=""){
         paste0(toupper(substr(nm, 1, 1)), substr(nm, 2, nchar(nm)))
     }
     coll_files  <- sort(dir("songs", "^collection-.*\\.txt$"))
+    # collection-all.txt first, then the rest alphabetically
+    coll_files  <- c(coll_files[coll_files == "collection-all.txt"],
+                     coll_files[coll_files != "collection-all.txt"])
     coll_htmls  <- gsub("^collection-", "", gsub("\\.txt$", ".html", coll_files))
     coll_titles <- sapply(coll_files, make_toc_title)
+    # The generated every-song index goes last
     nav_links <- c(
-        '<a href="index.html">All songs</a>',
-        paste0('<a href="', coll_htmls, '">', coll_titles, '</a>')
+        paste0('<a href="', coll_htmls, '">', coll_titles, '</a>'),
+        '<a href="index.html">All songs</a>'
     )
     toc_nav <- paste(nav_links, collapse="\n    ")
 
