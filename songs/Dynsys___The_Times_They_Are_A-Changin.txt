@@ -1,0 +1,103 @@
+(start singing on G) chordline
+
+D/C  x30232
+D/B  x20032
+
+[Verse 1]
+     G             Em          C        G
+Come gather 'round Dynsys, wherever you code
+    G              Am    C             D
+And admit that the data around you has grown
+    G               Em          C              G
+And accept that the machine has gone down your road
+        G        Am           D      (+1 bar)
+If your model to you is worth savin'
+         D            D/C               D/B         D/A
+Then you better start scalin' or you'll crash under load
+        G           C     D   G
+For the times, they are a-changin'
+
+[Harmonica]
+G  Em  C  G
+
+[Verse 2]
+     G          Em         C                  G
+Come authors of papers who forecast with your pen
+G              Am               C           D
+Keep your mind open, the chance won't come again
+    G               Em          C           G
+And don't scoff too soon at the mind in the machine
+        G          Am          D        (+1 bar)
+there's no tellin' what it's explainin'
+        D              D/C           D/B        D/A
+For the problem that's hopeless will later give in
+        G          C     D   G
+For the times they are a-changin'
+
+[Harmonica]
+G  Em  C  G
+D  C   G  D
+
+[Verse 3]
+     G           Em       C               G
+Come deans and directors, please heed the call
+      G             Am             C           D
+Don't guard the old methods, don't lock up the hall
+        G             Em          C            G
+For the lab that gets hurt is the lab that has stalled
+          G        Am             D      (+1 bar)
+There's a paradigm shift and it's ragin'
+       D              D/C           D/B             D/A
+It was Newton's, then Darwin's, now it's shakin' us all
+        G          C     D   G
+For the times they are a-changin'
+
+[Harmonica]
+G  D  C  D  G
+
+[Verse 4]
+     G          Em             C        G
+Come old-school professors all over the land
+    G             Am             C          D
+And don't ban the tools that you don't understand
+     G            Em         C           G
+Your students and agents are beyond your command
+     G           Am      D     (+1 bar)
+Your old code is rapidly agin'
+   D             D/C              D/B           D/A
+So come join the new one, there's room for each hand
+        G          C     D   G
+For the times they are a-changin'
+
+[Harmonica]
+G  Em  C  G
+D  C   G  D
+G  C   D  G
+
+[Verse 5]
+
+    G           Em            C        G
+The forecast is drawn and the model is cast
+    G        Am          C        D
+The slow simulation will later be fast
+         G           Em       C          G
+What was once out of reach is now in our grasp
+     G        Am       D      (+1 bar)
+Like entropy, order is fadin'
+         D        D/C                     D/B         D/A
+We might lose the controls, but were they ours in the past?
+          G          C     D   G
+Cause the times are always changin'
+
+[Harmonica]
+G  Em  C  G
+
+(Fade out)
+
+## Solo scales
+Key: G major
+- G major (G A B C D E F#) — safe default, straight folk melody
+- G major pentatonic (G A B D E) — simplest default, can't-miss over G–Em–C
+- E minor pentatonic (E G A B D) — relative minor, darker colour for the Em bars
+- Harmonica: G harp, 1st position (as on the record); C harp 2nd position (G mixolydian) for a bluesier bend
+

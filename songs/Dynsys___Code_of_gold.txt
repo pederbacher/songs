@@ -1,0 +1,82 @@
+Start G
+
+[Intro]
+Em7 D Em
+Em7 D Em
+
+Em C  D G
+Em C  D G
+Em C  D G
+Em7      D        Em
+e|-------0--0--0--0--0--0--|-2-----2--0----------------|
+B|-------3--3--3--3--3--3--|-3-----3--0----------------|
+G|-------0--0--0--0--0--0--|-2-----2--0----------------|
+D|-------2--2--2--2--2--2--|-0-----0--2----------0--2--|
+A|-------2--2--2--2--2--2--|----------2------0h2-------|
+E|-0-----0--0--0--0--0--0--|----------0----------------|
+
+Em          C      D           G
+  I want to learn,   I want to teach
+Em            C           D       G
+  I've been a miner for a code of gold
+Em            C     D             G
+  It's these ideas,   just out of reach
+Em                             G
+  That keep me searching for a code of gold
+C                      G
+   And the code is old
+Em                        G
+  Keep me searching for a code of gold
+C                      G
+   And I'm getting old
+
+e|-----------3------------------|
+B|-----------0------------------|
+G|-----------0------------------|
+D|-----------0------------------|
+A|--3--2--0--2------------------|
+E|-----------3------------------|
+
+[Harmonica Solo]
+Em C  D  G
+Em C  D  G
+Em C  D  G
+Em7   D  Em
+
+Em                  C            D                   G
+  I've been through punch cards,   I've been through Python
+Em                   C           D       G
+  I've crossed the decades for a code of gold
+Em          C        D             G
+  It copies my mind,   it's such a fine line
+Em                             G
+  That keep me searching for a heart in the code
+C                       G
+   And it can't be sold
+Em                             G
+  That keep me searching for a heart in the code
+C                       G
+   And I'm getting old
+
+[Harmonica Solo]
+Em C  D  G
+Em C  D  G
+Em C  D  G
+
+Em                                 D       Em
+  Young ones, keep searching for a code of gold
+Em                             D       Em
+  I pass it on to you, now I'm growin' old
+Em                                D       Em
+  Don't let machines mine out the code of gold
+Em                           G            C        G
+  It takes a heart to make a code of gold,   ahhhhhh
+
+|- h  Hammer-on -|
+
+## Solo scales
+Key: E minor (relative of G major, built on the Em–C–D–G loop)
+- E natural minor / Aeolian (E F# G A B C D) — safe default, matches the melody
+- E minor pentatonic (E G A B D) — simplest default, can't miss over the loop
+- G major pentatonic (G A B D E) — relative major, brighter lift on the G and C bars
+- Harmonica: G harp, 1st position (as on the record)
