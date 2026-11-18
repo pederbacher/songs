@@ -1,4 +1,4 @@
-Start D chordline
+Start D <chordline>
 
 [Intro]
 Am

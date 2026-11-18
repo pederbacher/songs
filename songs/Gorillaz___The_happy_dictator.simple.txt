@@ -1,5 +1,5 @@
-key: B chordline
-start C#-D# chordline
+key: B <chordline>
+start C#-D# <chordline>
 
 [Verse 1]
        B

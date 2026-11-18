@@ -1,5 +1,5 @@
-Start: H-C-D chordline
-Scale: G chordline
+Start: H-C-D <chordline>
+Scale: G <chordline>
 
 [Verse 1]
         D         (C)    G

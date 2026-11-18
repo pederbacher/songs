@@ -8,12 +8,12 @@ Em C  D G
 Em C  D G
 Em C  D G
 Em7      D        Em
-e|-------0--0--0--0--0--0--|-2-----2--0----------------|
-B|-------3--3--3--3--3--3--|-3-----3--0----------------|
-G|-------0--0--0--0--0--0--|-2-----2--0----------------|
-D|-------2--2--2--2--2--2--|-0-----0--2----------0--2--|
-A|-------2--2--2--2--2--2--|----------2------0h2-------|
-E|-0-----0--0--0--0--0--0--|----------0----------------|
+e|-------0--0--0--0--0--0--|-2-----2--0----------------| <chordline>
+B|-------3--3--3--3--3--3--|-3-----3--0----------------| <chordline>
+G|-------0--0--0--0--0--0--|-2-----2--0----------------| <chordline>
+D|-------2--2--2--2--2--2--|-0-----0--2----------0--2--| <chordline>
+A|-------2--2--2--2--2--2--|----------2------0h2-------| <chordline>
+E|-0-----0--0--0--0--0--0--|----------0----------------| <chordline>
 
 Em          C      D           G
   I want to learn,   I want to teach
@@ -30,12 +30,12 @@ Em                        G
 C                      G
    And I'm getting old
 
-e|-----------3------------------|
-B|-----------0------------------|
-G|-----------0------------------|
-D|-----------0------------------|
-A|--3--2--0--2------------------|
-E|-----------3------------------|
+e|-----------3------------------| <chordline>
+B|-----------0------------------| <chordline>
+G|-----------0------------------| <chordline>
+D|-----------0------------------| <chordline>
+A|--3--2--0--2------------------| <chordline>
+E|-----------3------------------| <chordline>
 
 [Harmonica Solo]
 Em C  D  G
@@ -72,11 +72,15 @@ Em                                D       Em
 Em                           G            C        G
   It takes a heart to make a code of gold,   ahhhhhh
 
-|- h  Hammer-on -|
+|- h  Hammer-on -| <chordline>
 
+[Guidelines]
 ## Solo scales
 Key: E minor (relative of G major, built on the Em–C–D–G loop)
-- E natural minor / Aeolian (E F# G A B C D) — safe default, matches the melody
-- E minor pentatonic (E G A B D) — simplest default, can't miss over the loop
-- G major pentatonic (G A B D E) — relative major, brighter lift on the G and C bars
+- E natural minor / Aeolian (E F# G A B C D)
+  safe default, matches the melody
+- E minor pentatonic (E G A B D)
+  simplest default, can't miss over the loop
+- G major pentatonic (G A B D E)
+  relative major, brighter lift on the G and C bars
 - Harmonica: G harp, 1st position (as on the record)

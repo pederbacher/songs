@@ -1,4 +1,4 @@
-Start G-A G-A chordline
+Start G-A G-A <chordline>
 Firefox speed: 8
 
 [Intro]

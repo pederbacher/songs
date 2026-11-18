@@ -1,4 +1,4 @@
-(Start: H-C-D) chordline
+(Start: H-C-D) <chordline>
 (Guitar tuned down (1/2)
 step in original recording.)
 

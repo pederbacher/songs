@@ -1,5 +1,6 @@
-Start på G-A chordline
+Start på G-A <chordline>
 
+[Chords]
 Chord shapes:
 Am    577555
 Adim7 xx4545
@@ -83,4 +84,5 @@ Always look on the right side of life
 A      F#m7        Bm     E7         A    F#m7    Bm    E7
 Always look on the bright side of life
 A      F#m7        Bm     E7         A    F#m7    Bm    E7
-Always look on the bright side of life (Worse things happen at sea, you know?
+Always look on the bright side of life
+(Worse things happen at sea, you know?)

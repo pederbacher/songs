@@ -1,4 +1,4 @@
-Start E chordline
+Start E <chordline>
 
 [Verse]
 Am
@@ -144,8 +144,14 @@ Gathered from all nations
 [Guidelines]
 ## Solo scales
 Key: A minor (modal — built on the Am–G vamp)
-- A natural minor / Aeolian (A B C D E F G) — safe default, dark shanty feel
-- A minor pentatonic (A C D E G) — simplest default, can't miss over the riff
-- C major pentatonic (C D E G A) — relative major, brighter lift for a contrasting pass
-- A Dorian (A B C D E F# G) — modal option; the raised F# over the G is the classic "Drunken Sailor" colour
-- Fiddle / tin whistle: stay in A Dorian and lean on the F# against the G for the sea-shanty bounce
+- A natural minor / Aeolian (A B C D E F G):
+    - Safe default, dark shanty feel
+- A minor pentatonic (A C D E G):
+    - Simplest default, can't miss over the riff
+- C major pentatonic (C D E G A):
+    - Relative major, brighter lift for a contrasting pass
+- A Dorian (A B C D E F# G):
+    - Modal option; the raised F# over the G
+      is the classic "Drunken Sailor" colour
+- Fiddle / tin whistle: stay in A Dorian and
+  lean on the F# against the G for the sea-shanty bounce

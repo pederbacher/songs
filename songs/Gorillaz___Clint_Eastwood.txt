@@ -1,6 +1,6 @@
 [guidelines]
 Capo: 1st fret
-Start: A-A-E chordline
+Start: A-A-E <chordline>
 
 Rhythm guitar:
  

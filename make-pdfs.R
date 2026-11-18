@@ -11,7 +11,6 @@ sapply(dir("functions/", pattern="\\.R$", full.names=TRUE), source)
 
 ################################################################
 # OPTIONS
-trstep     <- 0                       # 0..11 — transpose step (0 = original key)
 fontsize   <- 11                      # lyric/chord font size (pt)
 monofont   <- "Latin Modern Mono"     # monospace font for chord+lyric blocks
 engine     <- "lualatex"              # pandoc --pdf-engine
@@ -122,19 +121,24 @@ song_md <- function(filename, trstep, variant){
 }
 
 
-# Assemble and compile one collection+variant -> PDF
-build <- function(collection, variant){
+# Assemble and compile one collection+variant -> PDF.
+# transpose: semitones to shift the chords (e.g. 7, or -5); 0 = original key.
+# A nonzero value is appended to the output file name, e.g. "_7".
+build <- function(collection, variant, transpose=0){
     songs <- read_collection(collection)
-    chunks <- lapply(songs, song_md, trstep=trstep, variant=variant)
-    # For the chords variant, force each song onto a new page
+    chunks <- lapply(songs, song_md, trstep=transpose %% 12, variant=variant)
+    # For the chords variant, force each song onto a new page.
+    # \clearpage (not \newpage): with classoption=twocolumn, \newpage only
+    # moves to the next column, \clearpage always starts a fresh page.
     if(variant == "chords"){
-        chunks <- lapply(chunks, function(ch) c("\\newpage", "", ch))
+        chunks <- lapply(chunks, function(ch) c("\\clearpage", "", ch))
     }
     md <- unlist(chunks)
 
     stem     <- sub("^collection-", "", sub("\\.txt$", "", basename(collection)))
-    md_path  <- pst("output_pdf/", stem, "_", variant, ".md")
-    pdf_path <- pst("output_pdf/", stem, "_", variant, ".pdf")
+    suffix   <- if(transpose != 0) pst("_", transpose) else ""
+    md_path  <- pst("output_pdf/", stem, "_", variant, suffix, ".md")
+    pdf_path <- pst("output_pdf/", stem, "_", variant, suffix, ".pdf")
 
     md <- c(
         "---",
@@ -173,7 +177,9 @@ for(coll in collections){
 
 cat("\nDone. Output in output_pdf/\n")
 
+# Just for testing then only run a single
 process_songs()
-coll <- "songs/collection-roskilde_2026_final.txt"
+coll <- "songs/collection-dynsys.txt"
 build(coll, "chords")
+build(coll, "chords", transpose=7)
 build(coll, "nochords")

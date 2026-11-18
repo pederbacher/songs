@@ -1,4 +1,4 @@
-Start E chordline
+Start E <chordline>
 
 [Verse 1]
 Am

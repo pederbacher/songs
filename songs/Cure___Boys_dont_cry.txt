@@ -1,4 +1,4 @@
-Key: A chordline
+Key: A <chordline>
 
 [Intro]
 A    Bm    C#m    D    D C#m Bm (x4)

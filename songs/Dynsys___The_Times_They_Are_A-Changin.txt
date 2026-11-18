@@ -1,4 +1,4 @@
-(start singing on G) chordline
+(start singing on G) <chordline>
 
 D/C  x30232
 D/B  x20032
@@ -13,7 +13,7 @@ And accept that the machine has gone down your road
         G        Am           D      (+1 bar)
 If your model to you is worth savin'
          D            D/C               D/B         D/A
-Then you better start scalin' or you'll crash under load textline
+Then you better start scalin' or you'll crash under load <textline>
         G           C     D   G
 For the times, they are a-changin'
 
@@ -92,12 +92,16 @@ Cause the times are always changin'
 [Harmonica]
 G  Em  C  G
 
-(Fade out)
+(Fade out) <chordline>
 
+[Guidelines]
 ## Solo scales
 Key: G major
-- G major (G A B C D E F#) — safe default, straight folk melody
-- G major pentatonic (G A B D E) — simplest default, can't-miss over G–Em–C
-- E minor pentatonic (E G A B D) — relative minor, darker colour for the Em bars
-- Harmonica: G harp, 1st position (as on the record); C harp 2nd position (G mixolydian) for a bluesier bend
-
+- G major (G A B C D E F#)
+  safe default, straight folk melody
+- G major pentatonic (G A B D E)
+  simplest default, can't-miss over G–Em–C
+- E minor pentatonic (E G A B D)
+  relative minor, darker colour for the Em bars
+- Harmonica: G harp, 1st position (as on the record);
+  C harp 2nd position (G mixolydian) for a bluesier bend

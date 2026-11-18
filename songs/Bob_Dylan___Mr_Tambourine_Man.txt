@@ -1,6 +1,6 @@
 # speed=12
 
-(start C->D) chordline
+(start C->D) <chordline>
 
 [Chords]
 D      000232

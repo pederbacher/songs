@@ -1,5 +1,5 @@
-Key: B chordline
-start C#-D# chordline
+Key: B <chordline>
+start C#-D# <chordline>
 
 [Intro]
 F  Dm         E                        A  E

@@ -68,11 +68,19 @@ process_songs <- function(infolder="songs", outfolder="cache/songsprocessed"){
         # it's been rewritten into a <span> before they run.
         has_brackets <- grepl("\\[.*\\]", x)
         i <- i[!has_brackets[i]]
-        # Finally, remove the specifically marked textlines
-        ii <- grep("textline$", x)
+        # Lines explicitly marked with <chordline> in the song file are always
+        # chord lines; strip the marker (the internal " chordline" tag is
+        # appended below)
+        ic <- grep("<chordline>", x, fixed=TRUE)
+        if(length(ic) > 0){
+            i <- sort(unique(c(i, ic)))
+            x[ic] <- trimws(gsub("\\s*<chordline>\\s*", " ", x[ic]), which="right")
+        }
+        # Finally, remove the specifically marked <textline>s
+        ii <- grep("<textline>", x, fixed=TRUE)
         if(length(ii) > 0){
             i <- i[!(i %in% ii)]
-            x[ii] <- trimws(gsub("textline", "", x[ii]))
+            x[ii] <- trimws(gsub("\\s*<textline>\\s*", " ", x[ii]))
         }
         # Add a tag in the end of the lines
         x[i] <- pst(x[i], " chordline")

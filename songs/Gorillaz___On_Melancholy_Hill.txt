@@ -1,6 +1,6 @@
 [guidelines]
 Capo 2
-Start E chordline
+Start E <chordline>
 
 [Tabs]
    C             G           Am            F     G         F     G

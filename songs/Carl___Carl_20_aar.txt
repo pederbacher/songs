@@ -1,6 +1,6 @@
 Start B-A-B
 
-Carl, textline
+Carl, <textline>
        G               D7
 der er ingen bånd, der binder dig
 D7            G
