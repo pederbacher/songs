@@ -9,7 +9,6 @@ exclude regex: Panda_Bear___
 exclude regex: Pixies___
 exclude regex: Rilo_Kiley___
 exclude regex: Sophs___
-exclude regex: The_animals___
 exclude regex: The_xx___
 exclude regex: Viagra_Boys___
 exclude regex: Vico_Valle___
