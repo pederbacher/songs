@@ -13,7 +13,7 @@ They call the Rising Sun
          Am       C       D           F
 And it's been the ruin of many a poor boy
     Am    E        Am
-And God I know I'm one <textline>
+And God I know I'm one 
  
 [Verse 2]
     Am     C     D   F
@@ -22,11 +22,11 @@ And God I know I'm one <textline>
  She sewed my new blue jeans
    Am     C     D        F
 My father was a gamblin' man
-  Am    E     Am
+ Am     E     Am
 Down in New Orleans
  
 [Verse 3]
-         Am   C       D            F
+         Am   C       D       F
  Now the only thing a gambler needs
      Am       C     E
 Is a suitcase and a trunk
