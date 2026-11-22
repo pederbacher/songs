@@ -3,28 +3,28 @@ D/C  x30232
 D/B  x20032
 
 [Verse 1]
-     G             Em         C        G
+     G             Em         C        G    (+1 bar)
 Come gather 'round people wherever you roam
       G            Am      C              D
 And admit that the waters around you have grown
-      G            Em             C               G
+      G            Em             C               G    (+1 bar)
 And accept it that soon you'll be drenched to the bone
         G       Am           D      (+1 bar)
 If your time to you is worth savin'
          D            D/C                D/B          D/A
-Then you better start swimmin' or you'll sink like a stone,
+Then you better start swimmin' or you'll sink like a stone, <textline>
         G           C     D   G
 For the times, they are a-changin'
 
 [Harmonica]
-G  Em  C  G
+G  Em  C  G (+3 bar)
 
 [Verse 2]
-     G           Em                C              G
+     G           Em                C              G   (+1 bar)
 Come writers and critics who prophesize with your pen
     G              Am              C           D
 And keep your eyes wide the chance won't come again
-    G               Em           C                G
+    G               Em           C                G    (+1 bar)
 And don't speak too soon for the wheel's still in spin
             G          Am            D     (+1 bar)
 And there's no tellin' who that it's namin'
@@ -35,14 +35,14 @@ For the times they are a-changin'
 
 [Harmonica]
 G  Em  C  G
-D  C   G  D
+D  C   G  D (+3 bar)
 
 [Verse 3]
-     G         Em          C               G
+     G         Em          C               G    (+1 bar)
 Come senators, congressmen please heed the call
       G            Am             C            D
 Don't stand in the doorway, don't block up the hall
-    G            Em           C          G
+    G            Em           C          G       (+1 bar)
 For he that gets hurt will be he who has stalled
           G         Am            D      (+1 bar)
 There's a battle outside and it's ragin'
@@ -52,14 +52,14 @@ It'll soon shake your windows and rattle your walls
 For the times they are a-changin'
 
 [Harmonica]
-G  D  C  D  G
+G  D  C  D  G (+3 bar)
 
 [Verse 4]
-     G           Em      C              G
+     G           Em      C              G    (+1 bar)
 Come mothers and fathers throughout the land
     G          Am            C          D
 And don't criticize what you can't understand
-     G             Em              C            G
+     G             Em              C            G    (+1 bar)
 Your sons and your daughters are beyond your command
      G           Am      D     (+1 bar)
 Your old road is rapidly agin'
@@ -71,15 +71,14 @@ For the times they are a-changin'
 [Harmonica]
 G  Em  C  G
 D  C   G  D
-G  C   D  G
+G  C   D  G (+3 bar)
 
 [Verse 5]
-
-    G          Em        C           G
+    G          Em        C           G    (+1 bar)
 The line it is drawn the curse it is cast
     G        Am       C        D
 The slow one now will later be fast
-       G       Em       C        G
+       G       Em       C        G    (+1 bar)
 As the present now will later be past
     G        Am      D      (+1 bar)
 The order is rapidly fadin'
@@ -89,6 +88,6 @@ And the first one now will later be last
 For the times they are a-changin'
 
 [Harmonica]
-G  Em  C  G
+G  Em  C  G (+3 bar)
 
 (Fade out)
